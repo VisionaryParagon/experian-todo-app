@@ -62,17 +62,14 @@ header {
 
   nav {
     background: #fff;
-    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    box-shadow: 0 10px 10px rgba(0,0,0,.2);
+    overflow: hidden;
 
     a {
-      border-bottom: 1px solid #eee;
+      border-top: 1px solid #eee;
       display: block;
       font-size: 1.25rem;
       padding: 1rem 0;
-
-      &:last-child {
-        border: none;
-      }
     }
   }
 }
