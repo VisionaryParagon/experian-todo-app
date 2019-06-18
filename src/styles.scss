@@ -1,1 +1,188 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+$experian-blue: #1d4f91;
+$experian-blue-hover: #276bc4;
+$experian-pink: #af1685;
+$experian-pink-hover: #e31fad;
+$experian-link: #426da9;
+$success: #28a745;
+
+html,
+body {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+/*~~ Typography ~~*/
+
+h1 {
+  margin: 1rem 0;
+}
+
+label {
+  margin: 0;
+}
+
+
+/*~~ Layout ~~*/
+
+// Header
+header {
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+
+  .logo {
+    background: url(./assets/images/logo-experian.svg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: block;
+    height: 100%;
+    width: 117px;
+  }
+
+  .menu {
+    color: $experian-blue;
+    cursor: pointer;
+    font-size: 2rem;
+
+    &:hover {
+      color: $experian-blue-hover;
+    }
+  }
+
+  nav {
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+
+    a {
+      border-bottom: 1px solid #eee;
+      display: block;
+      font-size: 1.25rem;
+      padding: 1rem 0;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
+
+// Templates
+section {
+  padding: 60px 0;
+}
+
+// Lists
+.lists {
+  white-space: nowrap;
+
+  .list {
+    background: #ddd;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 15px 0 0;
+    vertical-align: top;
+    white-space: normal;
+    width: 320px;
+
+    .mat-card {
+      margin: 0 0 .5rem;
+    }
+  }
+}
+
+input {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 .5rem;
+  width: 100%;
+
+  &.nameInput {
+    font-size: 20px;
+    line-height: 2.5rem;
+    margin: 1rem 0;
+  }
+
+  &.description {
+    font-size: 16px;
+    line-height: 2.5rem;
+    margin: 0 0 1rem;
+  }
+
+  &:focus {
+    background: #fff;
+    border-color: $experian-blue;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1.5rem;
+  margin: 1rem 0;
+  padding: .5rem 1rem;
+
+  &.addBtn {
+    align-items: center;
+    display: flex;
+    line-height: 24px;
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  &.more {
+    align-items: center;
+    display: flex;
+    margin: 0;
+    padding: .5rem;
+  }
+
+  &:hover {
+    background: #eee;
+  }
+}
+
+*:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+
+/*~~ Bootstrap Components ~~*/
+
+.dropdown {
+  margin: 1rem 0;
+
+  .dropdown-menu {
+    display: block;
+    padding: 1rem;
+
+    a {
+      cursor: pointer;
+    }
+  }
+}
+
+
+/*~~ Angular Material Components ~~*/
+
+snack-bar-container {
+  &.success {
+    background: $success;
+  }
+}

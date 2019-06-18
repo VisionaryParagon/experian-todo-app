@@ -1,0 +1,26 @@
+<section [@fade]="true">
+  <div class="container-fluid">
+    <h1>Todo Lists</h1>
+
+    <div class="lists">
+      <div class="list" *ngFor="let list of lists">
+        <app-list [list]="list" [archive]="false"></app-list>
+      </div>
+
+      <div class="list">
+        <button class="addBtn" *ngIf="!new" (click)="newList()"><mat-icon>add</mat-icon> Add a list</button>
+
+        <div class="container" [hidden]="!new">
+          <form #listForm="ngForm" novalidate>
+            <input type="text" class="nameInput" id="newName" name="nameInput" #nameInput placeholder="Enter list name..." autocomplete="off" [(ngModel)]="list.name" (focusout)="checkVal($event)">
+            {{ nameInput.focus() }}
+
+            <button class="btn btn-success mr-2 mt-0" [disabled]="!nameInput.value" (click)="submit(list)">Add</button>
+
+            <button class="btn btn-secondary mt-0" (click)="cancel()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

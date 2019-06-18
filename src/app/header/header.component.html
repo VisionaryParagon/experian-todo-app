@@ -1,0 +1,14 @@
+<header>
+  <div class="container-fluid h-100 d-flex align-items-center justify-content-between">
+    <a routerLink="/" class="logo" (click)="closeMenu()"></a>
+
+    <mat-icon class="menu" (click)="toggleMenu()">menu</mat-icon>
+  </div>
+
+  <nav [@topDown]="true" *ngIf="navActive">
+    <div class="container-fluid text-right">
+      <a routerLink="/" (click)="closeMenu()">Lists</a>
+      <a routerLink="/archive" (click)="closeMenu()">Archive</a>
+    </div>
+  </nav>
+</header>
