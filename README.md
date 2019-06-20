@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 1. Clone repo to local directory
 2. Run `npm install` to install app dependencies
 3. Navigate to @experian/eds-components directory with `cd \@experian/eds-components`
-4. Run `npm install && npm run build:prod` to install EDS dependencies and perform a production build
+4. Run `npm install` to install EDS dependencies
 5. Navigate back to app root directory with `cd ../../`
 6. Serve, build, or test the app using the options below
 
