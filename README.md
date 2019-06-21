@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Local Development Setup Instructions
 
-1. Clone repo to local directory and navigate to app directory with `cd experian-todo-app`
+1. Clone branch to local directory and navigate to app directory with `cd experian-todo-app`
 2. Run `npm install` to install app dependencies
 3. Navigate to @experian/eds-components directory with `cd ./\@experian/eds-components`
 4. Run `npm install` to install EDS dependencies
