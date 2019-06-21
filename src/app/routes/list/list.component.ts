@@ -19,26 +19,10 @@ export class ListComponent implements OnInit, OnDestroy {
   item: TodoItem = new TodoItem();
   items: TodoItem[] = [];
   selectedItems: TodoItem[] = [];
-  /*
-  gridOptions = {
-    rowSelection: 'multiple',
-    suppressRowClickSelection: true,
-    suppressCellSelection: true,
-    columnDefs: [
-      { field: '', headerName: '', cellStyle: { borderRight: '1px solid #ccc' }, checkboxSelection: true, headerCheckboxSelection: true, sortable: false, width: 57 },
-      { field: 'description', headerName: 'Item', sortable: true }
-    ],
-    rowData: [],
-    api: {
-      deselectAll: () => { console.log('deselected') }
-    }
-  };
-  */
   columns = [
     { field: 'description', name: 'Item', sort: true }
   ];
 
-  // @ViewChild('itemTable', { static: true }) itemTable: ElementRef;
   @ViewChild('listTable', { static: true }) table: ElementRef;
   @ViewChild('newItemModal', { static: true }) modal: ElementRef;
   @ViewChild(NewItemComponent, { static: true }) itemForm: NewItemComponent;
@@ -86,8 +70,10 @@ export class ListComponent implements OnInit, OnDestroy {
     this.todoService.getItems()
       .subscribe(
         res => {
+          // Set items to apply to current list and unarchived only
           this.items = res.filter(item => item.list === this.list.name && !item.archived);
-          // this.gridOptions.rowData = this.items;
+
+          // Clear table selections
           this.clearSelected();
         },
         err => console.log(err)
@@ -135,7 +121,6 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   clearSelected() {
-    // this.itemTable.nativeElement.clearSelection();
     this.table.nativeElement.clearSelection();
   }
 
