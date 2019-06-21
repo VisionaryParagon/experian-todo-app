@@ -9,8 +9,7 @@
     </div>
   </div>
 
-  <!--
-  <eds-data-grid [agOptions]="gridOptions" (selectionchange)="changeSelected($event)" #itemTable>
+  <eds-data-grid [agOptions]="gridOptions" (selectionchange)="changeSelected($event)" #listTable>
     <div slot="header">
       <eds-toolbar>
         <section class="flex-grow-1 text-only">
@@ -45,43 +44,6 @@
       </eds-toolbar>
     </div>
   </eds-data-grid>
-  -->
-
-  <eds-table multiSelect [columns]="columns" [data]="items" (selectionchange)="changeSelected($event)" #listTable>
-    <div slot="header">
-      <eds-toolbar>
-        <section class="flex-grow-1 text-only">
-          <h4>{{ items.length }} Items</h4>
-        </section>
-        <section>
-          <button eds-button class="icon-left" motif="tertiary" aria-label="add new item" (click)="openModal()">
-            <eds-icon icon="add" aria-hidden="true"></eds-icon> New Item...
-          </button>
-        </section>
-      </eds-toolbar>
-    </div>
-  
-    <div slot="selection-header">
-      <eds-toolbar>
-        <section class="flex-grow-1 text-only">
-          {{ selectedItems.length }} Items selected
-        </section>
-        <section>
-          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="archive selected items" (click)="archiveItems()">
-            <eds-icon icon="check" aria-hidden="true"></eds-icon> Archive
-          </button>
-          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="delete selected items" (click)="deleteItems()">
-            <eds-icon icon="delete" aria-hidden="true"></eds-icon> Delete
-          </button>
-        </section>
-        <section>
-          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="cancel selection" (click)="clearSelected()">
-            <eds-icon icon="cancel" aria-hidden="true"></eds-icon> Cancel
-          </button>
-        </section>
-      </eds-toolbar>
-    </div>
-  </eds-table>
 </div>
 
 <eds-modal (hide)="reset()" #newItemModal>

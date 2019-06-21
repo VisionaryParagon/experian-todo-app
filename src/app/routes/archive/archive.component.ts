@@ -11,10 +11,17 @@ import { AlertService } from 'src/app/services/alert.service';
 export class ArchiveComponent implements OnInit {
   items: TodoItem[] = [];
   selectedItems: TodoItem[] = [];
-  columns = [
-    { field: 'description', name: 'Item', sortable: true },
-    { field: 'list', name: 'List', sortable: true }
-  ];
+  gridOptions = {
+    rowSelection: 'multiple',
+    suppressRowClickSelection: true,
+    suppressCellSelection: true,
+    columnDefs: [
+      { field: '', headerName: '', cellStyle: { borderRight: '1px solid #ccc' }, checkboxSelection: true, headerCheckboxSelection: true, sortable: false, width: 57 },
+      { field: 'description', headerName: 'Item', cellStyle: { borderRight: '1px solid #ccc' }, sortable: true },
+      { field: 'list', headerName: 'List', cellStyle: { borderRight: '1px solid #ccc' }, sortable: true }
+    ],
+    rowData: this.items
+  };
 
   @ViewChild('listTable', { static: true }) table: ElementRef;
 
@@ -31,7 +38,13 @@ export class ArchiveComponent implements OnInit {
     this.todoService.getItems()
       .subscribe(
         res => {
+          // Set items to apply to archived only
           this.items = res.filter(item => item.archived);
+
+          // Set grid options data
+          this.gridOptions.rowData = this.items;
+
+          // Clear table selections
           this.clearSelected();
         },
         err => console.log(err)
@@ -44,7 +57,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   clearSelected() {
-    this.table.nativeElement.clearSelection();
+    this.table.nativeElement.refresh();
   }
 
   // Unarchive selected items

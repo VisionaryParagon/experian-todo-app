@@ -3,7 +3,7 @@
     <h1 caps>Archived Items</h1>
   </div>
 
-  <eds-table multiSelect [columns]="columns" [data]="items" (selectionchange)="changeSelected($event)" #listTable>
+  <eds-data-grid [agOptions]="gridOptions" (selectionchange)="changeSelected($event)" #listTable>
     <div slot="header">
       <eds-toolbar>
         <section class="flex-grow-1 text-only">
@@ -32,5 +32,5 @@
         </section>
       </eds-toolbar>
     </div>
-  </eds-table>
+  </eds-data-grid>
 </div>
