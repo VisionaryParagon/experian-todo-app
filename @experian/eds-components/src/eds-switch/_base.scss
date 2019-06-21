@@ -1,0 +1,159 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+$switch-on-color: $eds-white;
+$switch-on-background-color: $eds-blue;
+$switch-pressed-color: $eds-blue-dark;
+$switch-height: 22px;
+$switch-width: 44px;
+$switch-outline-thickness: 1px;
+$switch-marker-size: 16px;
+$switch-label-font-size: 14px;
+$switch-marker-offset: ($switch-height - $switch-marker-size) / 2;
+$switch-transition-period: 0.15s;
+$switch-off-color: $eds-form-field-disabled-font-color;
+$switch-disabled-color: #DFDFDF;
+$switch-disabled-on-color: $switch-on-color;
+$switch-disabled-on-background-color: $switch-disabled-color;
+
+eds-switch {
+  display: inline-block;
+  outline: none;
+
+  label {
+    display: table;
+    color: $eds-black;
+  }
+
+  .label {
+    font-size: $switch-label-font-size;
+    padding-right: $switch-label-font-size;
+  }
+
+  .label, .switch-components {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .switch-components {
+    display: block;
+    position: relative;
+    min-width: $switch-width;
+    height: $switch-height;
+
+    .outline, .marker {
+      position: absolute;
+    }
+
+    .outline {
+      top: 0;
+      bottom: 0;
+    }
+
+    .outline {
+      right: 0;
+      left: 0;
+      box-sizing: border-box;
+      border: $switch-outline-thickness solid $switch-off-color;
+      border-radius: $switch-height / 2;
+      transition: border-color $switch-transition-period, background-color $switch-transition-period;
+    }
+
+    .marker {
+      position: absolute;
+      width: $switch-marker-size;
+      height: $switch-marker-size;
+      top: ($switch-height - $switch-marker-size) / 2;
+      border-radius: 50%;
+      transition:
+        left $switch-transition-period,
+        background-color $switch-transition-period;
+    }
+  }
+
+  input:not(:checked) + .switch-components {
+    .marker {
+      left: $switch-marker-offset;
+    }
+  }
+
+  &:not([disabled]) {
+    input:not(:checked) + .switch-components {
+      .marker {
+        background: $switch-off-color;
+      }
+    }
+  }
+
+  input:checked + .switch-components {
+    .marker {
+      left: calc(100% - #{$switch-marker-size} - 3px);
+    }
+  }
+
+  &:not([disabled]) {
+    input:checked + .switch-components {
+      .outline {
+        background: $switch-on-background-color;
+      }
+
+      .marker {
+        background: $switch-on-color;
+      }
+    }
+  }
+
+  &[disabled] {
+    input:checked + .switch-components {
+      .outline {
+        background: $switch-disabled-on-background-color;
+      }
+
+      .marker {
+        background: $switch-disabled-on-color;
+      }
+    }
+  }
+
+  &:not([disabled]) {
+    input:checked + .switch-components {
+      .outline {
+        border-color: $switch-on-color;
+      }
+    }
+  }
+
+  &:active {
+    .switch-components {
+      .outline {
+        border-color: $switch-off-color;
+      }
+
+      .marker {
+        background: $switch-pressed-color;
+      }
+    }
+  }
+
+  &:not([disabled]) {
+    .switch-components {
+      @include focus-element(-1px, 16px);
+    }
+  }
+
+  &[disabled] {
+    .switch-components {
+      .outline {
+        border-color: $switch-disabled-color;
+      }
+
+      .marker {
+        background: $switch-disabled-color;
+      }
+    }
+  }
+
+  input {
+    @include hide-focusable;
+  }
+}

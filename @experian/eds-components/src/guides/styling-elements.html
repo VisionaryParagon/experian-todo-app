@@ -1,0 +1,90 @@
+<h1>Styling EDS Elements</h1>
+
+<p>
+  EDS elements are HTML custom elements, however we aren't using the entire spec yet. One important area to understand is how element styles are handled in this library. While we would like to enjoy the encapsulation benefits of true shadow DOM, it's not quite ready for prime time even when using a polyfill. So, we're using a temporary strategy that works everywhere while still being somewhat forward looking.
+</p>
+
+<h2>Our (Future) Long-term Strategy </h2>
+
+<p>
+  Briefly, let's review what we are not doing, but will be doing in the future. Style encapsulation raises a number of questions that have still not be answered from a design perspective. This is a relatively new pattern in web development and means not all cases have been considered and the ramifications of <em>true</em> encapsulation are not completely understood. What we know for sure is that encapsulation will provide the benefits of local scope (no name collisions, no style bleed) and browsers will be optimized to handle it. What is less clear is how and when we will allow external styles to effect that scope for cases where configurability and overrides are necessary.
+</p>
+
+<p>
+  The front running solution to this problem, which has already been implemented in most browsers, is <mdn-doc-link url='CSS/Using_CSS_variables'>CSS custom properties</mdn-doc-link>. While this addresses a big part of the issue, it falls short of the bigger picture and nuances associated with providing encapsulation along side the ability to override. As the community has learned from this, other proposals have been made and a promising option is <a href='https://meowni.ca/posts/part-theme-explainer/'>::part and ::theme</a>. Our long term strategy is to let the industry continue to work through this problem, and we'll eventually adopt the standard that emerges.
+</p>
+
+<h2>Our (Current) Short-term Strategy</h2>
+
+<p>
+  Our current strategy follows the same api we will use with the long-term strategy. It allows element authors to write <code>.scss</code> files or css strings that get passed directly to <code>initShadowDOM()</code>. This provides the illusion that your styles are scoped, but this illusion will only become reality in the future.
+</p>
+
+<h3>Style hoisting</h3>
+
+<p>
+  Today, when you pass a style to <code>initShadowDOM()</code> it will "hoist" that style to the document head where it will apply globally like traditional style sheets. Logic is in place to deduplicate styles so there will only ever be a single style sheet per EDS element definition, regardless of how many times the element is used.
+</p>
+
+<p>
+  The advantage of doing things this way is that EDS element styles are not truly encapsulated so they are open to complete modification by users. This is considered a plus at this stage of the design system because we don't have enough data to "lock things down" and we want to see where users are overriding defaults. Additionally, we avoid the entire issue of how to properly mix encapsulation with overrides.
+</p>
+
+<p>
+  A disadvantage, however, is that since there is no true style encapsulation, we must follow conventions to mimic it. For example, each element style definition should be scoped to the custom element tag:
+</p>
+
+<doc-code language='scss'>
+  // eds-my-element.scss
+  eds-my-element {
+    color: red;
+  }
+</doc-code>
+
+<doc-code language='javascript'>
+  const tag = 'eds-my-element';
+  const html = '<slot></slot>';
+  const css = require('./eds-my-element.scss');
+
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+    }
+  });
+</doc-code>
+
+<h3>CSS API with <code>api-</code> classes</h3>
+
+<p>
+  Although components are technically styled externally, and will therefore be styled by users this way, we are trying to prepare for the future when encapsulation is possible. We do this by "sanctioning" some overrides with the use of <code>api-</code> hooks. These hooks are nothing more than empty classes assigned to specific elements in the shadowRoot. They provide a way for us to let users know we expect overrides in these situations.
+</p>
+
+<doc-code language='scss'>
+  // eds-my-element.scss
+  eds-my-element {
+    color: red;
+
+    .label {
+      color: #333;
+    }
+  }
+</doc-code>
+
+<doc-code language='javascript'>
+  const tag = 'eds-my-element';
+  const html = '<slot></slot><span class="label api-label"></span>';
+  const css = require('./eds-my-element.scss');
+
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+    }
+  });
+</doc-code>
+
+<doc-code language='scss'>
+  // user-app.scss
+  eds-my-element .api-label {
+    color: red;
+  }
+</doc-code>

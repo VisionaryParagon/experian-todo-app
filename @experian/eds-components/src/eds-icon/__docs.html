@@ -1,0 +1,210 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+eds-button eds-icon {
+  margin-right: 10px;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<eds-icon icon='person' class='s36'></eds-icon>
+<eds-button><eds-icon icon='message'></eds-icon>Send Message</eds-button>
+<eds-icon icon='rotate_right' spin></eds-icon>
+
+<doc-header>Global Settings</doc-header>
+
+<p>
+  The following settings are set at the global level in the <code>EDS.icons</code> namespace.
+</p>
+
+<api-option name='EDS.icons.defaultLibrary' type='string'>
+  Sets the default <code>library</code> to use. If this option is set you don't need to specify a <code>library</code> for each <code>eds-icon</code> instance. This value should map to a predefined or user defined renderer (see <code>EDS.icons.renderers</code>).
+
+  <p>
+    The following renderers are offered out of the box:
+  </p>
+
+  <ul>
+    <li><b>material-icon-font</b> - for use with Material Icons (the font version)</li>
+    <li><b>far-svg</b> - for use with FontAwesome SVG (regular)</li>
+    <li><b>fas-svg</b> - for use with FontAwesome SVG (solid)</li>
+  </ul>
+
+  <doc-note motif="warning">
+    Although some renderers are offered out of the box, the libraries are not included. You still need to include the font or svg libraries somewhere in your application in order to make use of the icons they provide.
+  </doc-note>
+
+  <doc-code live>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+      window.EDS.icons.defaultLibrary = 'material-icon-font';
+    </script>
+
+    <eds-icon icon='person'></eds-icon>
+  </doc-code>
+
+</api-option>
+
+<api-option name='EDS.icons.renderers' type='any[]'>
+  An array of renderers. Renderers have the following format:
+
+  <ul>
+    <li><b>name: string</b> - the name of the icon library to render</li>
+    <li><b>render: function(val, el, host)</b> - a method responsible for rendering the icon</li>
+  </ul>
+
+  <p>
+    The following renderers are provided out of the box:
+  </p>
+
+  <ul>
+    <li><b>material-icon-font</b> - for use with Material Icons (the font version)</li>
+    <li><b>far-svg</b> - for use with FontAwesome SVG (regular)</li>
+    <li><b>fas-svg</b> - for use with FontAwesome SVG (solid)</li>
+  </ul>
+
+  <doc-note motif="warning">
+    Although some renderers are offered out of the box, the font libraries are not included. You still need to include the font or svg libraries somewhere in your application in order to make use of the icons they provide.
+  </doc-note>
+
+  <doc-code live>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <script>
+      const materialIconFontRenderer = {
+        name: 'material-icon-font',
+        render: (val, el, host) => {
+          el.classList.add('material-icons');
+          el.innerHTML = val;
+          // Removes whitespace around material font (rough average)
+          // Normalizes size with font-awesome svg
+          el.style.transform = 'scale(1.35)';
+        }
+      };
+
+      const farSVGRenderer = {
+        name: 'far-svg',
+        render: (val, el, host) => {
+          el.classList.add('far', 'fa-fw', `fa-${val}`);
+          const def = FontAwesome.findIconDefinition({prefix: 'far', iconName: val})
+          const html = def ? FontAwesome.icon(def).html[0] : '';
+          host.shadowRoot.innerHTML = html;
+        }
+      };
+
+      const fasSVGRenderer = {
+        name: 'fas-svg',
+        render: (val, el, host) => {
+          el.classList.add('fas', 'fa-fw', `fa-${val}`);
+          const def = FontAwesome.findIconDefinition({prefix: 'fas', iconName: val})
+          const html = def ? FontAwesome.icon(def).html[0] : '';
+          host.shadowRoot.innerHTML = html;
+        }
+      };
+
+      window.EDS.icons.renderers[materialIconFontRenderer.name] = materialIconFontRenderer;
+      window.EDS.icons.renderers[farSVGRenderer.name] = farSVGRenderer;
+      window.EDS.icons.renderers[fasSVGRenderer.name] = fasSVGRenderer;
+    </script>
+
+    <eds-icon icon='person' library='material-icon-font'></eds-icon>
+    <eds-icon icon='user' library='far-svg'></eds-icon>
+    <eds-icon icon='user' library='fas-svg'></eds-icon>
+
+  </doc-code>
+
+</api-option>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='border' type='boolean'>
+  Encloses the icon in a padded box.
+
+  <doc-code live>
+    <eds-icon icon='person'></eds-icon>
+    <eds-icon icon='person' border></eds-icon>
+  </doc-code>
+
+</api-option>
+
+<api-option name='icon' type='string' required>
+  An icon name. This value is a lookup and is interpreted by the renderer specified in <code>EDS.icons.defaultLibrary</code> or the <code>library</code> option.
+
+  <doc-code live>
+    <eds-icon icon='person'></eds-icon>
+    <eds-icon icon='user' library='far-svg'></eds-icon>
+    <eds-icon icon='user' library='fas-svg'></eds-icon>
+  </doc-code>
+
+</api-option>
+
+<api-option name='library' type='string'>
+  An icon library to use. This value maps to a renderer in <code>EDS.icons.renderers</code> and specifies which icon library to use for this icon instance. If not specified, <code>EDS.icons.defaultLibrary</code> will be used.
+
+  <doc-code live>
+    <eds-icon icon='person'></eds-icon>
+    <eds-icon icon='user' library='far-svg'></eds-icon>
+    <eds-icon icon='user' library='fas-svg'></eds-icon>
+  </doc-code>
+
+</api-option>
+
+<api-option name='spin' type='boolean'>
+  Causes the icon to rotate clockwise.
+
+  <doc-code live>
+    <eds-icon icon='rotate_right'></eds-icon>
+    <eds-icon icon='rotate_right' spin></eds-icon>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Size & Color</doc-header>
+
+<p>
+  Icons can be sized using the following classes:
+</p>
+
+<doc-code live>
+  <eds-icon icon='person' class='s18'></eds-icon>
+  <eds-icon icon='person' class='s24'></eds-icon>
+  <eds-icon icon='person' class='s36'></eds-icon>
+  <eds-icon icon='person' class='s48'></eds-icon>
+  <eds-icon icon='person' class='s60'></eds-icon>
+</doc-code>
+
+<p>
+  Or by inheriting styles from a container:
+</p>
+
+<doc-code live>
+  <span style='font-size: 12px'>
+    <eds-icon icon='person'></eds-icon>
+  </span>
+
+  <eds-button>
+    <eds-icon icon='person'></eds-icon> Edit Profile
+  </eds-button>
+
+</doc-code>
+
+<p>
+  Colors are specified via css.
+</p>
+
+<doc-code live>
+  <eds-icon icon="credit_card" style='color:#004590;'></eds-icon>
+  <eds-icon icon="credit_card" style='color:#72217b;'></eds-icon>
+  <eds-icon icon="credit_card" style='color:#477a0c;'></eds-icon>
+
+  <span style='color:#0e6eb7;'>
+    <eds-icon icon="credit_card"></eds-icon>
+  </span>
+  <span style='color:#db0048;'>
+    <eds-icon icon="credit_card"></eds-icon>
+  </span>
+</doc-code>

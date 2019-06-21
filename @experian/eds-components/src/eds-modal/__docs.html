@@ -1,0 +1,233 @@
+<style>
+table tr td {
+  vertical-align: bottom;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+<eds-button onclick="document.getElementById('modal-example').show()" id="example-modal-referrer">
+  Show Modal
+</eds-button>
+
+<eds-modal id="modal-example" aria-labelledby="example-modal-referrer">
+  <header>
+    Example Modal
+  </header>
+  <div>
+    Hello
+  </div>
+  <footer>
+    <eds-button motif="primary" onclick="document.getElementById('modal-example').hide()">Close</eds-button>
+  </footer>
+</eds-modal>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name="closable" type="boolean" default="true">
+  Determines whether an "&times;" icon (that closes the modal when clicked) is displayed in the top right corner of the modal. Also determines if the modal is closed when clicking on the backdrop or by pressing the escape key.
+
+  <doc-code live>
+    <eds-button onclick="document.getElementById('modal-closable').show()">
+      Closable
+    </eds-button>
+
+    <eds-button onclick="document.getElementById('modal-non-closable').show()">
+      Not Closable
+    </eds-button>
+
+    <eds-modal id="modal-closable">
+      <header>
+        Close Me
+      </header>
+      <div>
+        You can close me by clicking on the "&times;", the backdrop, or by pressing the escape key.
+      </div>
+    </eds-modal>
+
+    <eds-modal id="modal-non-closable" closable="false">
+      <header>
+        Close Me
+      </header>
+      <div>
+        You can only close me by clicking on the button below.
+      </div>
+      <footer>
+        <eds-button
+          motif="primary"
+          onclick="document.getElementById('modal-non-closable').hide()">
+          Close
+        </eds-button>
+      </footer>
+    </eds-modal>
+  </doc-code>
+
+</api-option>
+
+<api-option name="ariaLabelClose" type="string" default="close">
+    Defines the value of the <code>aria-label</code> attribute of the button in the top right corner of the modal that allows the modal to be closed.
+  
+    <doc-note>
+      If the <code>closable</code> attribute is not <code>"true"</code>, this option is not relevant.
+    </doc-note>
+  
+    <doc-code live>
+      <eds-button onclick="document.getElementById('modal-with-aria-label-close').show()">
+        Localise accessibility label
+      </eds-button>
+
+      <eds-modal id="modal-with-aria-label-close" ariaLabelClose="ferme">
+        <header>
+          Ferme-moi
+        </header>
+        <div>
+          On peut me fermer en cliquant sur le "&times;".
+        </div>
+        <footer>
+          <eds-button
+            motif="primary"
+            onclick="document.getElementById('modal-with-aria-label-close').hide()">
+            Ferme
+          </eds-button>
+        </footer>
+      </eds-modal>
+    </doc-code>
+  </api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name='hide' type='CustomEvent'>
+  Fires when the modal is hidden. This event fires after all animations are complete.
+
+  <doc-code live>
+    <eds-button onclick="document.getElementById('hide-modal-event-example').show()">
+      Show Modal
+    </eds-button>
+
+    <div id='hide-modal-event-example-output' style='padding: 1rem; color: blue;'></div>
+
+    <eds-modal id='hide-modal-event-example'>
+      <header>Modal</header>
+      <div>Close me.</div>
+      <footer>
+        <eds-button motif='primary'
+          onclick="document.getElementById('hide-modal-event-example').hide()">
+          Close Modal
+        </eds-button>
+      </footer>
+    </eds-modal>
+
+    <script>
+      document.getElementById('hide-modal-event-example').addEventListener('hide', function() {
+        document.getElementById('hide-modal-event-example-output').innerHTML = "Modal hidden!";
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<api-event name='show' type='CustomEvent'>
+  Fires when the modal is shown. This event fires after all animations are complete.
+
+  <doc-code live>
+    <eds-button onclick="document.getElementById('show-modal-event-example').show()">
+      Show Modal
+    </eds-button>
+
+    <eds-modal id='show-modal-event-example'>
+      <header>Modal</header>
+      <div>Closes automatically in 2 seconds.</div>
+    </eds-modal>
+
+    <script>
+      document.getElementById('show-modal-event-example').addEventListener('show', function() {
+        setTimeout(() => {
+          document.getElementById('show-modal-event-example').hide();
+        }, 2000);
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='hide'>
+  Hides the modal.
+
+  <doc-code live>
+    <eds-button onclick="document.getElementById('hide-modal-example').show()">
+      Show Modal
+    </eds-button>
+
+    <eds-modal id='hide-modal-example'>
+      <header>
+        Modal
+      </header>
+      <div>
+        <eds-button motif='primary'
+          onclick="document.getElementById('hide-modal-example').hide()">
+          Hide Modal
+        </eds-button>
+      </div>
+    </eds-modal>
+  </doc-code>
+</api-method>
+
+<api-method name='show'>
+  Shows the modal.
+
+  <doc-code live>
+    <eds-button onclick="document.getElementById('show-modal-example').show()">
+      Show Modal
+    </eds-button>
+
+    <eds-modal id='show-modal-example'>
+      <header>
+        Modal
+      </header>
+      <div>
+        <eds-button motif='primary'
+          onclick="document.getElementById('show-modal-example').hide()">
+          Hide Modal
+        </eds-button>
+      </div>
+    </eds-modal>
+  </doc-code>
+</api-method>
+
+<doc-header>Styling Via the CSS API</doc-header>
+
+<p>
+  The <code>eds-modal</code> element includes both background and dialog components. Because of this, you don't directly style <code>eds-component</code>, but instead use the provided css api.
+</p>
+
+<doc-code live>
+  <style>
+    #style-modal-example .api-modal {
+      width: 600px;
+      height: 400px;
+    }
+
+    #style-modal-example .api-modal footer {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+    }
+  </style>
+
+  <eds-button onclick="document.getElementById('style-modal-example').show()">
+    Show Modal
+  </eds-button>
+
+  <eds-modal id='style-modal-example'>
+    <header>
+      Modal
+    </header>
+    <div>This modal uses a custom width and height</div>
+    <footer>
+      <eds-button motif='primary'
+        onclick="document.getElementById('style-modal-example').hide()">
+        Close Modal
+      </eds-button>
+    </footer>
+  </eds-modal>
+</doc-code>

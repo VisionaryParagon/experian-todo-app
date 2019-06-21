@@ -1,0 +1,53 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
+<script>
+    window.FontAwesomeConfig = {
+        autoReplaceSvg: false
+    };
+    window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<doc-header>Examples</doc-header>
+<div class='examples'>
+  <eds-progress-indicator>
+    <eds-stage>First</eds-stage>
+    <eds-stage active>Second</eds-stage>
+    <eds-stage>Third</eds-stage>
+  </eds-progress-indicator>
+</div>
+
+<doc-header>Configuration Options</doc-header>
+
+<p>
+  The number of stages is defined by the number of <code>eds-stage</code> elements within the root <code>eds-progress-indicator</code> element.
+</p>
+
+<doc-header><code>eds-stage</code> Configuration Options</doc-header>
+
+<api-option name='active' type='boolean' default='false'>
+  Sets whether the stage is currently active. Stages preceding the active stage will be marked as complete.
+
+  <doc-code live>
+    <eds-progress-indicator>
+      <eds-stage>First</eds-stage>
+      <eds-stage active>Second</eds-stage>
+      <eds-stage>Third</eds-stage>
+    </eds-progress-indicator>
+  </doc-code>
+
+</api-option>
+
+
+<doc-header>Stage Title</doc-header>
+
+<p>
+  Stage title is defined by the <code>eds-stage</code> element contents.
+</p>
+
+<doc-code live>
+  <eds-progress-indicator>
+    <eds-stage>Stage Title 1</eds-stage>
+    <eds-stage active>Stage Title 2</eds-stage>
+  </eds-progress-indicator>
+</doc-code>

@@ -1,0 +1,214 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
+<script>
+  window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+  };
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.container {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.container.small {
+  font-size: 14px;
+}
+
+[background='gray'] {
+  background-color: #f6f6f6;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<div class='container'>
+  <eds-tree-item icon='favorite' expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item icon='person'>Profile</eds-tree-item>
+      <eds-tree-item icon='favorite' selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='favorite'>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<div class='container small' background='gray'>
+  <eds-tree-item expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item>Profile</eds-tree-item>
+      <eds-tree-item selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='expanded' type='boolean' default='false'>
+  Gets or sets whether slotted <code>eds-tree-item</code> elements are displayed. This option is only meaningful where there are slotted <code>eds-tree-item</code>s. Also, this option is set automatically through user interaction (when the user clicks the parent <code>eds-tree-item</code>).
+
+  <doc-note motif='warning'>
+    <b>Nesting <code>eds-tree-item</code>s</b>: You can nest <code>eds-tree-item</code>s by wrapping them with a <code>div slot='children'</code> tag.
+  </doc-note>
+
+  <doc-code live>
+    <eds-tree-item>
+      Level 1
+      <div slot='children'>
+        <eds-tree-item>Level 2a</eds-tree-item>
+        <eds-tree-item>Level 2b</eds-tree-item>
+        <eds-tree-item>Level 2c</eds-tree-item>
+      </div>
+    </eds-tree-item>
+    <eds-tree-item expanded>
+      Level 1 (expanded)
+      <div slot='children'>
+        <eds-tree-item>Level 2a</eds-tree-item>
+        <eds-tree-item>Level 2b</eds-tree-item>
+        <eds-tree-item>Level 2c</eds-tree-item>
+      </div>
+    </eds-tree-item>
+  </doc-code>
+
+</api-option>
+
+<api-option name='hasChildren' type='boolean' default='false' readOnly propertyOnly>
+  A convenience property that exposes whether <code>eds-tree-item</code>s have been slotted.
+
+  <doc-code live>
+    <eds-tree-item id='children-example1'>No children</eds-tree-item>
+    <eds-tree-item id='children-example2'>
+      Children
+      <div slot='children'>
+        <eds-tree-item>Level 2a</eds-tree-item>
+        <eds-tree-item>Level 2b</eds-tree-item>
+        <eds-tree-item>Level 2c</eds-tree-item>
+      </div>
+    </eds-tree-item>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        const result1 = document.getElementById('children-example1').hasChildren;
+        const result2 = document.getElementById('children-example2').hasChildren;
+        console.log('hasChildren example1: ' + result1); // false
+        console.log('hasChildren example2: ' + result2); // true
+      });
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='icon' type='string'>
+  Displays an icon on the menu item. This value is passed through directly to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+  <doc-note motif='warning'>
+    <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+  </doc-note>
+
+  <doc-code live>
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <!-- <script src='eds-icon.js'></script> -->
+    <!-- <script>
+      window.EDS.icons.defaultLibrary = 'material-icon-font';
+    </script> -->
+    <eds-tree-item icon='favorite'>Hello</eds-tree-item>
+  </doc-code>
+
+</api-option>
+
+<api-option name='iconLibrary' type='string'>
+  The icon library to use when <code>icon</code> is also specified. This value is passed through as <code>library</code> to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+  <doc-note motif='warning'>
+    <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+  </doc-note>
+
+  <doc-code live>
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <!-- <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: false
+      };
+    </script> -->
+    <!-- <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script> -->
+    <!-- <script src='eds-icon.js'></script> -->
+    <!-- <script>
+      window.EDS.icons.defaultLibrary = 'material-icon-font';
+    </script> -->
+    <eds-tree-item icon='favorite'>Material Design Heart</eds-tree-item>
+    <eds-tree-item icon='heart' iconLibrary='fas-svg'>Font Awesome Heart</eds-tree-item>
+  </doc-code>
+
+</api-option>
+
+<api-option name='selected' type='boolean' default='false'>
+  Gets or sets the selected state.
+
+  <doc-note motif='warning'>
+    <b>Selection State Management</b>
+    <p>
+      At the <code>eds-tree-item</code> level there is no concept of single select or multi select paradigms. This setting will set the selected state of the component regardless of its siblings, parents, or children. Other components such as <code>eds-sidebar</code> manage selection models, and you'll need to do the same for any custom components you create.
+    </p>
+  </doc-note>
+
+  <doc-code live>
+    <eds-tree-item selected>Selected</eds-tree-item>
+    <eds-tree-item>Not Selected</eds-tree-item>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name='itemclick' type='CustomEvent'>
+  Fires when the menu item is clicked. <code>event.detail</code> contains the target element. For convenience the text content of this element is available via the <code>data-content</code> attribute.
+</api-event>
+
+<doc-header>Compact Style</doc-header>
+
+<p>
+  Containers that wish to implement the compact style should use the <code>eds-item-compact</code> class.
+</p>
+
+<doc-code live>
+  <div class='eds-item-compact' style='font-size: 14px; width: 200px;'>
+    <eds-tree-item>Compact Item 1</eds-tree-item>
+    <eds-tree-item selected>Compact Item 2</eds-tree-item>
+    <eds-tree-item>Compact Item 3</eds-tree-item>
+    <eds-tree-item>Compact Item 4</eds-tree-item>
+  </div>
+</doc-code>

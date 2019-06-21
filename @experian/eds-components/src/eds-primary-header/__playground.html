@@ -1,0 +1,101 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  .avatar {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    background-size: 30px 30px;
+    background-image: url("data:image/jpeg;base64,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");
+  }
+
+  #icon-example a eds-icon {
+    margin-left: 5px;
+    margin-right: 0;
+  }
+</style>
+
+<div style='padding: 10px;' background='gray'>
+  <eds-primary-header logoHref='/'>
+    <a href="#" title='Navigation One'>Nav1</a>
+    <a href="#" title='Navigation Two' selected>Nav2</a>
+    <a href="#" title='Navigation Three'>Nav3</a>
+
+    <span slot='icons'>
+      <span><eds-icon icon='notifications' class='s24'></eds-icon></span>
+      <span><span class='avatar'></span></span>
+    </span>
+  </eds-primary-header>
+</div>
+
+<div style='background: white; padding: 10px;'>
+  <eds-primary-header logoHref='/' motif='dark'>
+    <a>Nav1</a>
+    <a selected>Nav2</a>
+    <a>Nav3</a>
+
+    <span slot='icons'>
+      <span><eds-icon icon='notifications' class='s24'></eds-icon></span>
+      <span><span class='avatar'></span></span>
+    </span>
+  </eds-primary-header>
+</div>
+
+<h2>Events</h2>
+
+<div style='padding: 10px;' background='gray'>
+  <eds-primary-header logoHref='/' id='event-example'>
+    <a data-item='nav1'>Nav1</a>
+    <a data-item='nav2' selected>Nav2</a>
+    <a data-item='nav3'>Nav3</a>
+
+    <span slot='icons'>
+      <span data-item='notifications'><eds-icon icon='notifications' class='s24'></eds-icon></span>
+      <span data-item='avatar'><a class='avatar'></a></span>
+    </span>
+  </eds-primary-header>
+
+  <p id='event-example-output'></p>
+
+</div>
+
+<script>
+(function(inputEl, outputEl) {
+
+  inputEl.addEventListener('navigationclick', e => {
+    outputEl.innerHTML = `You clicked on ${e.detail.getAttribute('data-item')}!`;
+  });
+
+  inputEl.addEventListener('iconclick', e => {
+    let item = e.detail.getAttribute('data-item') || e.detail.parentElement.getAttribute('data-item');
+    outputEl.innerHTML = `You clicked on ${item}!`;
+  });
+
+
+})(document.getElementById('event-example'), document.getElementById('event-example-output'));
+</script>
+
+
+<h2>Navigation Icons</h2>
+
+<div style='padding: 10px;' background='gray'>
+  <eds-primary-header id='icon-example'>
+    <a class='icon-example'>Nav 1<eds-icon icon='arrow_drop_down'></eds-icon></a>
+    <a class='icon-example' selected>Nav2<eds-icon icon='arrow_drop_down'></eds-icon></a>
+    <a class='icon-example'>Nav3<eds-icon icon='arrow_drop_down'></eds-icon></a>
+
+    <span slot='icons'>
+      <span data-item='notifications'><eds-icon icon='notifications' class='s24'></eds-icon></span>
+      <span data-item='avatar'><a class='avatar'></a></span>
+    </span>
+  </eds-primary-header>
+
+  <eds-popover targetClass='icon-example' position='bottom'>Menus and stuff!</eds-popover>
+</div>
+
+

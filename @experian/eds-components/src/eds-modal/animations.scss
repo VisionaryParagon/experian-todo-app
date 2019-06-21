@@ -1,0 +1,19 @@
+@import "../styles/eds-variables.scss";
+
+eds-modal {
+
+  transition: transform 0ms ease 200ms, opacity 150ms ease 50ms;
+
+  &.eds-modal-show {
+    transition: transform 0ms ease 0ms, opacity 150ms ease 0ms;
+
+    .eds-modal-box {
+      transition: transform 100ms ease 0ms, opacity 75ms ease 25ms;
+    }
+  }
+
+  .eds-modal-box {
+    transition: transform 150ms ease 0ms, opacity 75ms ease 0ms;
+  }
+
+}

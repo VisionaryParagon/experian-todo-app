@@ -1,0 +1,54 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+.badge-examples {
+  border-spacing: 0;
+}
+
+.badge-examples th, .badge-examples td {
+  padding: 10px;
+  text-align: center;
+}
+
+.badge-examples tr td:last-child {
+  background: #ccc;
+}
+</style>
+
+<h2>Badges</h2>
+
+<h3>Basic</h3>
+<table class="badge-examples">
+  <thead>
+    <tr>
+      <th>Normal</th>
+      <th>Alt bg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div eds-badge>3</div></td>
+      <td><div eds-badge>3</div></td>
+    </tr>
+    <tr>
+      <td><div eds-badge>33</div></td>
+      <td><div eds-badge>33</div></td>
+    </tr>
+    <tr>
+      <td><div eds-badge>33</div></td>
+      <td><div eds-badge>333</div></td>
+    </tr>
+    <tr>
+      <td><div eds-badge>3,333</div></td>
+      <td><div eds-badge>3,333</div></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Within eds-button (tertiary)</h3>
+<button eds-button motif="tertiary">
+  <div eds-badge>3</div>
+  <eds-icon icon="mail_outline" library="material-icon-font" class="s18"></eds-icon>
+</button>
+
+<!-- TODO fix eds-button style bug -->
+<eds-button style="display: none"></eds-button>

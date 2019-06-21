@@ -1,0 +1,228 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.bottom-align td {
+  padding: 5px;
+  vertical-align: bottom;
+}
+.top-align td {
+  padding: 5px;
+  vertical-align: top;
+}
+.fixed-width td eds-textbox {
+  width: 180px;
+}
+.gray {
+  background-color: #f6f6f6;
+}
+</style>
+
+<table class='bottom-align'>
+  <tr>
+    <td></td>
+    <td>No Label</td>
+    <td>Label</td>
+    <td>Disabled</td>
+  </tr>
+  <tr>
+    <td>No text</td>
+    <td><eds-textbox></eds-textbox></td>
+    <td><eds-textbox label='Email Address'></eds-textbox></td>
+    <td><eds-textbox label='Email Address' disabled value='hello'></eds-textbox></td>
+  </tr>
+  <tr>
+    <td>Placeholder</td>
+    <td><eds-textbox placeholder='placeholder'></eds-textbox></td>
+    <td><eds-textbox placeholder='placeholder' label='Email Address'></eds-textbox></td>
+    <td><eds-textbox placeholder='placeholder' label='Email Address' disabled></eds-textbox></td>
+  </tr>
+  <tr class='gray'>
+    <td>Gray background</td>
+    <td><eds-textbox placeholder='placeholder'></eds-textbox></td>
+    <td><eds-textbox placeholder='placeholder' label='Email Address'></eds-textbox></td>
+    <td><eds-textbox placeholder='placeholder' label='Email Address' disabled></eds-textbox></td>
+  </tr>
+
+</table>
+
+<h4>Borderless</h4>
+
+<div style='padding: 10px;'>
+  <eds-textbox noborder placeholder='Type to search...'></eds-textbox>
+</div>
+
+<div background='gray' style='padding: 10px;'>
+  <eds-textbox noborder placeholder='Type to search...'></eds-textbox>
+</div>
+
+<h4>Prepends & Icons</h4>
+
+<table class='top-align fixed-width'>
+  <tr>
+    <td><eds-textbox><eds-icon icon='email' slot='prepend'></eds-icon></eds-textbox></td>
+    <td><eds-textbox><span slot='prepend'>USD</span></eds-textbox></td>
+    <td><eds-textbox><eds-icon icon='check' slot='inline' style='color: green;'></eds-icon></eds-textbox></td>
+  </tr>
+  <tr>
+    <td><eds-textbox><eds-icon icon='lock' slot='prepend'></eds-icon></eds-textbox></td>
+    <td><eds-textbox><span slot='prepend'>£</span></eds-textbox></td>
+    <td><eds-textbox><eds-icon icon='search' slot='inline'></eds-icon></eds-textbox></td>
+  </tr>
+  <tr>
+    <td><eds-textbox><eds-icon icon='person' slot='prepend'></eds-icon></eds-textbox></td>
+    <td><eds-textbox><span slot='prepend'>@</span></eds-textbox></td>
+    <td><eds-textbox><eds-icon icon='cancel' slot='inline' style='cursor: pointer;'></eds-icon></eds-textbox></td>
+  </tr>
+</table>
+
+<h4>States & Messages</h4>
+
+<table class='top-align'>
+  <tr>
+    <td><eds-textbox value='alan@' info='Use your work email here'></eds-textbox></td>
+    <td><eds-textbox value='alan@' warning='Avoid sub domains'></eds-textbox></td>
+    <td><eds-textbox value='alan@' error='This email is not valid'></eds-textbox></td>
+    <td>
+      <eds-textbox value='alan@'
+        info='Use your work email here'
+        warning='Avoid sub domains'
+        error='This email is not valid'
+      ></eds-textbox>
+    </td>
+  </tr>
+  <tr background='gray'>
+    <td><eds-textbox value='alan@' info='Use your work email here'></eds-textbox></td>
+    <td><eds-textbox value='alan@' warning='Avoid sub domains'></eds-textbox></td>
+    <td><eds-textbox value='alan@' error='This email is not valid'></eds-textbox></td>
+    <td>
+      <eds-textbox value='alan@'
+        info='Use your work email here'
+        warning='Avoid sub domains'
+        error='This email is not valid'
+      ></eds-textbox>
+    </td>
+  </tr>
+</table>
+
+<h4>Password mode with toggle</h4>
+<eds-textbox mode='password' label='Password' placeholder='Enter your password'>
+  <eds-icon
+    slot='inline'
+    style='cursor: pointer'
+    icon='visibility'
+    onclick="
+      this.parentNode.mode === 'password'
+      ? (this.parentNode.mode = 'text') & (this.icon = 'visibility_off')
+      : (this.parentNode.mode = 'password') & (this.icon = 'visibility')">
+  </eds-icon>
+</eds-textbox>
+
+<h4>Programmatic</h4>
+
+<eds-textbox id='value-example'></eds-textbox>
+<button id='value-example-button'>Set Value to "Hello"</button>
+<span id='value-example-output'></span>
+<script>
+((textbox, button, output) => {
+  const outputValue = () => {
+    output.innerHTML = `value: ${textbox.value}`;
+  }
+  textbox.addEventListener('input', () => outputValue());
+  button.addEventListener('click', () => {
+    textbox.value = "Hello";
+    outputValue();
+  });
+})(
+  document.getElementById('value-example'),
+  document.getElementById('value-example-button'),
+  document.getElementById('value-example-output')
+);
+</script>
+
+<eds-textbox id='native-methods-example' value='Some text'></eds-textbox>
+<button id='native-methods-example-button-focus'>focus()</button>
+<button id='native-methods-example-button-blur'>blur()</button>
+<button id='native-methods-example-button-select'>select()</button>
+<button id='native-methods-example-button-set-selection-range'>setSelectionRange()</button>
+<span id='native-methods-example-output'></span>
+<script>
+(() => {
+  const textbox = document.getElementById('native-methods-example');
+  const btnHandler = (btn, handler) => {
+    btn = document.getElementById('native-methods-example-button-' + btn);
+    btn.addEventListener('click', handler);
+  }
+  btnHandler('focus', () => { textbox.focus(); });
+  btnHandler('blur', () => { textbox.blur(); });
+  btnHandler('select', () => { textbox.select(); });
+  btnHandler('set-selection-range', () => {
+    textbox.focus();
+    textbox.setSelectionRange(0, 3);
+  });
+})();
+</script>
+
+<h4>Events</h4>
+
+<eds-textbox id='event-example'></eds-textbox>
+<span id='input-event-output'></span>
+<span id='change-event-output'></span>
+<script>
+((inputEl, outputEl) => {
+  let counter = 0;
+  inputEl.addEventListener('input', e => {
+    counter++;
+    outputEl.innerHTML = `${counter} input events`;
+  });
+})(document.getElementById('event-example'), document.getElementById('input-event-output'));
+
+((inputEl, outputEl) => {
+  let counter = 0;
+  inputEl.addEventListener('change', e => {
+    counter++;
+    outputEl.innerHTML = `${counter} change events`;
+  });
+})(document.getElementById('event-example'), document.getElementById('change-event-output'));
+</script>
+
+<h4>Accessibility</h4>
+
+<h3>placeholder as label</h3>
+<eds-textbox placeholder='placeholder as label'></eds-textbox>
+
+<h3>label as label</h3>
+<eds-textbox label='label as label' placeholder='placeholder as label'></eds-textbox>
+
+<h3>labelledby as label</h3>
+<div id='labelledby-example'>labelledby as label</div>
+<eds-textbox aria-labelledby='labelledby-example' label='label as label' placeholder='placeholder as label'></eds-textbox>
+
+<h3>Dynamic messages</h3>
+<eds-textbox id='dynamic-messages-example' required></eds-textbox>
+<br />
+<eds-button id='dynamic-error-example-button'>Add Error</eds-button>
+<eds-button id='dynamic-warning-example-button'>Add Warning</eds-button>
+<eds-button id='dynamic-info-example-button'>Add Info</eds-button>
+
+<script>
+(() => {
+  const textbox = document.getElementById('dynamic-messages-example');
+  const errorButton = document.getElementById('dynamic-error-example-button');
+  const warningButton = document.getElementById('dynamic-warning-example-button');
+  const infoButton = document.getElementById('dynamic-info-example-button');
+
+  errorButton.addEventListener('click', () => {
+    textbox.error = 'This is a dynamic error message.';
+  });
+  warningButton.addEventListener('click', () => {
+    textbox.warning = 'This is a dynamic warning message.';
+  });
+  infoButton.addEventListener('click', () => {
+    textbox.info = 'This is a dynamic info message.';
+  });
+
+})();
+</script>

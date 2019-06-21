@@ -1,0 +1,108 @@
+<eds-checkbox label='Normal'></eds-checkbox><br />
+<eds-checkbox label='Checked' checked></eds-checkbox><br />
+<eds-checkbox label='Disabled' disabled></eds-checkbox><br />
+<eds-checkbox label='Checked Disabled' checked disabled></eds-checkbox>
+
+<h2>tab index</h2>
+<eds-checkbox label='tabIndex = 3' tabindex='3'></eds-checkbox>
+<eds-checkbox label='tabIndex = 1' tabindex='1'></eds-checkbox>
+<eds-checkbox label='tabIndex = 2' tabindex='2'></eds-checkbox>
+
+<h2>focus/blur</h2>
+<eds-checkbox label='Testing' id='focusme'></eds-checkbox>
+<button onclick='document.getElementById("focusme").focus()'>focus</button>
+<button onclick='document.getElementById("focusme").blur()'>blur</button>
+
+<h2>programmatic use of properties</h2>
+
+<h3>label</h3>
+<eds-checkbox label='Label text' id='labeltest'></eds-checkbox>
+<input id='labeltext' value='Label text' oninput="document.getElementById('labeltest').label=this.value" />
+<script>document.getElementById('labeltext').value=document.getElementById('labeltest').label</script>
+
+<h3>disabled</h3>
+<eds-checkbox label='Testing' id='disabledtest'></eds-checkbox>
+<button onclick="document.getElementById('disabledtest').disabled=!document.getElementById('disabledtest').disabled">
+  toggle disabled
+</button>
+
+<h3>events</h3>
+<eds-checkbox label='Clicked 0 times' id='clicktest'></eds-checkbox>
+<script>
+(function(el) {
+  var clickTestCounter = 0;
+  el.addEventListener('click', function(e) {
+    el.label = 'Clicked ' + (clickTestCounter += 1) + ' times';
+  });
+})(document.getElementById('clicktest'))
+</script>
+
+<h3>methods</h3>
+<eds-checkbox label='toggle()' id='toggletest'></eds-checkbox>
+<button onclick="document.getElementById('toggletest').toggle()">
+  toggle
+</button>
+
+<h3>checked</h3>
+<eds-checkbox label='hello' id='checkedtest'></eds-checkbox>
+<button onclick="document.getElementById('checkedtest').checked = true;" id='checkedtest-btn-true'>
+  check
+</button>
+<button onclick="document.getElementById('checkedtest').checked = false;" id='checkedtest-btn-false'>
+  uncheck
+</button>
+<button onclick="document.getElementById('checkedtest').setAttribute('checked');" id='checkedtest-btn-attr'>
+  check (attr)
+</button>
+<p id='checkedtest-output'></p>
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('checkedtest');
+    var output = document.getElementById('checkedtest-output');
+    var buttonTrue = document.getElementById('checkedtest-btn-true');
+    var buttonFalse = document.getElementById('checkedtest-btn-false');
+    var buttonAttr = document.getElementById('checkedtest-btn-attr');
+    buttonTrue.addEventListener('click', function(e) {
+      output.innerHTML = `checked: ${el.checked}`;
+    });
+    buttonFalse.addEventListener('click', function(e) {
+      output.innerHTML = `checked: ${el.checked}`;
+    });
+    buttonAttr.addEventListener('click', function(e) {
+      output.innerHTML = `checked: ${el.checked}`;
+    });
+    el.addEventListener('change', function() {
+      output.innerHTML = `checked (change): ${el.checked}`;
+    });
+  });
+})()
+</script>
+
+<input type='checkbox' label='hello' id='checkedtest2'></input>
+<button onclick="document.getElementById('checkedtest2').checked = true;" id='checkedtest2-btn-true'>
+  check
+</button>
+<button onclick="document.getElementById('checkedtest2').checked = false;" id='checkedtest2-btn-false'>
+  uncheck
+</button>
+<p id='checkedtest2-output'></p>
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('checkedtest2');
+    var output = document.getElementById('checkedtest2-output');
+    var buttonTrue = document.getElementById('checkedtest2-btn-true');
+    var buttonFalse = document.getElementById('checkedtest2-btn-false');
+    buttonTrue.addEventListener('click', function(e) {
+      output.innerHTML = `checked: ${el.checked}`;
+    });
+    buttonFalse.addEventListener('click', function(e) {
+      output.innerHTML = `checked: ${el.checked}`;
+    });
+    el.addEventListener('change', function() {
+      output.innerHTML = `checked (change): ${el.checked}`;
+    });
+  });
+})()
+</script>

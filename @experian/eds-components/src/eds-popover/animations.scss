@@ -1,0 +1,12 @@
+
+eds-popover  .eds-popover-content {
+  transition:
+    transform 250ms ease 0ms,
+    opacity 85ms ease 15ms;
+
+  &.show {
+    transition:
+      transform 130ms ease 0ms,
+      opacity 50ms ease 50ms;
+  }
+}

@@ -1,0 +1,236 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "./animations.scss";
+
+// Size variables
+$eds-alert-border-radius: $eds-border-radius-small;
+$eds-alert-padding:       10px;
+$eds-alert-sidebar-width: 28px;
+$eds-alert-stack-margin:  6px 0;
+$eds-alert-region-margin: 24px;
+
+// Alert color palette
+$eds-alert-bg-color-white:      $eds-white;
+$eds-alert-bg-color-gray:       $eds-gray;
+$eds-alert-error-bg-color:      $eds-error-light;
+$eds-alert-error-icon-color:    $eds-error;
+$eds-alert-error-text-color:    $eds-error;
+$eds-alert-success-bg-color:    $eds-success-light;
+$eds-alert-success-text-color:  $eds-success;
+$eds-alert-info-bg-color:       $eds-info-light;
+$eds-alert-info-text-color:     $eds-blue;
+$eds-alert-warning-bg-color:    $eds-warning-light;
+$eds-alert-warning-icon-color:  $eds-warning;
+$eds-alert-warning-text-color:  $eds-warning;
+
+eds-alert {
+
+  display: flex;
+  border-radius: $eds-alert-border-radius;
+  background-color: $eds-alert-bg-color-white;
+  overflow: hidden; // Because of the slot, no content will actually be hidden. This is so the children "clip" to match the border-radius.
+  max-height: 500px; // Could increase this? But then transition timing would differ.
+  margin: $eds-1rem 0;
+  opacity: 1;
+  transform: scale(1);
+
+  &[border] .eds-alert-content {
+    border-top: 1px solid $eds-border-color;
+    border-right: 1px solid $eds-border-color;
+    border-bottom: 1px solid $eds-border-color;
+    border-top-right-radius: $eds-border-radius-small;
+    border-bottom-right-radius: $eds-border-radius-small;
+  }
+
+  // Only allow gray backgrounds on non-regional alerts
+  &[background="gray"]:not([region]) {
+    background-color: $eds-alert-bg-color-gray;
+    border: none;
+  }
+
+  &[motif] .eds-alert-sidebar {
+
+    display: flex;
+    position: relative;
+    min-width: $eds-alert-sidebar-width;
+    justify-content: center;
+    padding-top: $eds-alert-padding;
+
+    &:after {
+      content: "";
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .eds-alert-content {
+    flex-grow: 0;
+    position: relative;
+    padding: $eds-alert-padding $eds-alert-padding $eds-alert-padding $eds-alert-padding + 4px;
+    width: calc(100% - 28px);
+
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+
+      li {
+        display:         list-item;
+        margin-bottom:   0;
+        margin-left:     20px;
+        padding-left:    14px;
+        position:        relative;
+        line-height:     1.6em;
+
+        &:before {
+          content:       $bullet-icon;
+          color:         inherit;
+          position:      absolute;
+          left:          -20px;
+          width:         25px;
+          height:        25px;
+          text-align:    center;
+        }
+      }
+    }
+
+    // Remove margins from certain children to maintain the alert's uniform spacing.
+    h4:first-child {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    p:last-child, ul:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .eds-alert-close-icon {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    right: 10px;
+    font-size: 29px;
+    font-weight: 300;
+    color: $eds-blue;
+    cursor: pointer;
+
+    @include reset-button();
+    line-height: 1;
+  }
+
+  &[closable] .eds-alert-close-icon {
+    display: block;
+  }
+
+  // Motif variants
+  @mixin alert-style($motif) {
+    $alert-motifs: (
+      error: (background: $eds-alert-error-bg-color, text: $eds-alert-error-text-color, icon: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z' fill='#{url-encode-color($eds-alert-error-icon-color)}' /%3E%3C/svg%3E")),
+      success: (background: $eds-alert-success-bg-color, text: $eds-alert-success-text-color, icon: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA3QTNCIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+DQogICAgPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bS0yIDE1bC01LTUgMS40MS0xLjQxTDEwIDE0LjE3bDcuNTktNy41OUwxOSA4bC05IDl6Ii8+DQo8L3N2Zz4=")),
+      warning: (background: $eds-alert-warning-bg-color, text: $eds-alert-warning-text-color, icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z' fill='#{url-encode-color($eds-alert-warning-icon-color)}'/%3E%3C/svg%3E")),
+      info: (background: $eds-alert-info-bg-color, text: $eds-alert-info-text-color, icon: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNDI2ZGE5IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+DQogICAgPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTEgMTVoLTJ2LTZoMnY2em0wLThoLTJWN2gydjJ6Ii8+DQo8L3N2Zz4="))
+    );
+
+    $alert-colors: map-get($alert-motifs, $motif);
+
+    &[motif=#{$motif}] {
+      .eds-alert-sidebar {
+        background-color: map-get($alert-colors, background);
+
+        &:after {
+          display:block;  // Required for IE11 on Windows 7/8
+          background-image: map-get($alert-colors, icon);
+          background-size: contain;
+        }
+      }
+
+      &[compact] .eds-alert-content {
+        b, strong {
+          color: map-get($alert-colors, text);
+        }
+      }
+
+      .eds-alert-content {
+        h4 {
+          color: map-get($alert-colors, text);
+        }
+
+        li:before {
+          color: map-get($alert-colors, text);
+        }
+      }
+    }
+  }
+
+  @include alert-style(success);
+  @include alert-style(error);
+  @include alert-style(warning);
+  @include alert-style(info);
+}
+
+/*
+ * Regional alert specific styles
+ */
+
+eds-alert[region] {
+  @include raised-container-high();
+  margin: $eds-alert-stack-margin;
+  pointer-events: auto;
+}
+
+// Regional alert container styles
+[class^="eds-alert-region-"] {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+
+  &[class*="top-left"] {
+    top: $eds-alert-region-margin;
+    left: $eds-alert-region-margin;
+  }
+  &[class*="top-center"] {
+    top: $eds-alert-region-margin;
+    left: $eds-alert-region-margin;
+    right: $eds-alert-region-margin;
+    eds-alert {
+      max-width: 50%; // What's a sensible width?
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  &[class*="top-right"] {
+    top: $eds-alert-region-margin;
+    right: $eds-alert-region-margin;
+  }
+  &[class*="bottom-left"] {
+    bottom: $eds-alert-region-margin;
+    left: $eds-alert-region-margin;
+    flex-direction: column-reverse;
+  }
+  &[class*="bottom-center"] {
+    bottom: $eds-alert-region-margin;
+    left: $eds-alert-region-margin;
+    right: $eds-alert-region-margin;
+    flex-direction: column-reverse;
+    eds-alert {
+      max-width: 50%; // What's a sensible width?
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  &[class*="bottom-right"] {
+    bottom: $eds-alert-region-margin;
+    right: $eds-alert-region-margin;
+    flex-direction: column-reverse;
+  }
+}
+
+eds-alert[hidden] {
+  transform: scale(0);
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  border: 0;
+}

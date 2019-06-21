@@ -1,0 +1,78 @@
+@import "../styles/eds-variables";
+
+$basic-button-color: $eds-blue;
+$basic-button-background-color: #EDF4FA;
+$basic-button-hover-background-color: #DCEAF4;
+$basic-button-active-background-color: #CEE0ED;
+$basic-button-focus-border-color: $eds-blue;
+$basic-button-border-color: rgba(0,69,144,0.3);
+$basic-button-disabled-color: #AAAAAA;
+$basic-button-disabled-background-color: #F3F3F3;
+$basic-button-disabled-border-color: #CCCCCC;
+
+eds-button:not([motif]) button,
+eds-button[motif="basic"] button,
+button[eds-button],
+button[eds-button][motif="basic"] {
+  color: $basic-button-color;
+  background-color: $basic-button-background-color;
+  border-color: $basic-button-border-color;
+  &:hover {
+    background-color: $basic-button-hover-background-color;
+  }
+  &:active {
+    background-color: $basic-button-active-background-color;
+  }
+  &[disabled] {
+    color: $basic-button-disabled-color;
+    background-color: $basic-button-disabled-background-color;
+    border-color: $basic-button-disabled-border-color;
+  }
+  &::after {
+    border-color: $basic-button-focus-border-color;
+  }
+}
+
+// Inverse
+$inverse-button-background-color: rgba(255,255,255, 0.2);
+$inverse-button-color: $eds-white;
+$inverse-button-hover-color: $eds-white;
+$inverse-button-focus-color: $eds-white;
+$inverse-button-focus-border-color: $eds-white;
+$inverse-button-active-color: $eds-white;
+$inverse-button-border-color: rgba(255,255,255, 0.3);
+$inverse-button-disabled-color: rgba(255, 255, 255, 0.6);
+$inverse-button-disabled-icon-color: rgba(255, 255, 255, 0.6);
+
+eds-button[inverse]:not([motif]) button,
+eds-button[inverse][motif="basic"] button,
+button[eds-button][inverse],
+button[eds-button][inverse][motif="basic"] {
+  color: $inverse-button-color;
+  background-color: $inverse-button-background-color;
+  border-color: $inverse-button-border-color;
+
+  &:hover {
+    color: $inverse-button-hover-color;
+    background-color: rgba(255,255,255, 0.25);
+  }
+  &:active {
+    color: $inverse-button-active-color;
+    background-color: rgba(255,255,255, 0.3);
+  }
+  &:focus {
+    color: $inverse-button-focus-color;
+  }
+  &[disabled] {
+    color: $inverse-button-disabled-color;
+    background-color: rgba(255,255,255, 0.1);
+    border-color: rgba(255,255,255, 0.2);
+
+    .eds-button-icon {
+      color: $inverse-button-disabled-icon-color;
+    }
+  }
+  &::after {
+    border-color: $inverse-button-focus-border-color;
+  }
+}

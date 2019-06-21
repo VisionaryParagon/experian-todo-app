@@ -1,0 +1,28 @@
+<doc-header>Examples</doc-header>
+
+<a href="#" class="eds-cta-link cta-primary">CTA Link</a>
+
+<doc-header>Styling options</doc-header>
+<p>
+  This is a <strong>CSS Only</strong> component. It is intentionally unopinionated with regards to font and background colors and should be extended by the user to suit their application.
+</p>
+
+<api-option name='eds-cta-link' type='string'>
+  Styles a native HTML anchor tag like a CTA Link.
+
+  <doc-code live>
+    <!-- Extend the baseline styles by applying custom font and background colors. -->
+    <style>
+      a.cta-primary {
+        background-color: #b12384;
+        color: white;
+      }
+      a.cta-primary:hover {
+        background-color: #861b64;
+        color: white;
+      }
+    </style>
+
+    <a href="#" class="eds-cta-link cta-primary">Download</a>
+  </doc-code>
+</api-option>

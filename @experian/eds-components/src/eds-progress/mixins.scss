@@ -1,0 +1,18 @@
+@mixin eds-progress-theme($progress-bar-color: $eds-magenta) {
+
+  border: 1px solid $progress-bar-color;
+
+  .eds-progress-baseline-fill {
+    background-color: $progress-bar-color;
+  }
+
+  .eds-progress-fill {
+    background-color: $progress-bar-color;
+  }
+
+  .eds-progress-indeterminate {
+    $color1: $progress-bar-color;
+    $color2: mix($color1, $eds-white, 30%);
+    background-image: linear-gradient(-45deg, $color1 0px, $color2 40px, $color1 80px, $color2 120px);
+  }
+}

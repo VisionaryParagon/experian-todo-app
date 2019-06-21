@@ -1,0 +1,390 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+<script src="ag-grid-community.min.noStyle.js"></script>
+
+<style>
+  .hobby {
+    color: red;
+  }
+  .hobby:before {
+    content: '★';
+    display: inline-block;
+    padding-right: 10px;
+  }
+</style>
+
+<eds-alert motif='warning' background='gray'>
+  <b>NOTE:</b> <code>eds-data-grid</code> wraps <a href='https://www.ag-grid.com/'>agGrid</a>. You must include the community or commercial edition (ag-grid-community.noStyle.js or ag-grid-enterprise.noStyle.js) in your application for <code>eds-data-grid</code> to work.
+
+  <p>
+    Styles for the grid are provided by the <code>eds-data-grid</code> element.
+  </p>
+</eds-alert>
+
+<eds-alert motif='error' background='gray'>
+  <b>ag-grid version 20 or higher is required!</b>
+</eds-alert>
+
+<doc-header>Examples</doc-header>
+
+<eds-data-grid id='main-example' style='height: 400px;'>
+  <div slot='header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;'>
+        <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <button eds-button motif='tertiary' icon='backup'>Save to Cloud</button>
+        <button eds-button motif='tertiary' icon='archive'>Archive</button>
+      </section>
+    </eds-toolbar>
+  </div>
+
+  <div slot='selection-header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1; padding: 12px 16px;'>
+        <span id='main-example-selected-rows'></span> records selected.
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <button eds-button inverse>Combine</button>
+        <button eds-button inverse>Save to List...</button>
+        <button eds-button inverse motif='tertiary' icon='cancel'>Cancel</button>
+      </section>
+    </eds-toolbar>
+  </div>
+</eds-data-grid>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('main-example');
+    var output = document.getElementById('main-example-selected-rows');
+
+    var hobbyClass = function(params) {
+      return 'hobby';
+    }
+
+    function getRowData() {
+      var arr = [];
+      for (var i = 0; i < 100; i++) {
+        arr.push({
+          id: i,
+          name: `Name${i}`,
+          hobby: `Hobby${i}`,
+          optional: `Optional${i}`,
+          complex: { nested: `Nested${i}` },
+          other: `Other${i}`
+        });
+      }
+      return arr;
+    }
+
+    el.options = {
+      rowSelection: 'multiple',
+      suppressRowClickSelection: true,
+      defaultColDef: {
+        filter: true
+      },
+      columnDefs: [
+        { field: 'id', headerName: 'ID', width: 120, pinned: 'left', checkboxSelection: true, headerCheckboxSelection: true },
+        { field: 'name', headerName: 'Name', width: 150, pinned: 'left' },
+        { field: 'hobby', headerName: 'Hobby', cellClass: hobbyClass, width: 160 },
+        { field: 'optional', headerName: 'Optional', width: 160 },
+        { field: 'complex.nested', headerName: 'Nested', width: 160 },
+        { field: 'other', headerName: 'Other', width: 150, pinned: 'right' }
+      ],
+      rowData: getRowData()
+    };
+
+    el.addEventListener('selectionchange', function(e) {
+      output.innerHTML = `${e.detail.length}`;
+    });
+  });
+})()
+</script>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='agOptions' type='any[]' propertyOnly readOnly>
+  A proxy for agGrid's <code>gridOptions</code> property. This object provides access to all apis for agGrid.
+
+  <eds-alert motif='info'>
+    See <a href='https://www.ag-grid.com/javascript-grid-reference-overview/'>https://www.ag-grid.com/javascript-grid-reference-overview/</a> for more information.
+  </eds-alert>
+
+  <eds-alert motif='warning'>
+    <b>NOTE:</b> This property only becomes available after the grid has been initialized.
+  </eds-alert>
+</api-option>
+
+<api-option name='api' type='any[]' propertyOnly readOnly>
+  A proxy for agGrid's <code>gridOptions.api</code> property.
+
+  <eds-alert motif='info'>
+    See <a href='https://www.ag-grid.com/javascript-grid-api/'>https://www.ag-grid.com/javascript-grid-api/</a> for more information.
+  </eds-alert>
+
+  <eds-alert motif='warning'>
+    <b>NOTE:</b> This property only becomes available after the grid has been initialized.
+  </eds-alert>
+</api-option>
+
+<api-option name='compact' type='boolean'>
+  Renders the data-grid in compact mode (more compressed row heights).
+
+  <doc-code live>
+    <eds-data-grid id='compact-example' compact style='height: 150px;'></eds-data-grid>
+    <script>
+    (function() {
+      window.addEventListener('WebComponentsReady', function() {
+        var el = document.getElementById('compact-example');
+        el.options = {
+          columnDefs: [
+            { field: 'id', headerName: 'ID', width: 100 },
+            { field: 'name', headerName: 'Name', width: 150 },
+            { field: 'hobby', headerName: 'Hobby' }
+          ],
+          rowData: [
+            { id: 1, name: 'Alan', hobby: 'Color Grading' },
+            { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+            { id: 3, name: 'Grant', hobby: 'Game Development' }
+          ]
+        };
+      });
+    })()
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='selectedRows' type='any[]' propertyOnly readOnly>
+  Gets the selected rows for the data-grid.
+
+  <doc-code live>
+    <eds-data-grid id='selectedRows-example' style='height: 160px;'></eds-data-grid>
+    <p id='selectedRows-output'></p>
+    <script>
+    (function() {
+      window.addEventListener('WebComponentsReady', function() {
+        var el = document.getElementById('selectedRows-example');
+        var output = document.getElementById('selectedRows-output');
+        el.options = {
+          rowSelection: 'multiple',
+          suppressRowClickSelection: true,
+          columnDefs: [
+            { field: 'id', headerName: 'ID', width: 150, checkboxSelection: true, headerCheckboxSelection: true },
+            { field: 'name', headerName: 'Name', width: 150 },
+            { field: 'hobby', headerName: 'Hobby' }
+          ],
+          rowData: [
+            { id: 1, name: 'Alan', hobby: 'Color Grading' },
+            { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+            { id: 3, name: 'Grant', hobby: 'Game Development' }
+          ]
+        };
+
+        el.addEventListener('selectionchange', function(e) {
+          output.innerHTML = `${el.selectedRows.length} selected rows`;
+        });
+      });
+    })()
+    </script>
+  </doc-code>
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name='eds-data-grid-ready' type='CustomEvent' detail='HTMLElement'>
+  Fires when the grid api is available for use. <code>event.detail</code> contains the eds-data-grid element.
+
+  <p>
+    This is useful in some edge cases where you need to register api calls before the element is done bootstrapping (normally this isn't required).
+  </p>
+</api-event>
+
+<api-event name='selectionchange' type='CustomEvent' detail='any[]'>
+  Fires when the selection changes due to user action. <code>event.detail</code> contains the new selection.
+
+  <doc-code live>
+    <eds-data-grid id='selectionchange-event-example' style='height: 160px;'></eds-data-grid>
+    <p id='selectionchange-event-output'></p>
+    <script>
+    (function() {
+      window.addEventListener('WebComponentsReady', function() {
+        var el = document.getElementById('selectionchange-event-example');
+        var output = document.getElementById('selectionchange-event-output');
+        el.options = {
+          rowSelection: 'multiple',
+          suppressRowClickSelection: true,
+          columnDefs: [
+            { field: 'id', headerName: 'ID', width: 150, checkboxSelection: true, headerCheckboxSelection: true },
+            { field: 'name', headerName: 'Name', width: 150 },
+            { field: 'hobby', headerName: 'Hobby' }
+          ],
+          rowData: [
+            { id: 1, name: 'Alan', hobby: 'Color Grading' },
+            { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+            { id: 3, name: 'Grant', hobby: 'Game Development' }
+          ]
+        };
+
+        el.addEventListener('selectionchange', function(e) {
+          output.innerHTML = `${e.detail.length} selected rows`;
+        });
+      });
+    })()
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='refresh'>
+  Re-renders the table.
+
+  <doc-note motif='warning'>
+    <b>NOTE:</b> Usually you won't need to call this method. It is typically invoked automatically after properties and attributes are changed.
+  </doc-note>
+</api-method>
+
+<doc-header>Headers and Toolbars</doc-header>
+
+<p>
+  There are two available header slots for <code>eds-data-grid</code>, one that persists and one that is visible only when selections are made.
+</p>
+
+<eds-alert motif='warning' background='gray'>
+  <b>NOTE:</b> When a selection header is displayed, it temporarily covers the standard header. This is meant to maintain the table's existing dimensions and to focus the user on a selection workflow. If you need the standard header to remain visible, you can listen for the <code>selectionchange</code> event and implement an external selection workflow rather than using the built-in selection header.
+</eds-alert>
+
+<p>
+  The <code>eds-header</code> and <code>eds-selection-header</code> slots are optimized for the following child elements:
+</p>
+
+<ul>
+  <li><b>eds-toolbar</b></li>
+  <li><b>section</b></li>
+</ul>
+
+<p>
+  Below are some examples of headers in action.
+</p>
+
+<doc-code live>
+  <eds-data-grid id='header-example' style='height: 300px;'>
+    <div slot='header'>
+      <eds-toolbar>
+        <section style='flex-grow: 1;'>
+          <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button motif='tertiary' icon='backup'>Save to Cloud</button>
+          <button eds-button motif='tertiary' icon='archive'>Archive</button>
+        </section>
+      </eds-toolbar>
+      <section background='gray'>
+        <eds-textbox label='Description' value='Configuration 1'></eds-textbox>
+        <eds-dropdown label='Product' style='width: 200px;'>
+          <eds-option>Product A</eds-option>
+          <eds-option selected>Product B</eds-option>
+          <eds-option>Product C</eds-option>
+        </eds-dropdown>
+      </section>
+    </div>
+
+    <div slot='selection-header'>
+      <eds-toolbar>
+        <section style='flex-grow: 1; padding: 12px 16px;'>
+          <span id='selected-rows'></span> records selected.
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button inverse>Combine</button>
+          <button eds-button inverse>Save to List...</button>
+          <button eds-button inverse motif='tertiary' icon='cancel'>Cancel</button>
+        </section>
+      </eds-toolbar>
+    </div>
+  </eds-data-grid>
+
+  <script>
+  (function() {
+    window.addEventListener('WebComponentsReady', function() {
+      var el = document.getElementById('header-example');
+      var output = document.getElementById('selected-rows');
+      el.options = {
+        rowSelection: 'multiple',
+        suppressRowClickSelection: true,
+        columnDefs: [
+          { field: 'id', headerName: 'ID', width: 150, checkboxSelection: true, headerCheckboxSelection: true },
+          { field: 'name', headerName: 'Name', width: 150 },
+          { field: 'hobby', headerName: 'Hobby' }
+        ],
+        rowData: [
+          { id: 1, name: 'Alan', hobby: 'Color Grading' },
+          { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+          { id: 3, name: 'Grant', hobby: 'Game Development' }
+        ]
+      };
+      el.addEventListener('selectionchange', function(e) {
+        output.innerHTML = `${e.detail.length}`;
+      });
+    });
+  })()
+  </script>
+</doc-code>
+
+<doc-code live>
+  <eds-data-grid id='header-example2' style='height: 220px;'>
+    <div slot='header'>
+      <eds-toolbar>
+        <section style='flex-grow: 1;'>
+          <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button motif='tertiary' icon='backup'>Save to Cloud</button>
+          <button eds-button motif='tertiary' icon='archive'>Archive</button>
+        </section>
+      </eds-toolbar>
+    </div>
+
+    <div slot='selection-header'>
+      <eds-toolbar>
+        <section style='flex-grow: 1; padding: 12px 16px;'>
+          <span id='selected-rows2'></span> records selected.
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button inverse motif='tertiary' icon='delete'>Delete</button>
+          <button eds-button inverse motif='tertiary' icon='cancel'>Cancel</button>
+        </section>
+      </eds-toolbar>
+    </div>
+  </eds-data-grid>
+
+  <script>
+  (function() {
+    window.addEventListener('WebComponentsReady', function() {
+      var el = document.getElementById('header-example2');
+      var output = document.getElementById('selected-rows2');
+      el.options = {
+        rowSelection: 'multiple',
+        suppressRowClickSelection: true,
+        columnDefs: [
+          { field: 'id', headerName: 'ID', width: 150, checkboxSelection: true, headerCheckboxSelection: true },
+          { field: 'name', headerName: 'Name', width: 150 },
+          { field: 'hobby', headerName: 'Hobby' }
+        ],
+        rowData: [
+          { id: 1, name: 'Alan', hobby: 'Color Grading' },
+          { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+          { id: 3, name: 'Grant', hobby: 'Game Development' }
+        ]
+      };
+      el.addEventListener('selectionchange', function(e) {
+        output.innerHTML = `${e.detail.length}`;
+      });
+    });
+  })()
+  </script>
+</doc-code>

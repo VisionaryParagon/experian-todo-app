@@ -1,0 +1,119 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+$animation-time: 0.15s;
+$button-border-radius: $eds-border-radius-small;
+$button-font-family: $eds-font-family-base;
+$button-font-size: 14px;
+$button-font-weight: 500;
+
+eds-button {
+  display: inline-block;
+}
+
+// Moving to css only
+eds-button button, button[eds-button] {
+  text-align: center;
+  vertical-align: text-bottom;
+  touch-action: manipulation;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  white-space: nowrap;
+  outline: none;
+  position: relative;
+  font-family: $button-font-family;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  @include font-smoothing();
+  line-height: $eds-1rem;
+  border: 1px solid transparent;
+  border-radius: $button-border-radius;
+  padding: 8px 20px;
+  overflow: visible;
+
+  display: inline-flex;
+  align-items: flex-end;
+
+  transition: background-color $animation-time ease;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  .eds-button-icon {
+    display: none;
+  }
+
+  &.icon-right, &.icon-left {
+    // Optically more balanced than 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  &.icon-left eds-icon {
+    margin-left: 0;
+    margin-right: 10px;
+    color: inherit;
+  }
+
+  &.icon-right eds-icon {
+    margin-left: 10px;
+    margin-right: 0;
+    color: inherit;
+  }
+
+  &[icon] {
+    // Optically more balanced than 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    .eds-button-icon {
+      display: inline-block;
+      margin-right: 10px;
+      color: inherit;
+    }
+
+    &.eds-icon-right  {
+      flex-direction: row-reverse;
+
+      .eds-button-icon {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  // Focus state
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: $button-border-radius;
+    border: 2px solid transparent;
+    opacity: 0;
+    transition: opacity $animation-time ease;
+  }
+  &:focus::after {
+    opacity: 1;
+  }
+
+}
+
+eds-button.icon-only button[icon],
+button[eds-button].icon-only {
+  padding: 2px 10px 0px !important;
+  min-height: 34px;
+  .eds-button-icon {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  line-height: 1.4em;
+
+  eds-icon {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}

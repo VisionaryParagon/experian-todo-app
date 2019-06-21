@@ -1,0 +1,439 @@
+<style>
+table tr td {
+  vertical-align: bottom;
+}
+
+eds-dropdown {
+  width: 150px;
+}
+
+</style>
+
+<doc-header>Examples</doc-header>
+<table>
+  <tr>
+    <td>
+      <eds-dropdown>
+        <eds-option selected>Option 1</eds-option>
+        <eds-option>Option 2</eds-option>
+        <eds-option>Option 3</eds-option>
+      </eds-dropdown>
+    </td>
+    <td>
+      <eds-dropdown multiple>
+        <eds-option selected>Option 1</eds-option>
+        <eds-option selected>Option 2</eds-option>
+        <eds-option>Option 3</eds-option>
+      </eds-dropdown>
+    </td>
+    <td>
+      <eds-dropdown disabled>
+        <eds-option selected>Option 1</eds-option>
+        <eds-option>Option 2</eds-option>
+        <eds-option>Option 3</eds-option>
+      </eds-dropdown>
+    </td>
+  </tr>
+</table>
+
+<doc-header>Configuration Options</doc-header>
+
+<p>
+  In addition to custom options listed below, this element inherits attributes from <mdn-doc-link url='HTML/Element/select'>&lt;select&gt;</mdn-doc-link>.
+</p>
+
+<api-option name='alignOptions' type='string' default='left'>
+  Aligns the options to either the left or right. This value is only practically useful when setting <code>optionsWidth</code> to something other than the width of the trigger element.
+
+  <doc-code live>
+    <eds-dropdown label='Left align' optionWidth='80px'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+
+    <eds-dropdown label='Right align' optionWidth='80px' alignOptions='right'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+
+</api-option>
+
+<api-option name='error' type='string || boolean'>
+  Sets a warning message and state on the dropdown. When truthy, a warning status will appear even if no message is specified (i.e. when setting via property).
+
+  <doc-code live>
+    <div style='display: flex'>
+      <eds-dropdown error='This field is required'>
+        <eds-option value='en'>English</eds-option>
+        <eds-option value='de'>German</eds-option>
+        <eds-option value='es'>Spanish</eds-option>
+      </eds-dropdown>
+      <eds-dropdown id='error-example'>
+        <eds-option value='en' selected>English</eds-option>
+        <eds-option value='de'>German</eds-option>
+        <eds-option value='es'>Spanish</eds-option>
+      </eds-dropdown>
+    </div>
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('error-example').error = true;
+      });
+    </script>
+  </doc-code>
+</api-option>
+
+<api-option name='formatter' type='function(value, options): string' propertyOnly>
+  A function that formats the display value. The default function returns a comma separated list of values. This function accepts two arguments:
+
+  <ul>
+    <li><b>value</b> -  the current value of the dropdown, always given as an array</li>
+    <li><b>options</b> - an array of dropdown options</li>
+  </ul>
+
+  <doc-note motif='warning'>
+    This function should return a string.
+  </doc-note>
+
+  <doc-code live>
+    <eds-dropdown id='formatter-property-example'>
+      <eds-option value='en' selected>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+      document.getElementById('formatter-property-example').formatter = function(value, options) {
+        return value.map(val => {
+          let option = options.filter(option => option.value == val)[0];
+          return `${option.content} (${option.value})`;
+        }).join(', ');
+      }
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='info' type='string'>
+  Sets an info message for the dropdown.
+
+  <doc-code live>
+    <eds-dropdown info='Select your native language'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+
+</api-option>
+
+<api-option name='label' type='string'>
+  Sets a label on the dropdown.
+
+  <doc-code live>
+    <eds-dropdown label='Language'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+
+</api-option>
+
+<api-option name='multiple' type='boolean'>
+  Defines whether or not multiple options can be selected at the same time.
+
+  <doc-code live>
+    <eds-dropdown placeholder='Select Multiple' multiple>
+      <eds-option>A</eds-option>
+      <eds-option>B</eds-option>
+      <eds-option>C</eds-option>
+    </eds-dropdown>
+  </doc-code>
+</api-option>
+
+<api-option name='options' type='string' propertyOnly>
+  An array of objects used as the dropdown options. Each object in the array must include the following properties:
+
+  <ul>
+    <li><b>value</b> - the option value</li>
+    <li><b>content</b> - the display value for the option</li>
+  </ul>
+
+  <doc-note>
+    <b>Note:</b> In addition to specifying <code>options</code> as a property, you can specify options directly in the markup.
+  </doc-note>
+
+  <doc-code live>
+    <eds-dropdown
+      label='Options as a property'
+      id='options-property-example'>
+    </eds-dropdown>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('options-property-example').options = [
+          { value: 'en', content: 'English' },
+          { value: 'de', content: 'German' },
+          { value: 'es', content: 'Spanish' }
+        ];
+        document.getElementById('options-property-example').value = 'en';
+      });
+    </script>
+
+    <eds-dropdown label='Options via markup'>
+      <eds-option value='en'>English</eds-option>
+      <eds-option value='de' selected>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+
+</api-option>
+
+<api-option name='optionsWidth' type='string' deprecated>
+  <doc-note motif='warning'>
+    This option is deprecated, use <code>optionWidth</code> instead.
+  </doc-note>
+</api-option>
+
+<api-option name='optionWidth' type='string'>
+  Sets the width of the options container. Must be a valid css <code>width</code> value.
+
+  <doc-code live>
+    <eds-dropdown label='Language' optionWidth='300px'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+
+    <eds-dropdown label='Language' optionWidth='auto'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+
+    <eds-dropdown label='Language' optionWidth='100%'>
+      <eds-option selected>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+
+  </doc-code>
+
+</api-option>
+
+<api-option name='placeholder' type='string'>
+  Sets placeholder text for the dropdown.
+
+  <doc-code live>
+    <eds-dropdown placeholder='Choose a language...' style='width: 200px;'>
+      <eds-option>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+</api-option>
+
+<api-option name='searchable' type='boolean' default='false'>
+  If set to true the dropdown options will be searchable.
+
+  <doc-code live>
+    <eds-dropdown searchable>
+      <eds-option>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+</api-option>
+
+<api-option name='searchFunction' type='function(options, query): any[]' propertyOnly>
+  A function that filters <code>options</code> using <code>query</code>. This function accepts two arguments:
+
+  <ul>
+    <li><b>options</b> - an array of dropdown options</li>
+    <li><b>query</b> - a query string taken from the user's input</li>
+  </ul>
+
+  <doc-note motif='warning'>
+    This function should return an array of options.
+  </doc-note>
+
+  <doc-code live>
+    <eds-dropdown id='search-function-property-example' searchable>
+      <eds-option value='en' selected>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+      document.getElementById('search-function-property-example').searchFunction = function(options, query) {
+        return options.filter(option => {
+          return option.content.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        });
+      }
+    </script>
+  </doc-code>
+</api-option>
+
+<api-option name='searchPlaceholder' type='string' default='Search'>
+  A placeholder for the searchbox. This configuration option is ignored unless <code>searchable</code> is true.
+
+  <doc-code live>
+    <eds-dropdown searchPlaceholder='Find a language' searchable style='width: 200px;'>
+      <eds-option>English</eds-option>
+      <eds-option>German</eds-option>
+      <eds-option>Spanish</eds-option>
+    </eds-dropdown>
+  </doc-code>
+</api-option>
+
+<api-option name='value' type='string || string[]' propertyOnly>
+  A string or array of strings corresponding to the selected option values.
+
+  <doc-code live>
+    <eds-dropdown id='value-property-example1'>
+      <eds-option value='en' selected>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <eds-dropdown id='value-property-example2' multiple>
+      <eds-option value='en'>English</eds-option>
+      <eds-option value='de' selected>German</eds-option>
+      <eds-option value='es' selected>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        // Select the German option
+        document.getElementById('value-property-example1').value = 'de';
+
+        // Read existing selections
+        console.log(document.getElementById('value-property-example2').value);
+        // Outputs: ['de', 'es']
+      });
+    </script>
+  </doc-code>
+</api-option>
+
+<api-option name='warning' type='string || boolean'>
+  Sets a warning message and state on the dropdown. When truthy, a warning status will appear even if no message is specified (i.e. when setting via property).
+
+  <doc-code live>
+    <div style='display: flex'>
+      <eds-dropdown warning='Fluency required'>
+        <eds-option value='en' selected>English</eds-option>
+        <eds-option value='de'>German</eds-option>
+        <eds-option value='es'>Spanish</eds-option>
+      </eds-dropdown>
+      <eds-dropdown id='warning-example'>
+        <eds-option value='en' selected>English</eds-option>
+        <eds-option value='de'>German</eds-option>
+        <eds-option value='es'>Spanish</eds-option>
+      </eds-dropdown>
+    </div>
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('warning-example').warning = true;
+      });
+    </script>
+  </doc-code>
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<p>
+  See <mdn-doc-link url='API/HTMLSelectElement'>HTMLSelectElement</mdn-doc-link> for a list of select events that <mdn-doc-link url='API/Event/bubbles'>bubble</mdn-doc-link>.
+</p>
+
+<api-event name='change' type='string || string[]'>
+  Fires when the selected options change. <code>event.detail</code> contains the new selection.
+</api-event>
+
+<api-event name='close' type='CustomEvent'>
+  Fires when the dropdown is closed.
+
+  <doc-code live>
+    <eds-dropdown id='close-event-example'>
+      <eds-option value='en' selected>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+      window.addEventListener('WebComponentsReady', () => {
+        document.getElementById('close-event-example').addEventListener('close', () => {
+          window.EDS.alerts.create('Dropdown closed!', {
+            motif: 'success',
+            region: 'bottom-right',
+            timeout: 3000
+          });
+        });
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<api-event name='open' type='CustomEvent'>
+  Fires when the dropdown is opened.
+
+  <doc-code live>
+    <eds-dropdown id='open-event-example'>
+      <eds-option value='en' selected>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+      window.addEventListener('WebComponentsReady', () => {
+        document.getElementById('open-event-example').addEventListener('open', () => {
+          window.EDS.alerts.create('Dropdown opened!', {
+            motif: 'success',
+            region: 'bottom-right',
+            timeout: 3000
+          });
+        });
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='add' args="option: any">
+  Adds an option to the dropdown.
+
+  <doc-code live>
+    <eds-dropdown id='add-method-example'>
+      <eds-option value='en'>English</eds-option>
+      <eds-option value='de'>German</eds-option>
+      <eds-option value='es'>Spanish</eds-option>
+    </eds-dropdown>
+
+    <script>
+    window.addEventListener('WebComponentsReady', function() {
+      document.getElementById('add-method-example').add({
+        content: 'French',
+        value: 'fr'
+      });
+
+      document.getElementById('add-method-example').value = 'fr';
+    });
+    </script>
+  </doc-code>
+</api-method>
+
+<api-method name='close'>
+  Closes the dropdown.
+</api-method>
+
+<api-method name='open'>
+  Opens the dropdown.
+</api-method>
+
+<api-method name='toggle'>
+  Toggles the open/closed state of the dropdown.
+</api-method>

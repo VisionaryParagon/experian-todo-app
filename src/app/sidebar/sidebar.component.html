@@ -1,0 +1,15 @@
+<eds-sidebar id="sidenav" background="gray">
+  <h4 caps>My ToDo Lists</h4>
+
+  <eds-menu-item *ngFor="let list of user.lists" [routerLink]="['/list/', list.slug]" [selected]="slug === list.slug">{{ list.name }}</eds-menu-item>
+
+  <eds-menu-item [routerLink]="['/archive']" [selected]="slug === 'archive'">Archive</eds-menu-item>
+
+  <button eds-button class="icon-left" aria-label="add new list" (click)="openModal()">
+    <eds-icon icon="add" aria-hidden="true"></eds-icon> New List...
+  </button>
+</eds-sidebar>
+
+<eds-modal (hide)="reset()" #newListModal>
+  <app-new-list [list]="list" (close)="closeModal($event)"></app-new-list>
+</eds-modal>

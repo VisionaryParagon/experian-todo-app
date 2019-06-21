@@ -1,0 +1,17 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+[background='gray'] eds-menu-item {
+
+  background-color: $eds-gray;
+
+  &[selected] {
+    background-color: $eds-white;
+
+    .eds-menu-item-main {
+      &::before {
+        border-color: $eds-white;
+      }
+    }
+  }
+}

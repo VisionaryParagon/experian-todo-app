@@ -1,0 +1,16 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+[background='gray'] eds-tree-item {
+
+  background-color: $eds-gray;
+
+  &[selected] {
+    & > .eds-tree-item-main {
+      background-color: $eds-white;
+      &::before {
+        border-color: $eds-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "../styles/eds-variables";
+
+$default-tags-color: $eds-default-light;
+$default-font-color: $eds-default;
+
+eds-tag:not([motif]), eds-tag[motif="default"] {
+    background: $default-tags-color;
+    color: $default-font-color;
+}

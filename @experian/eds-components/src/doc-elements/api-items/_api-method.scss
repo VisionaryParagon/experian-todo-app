@@ -1,0 +1,22 @@
+$type-color:        #a064af;
+$arg-color:         #9b6a16;
+$return-type-color: #555;
+
+.api-item-container {
+
+  .api-item {
+
+    .method-arg {
+      color: $arg-color;
+    }
+
+    .method-arg-type {
+      color: $type-color;
+    }
+
+    .method-return-type {
+      color: $return-type-color;
+    }
+  }
+
+}

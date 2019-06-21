@@ -1,0 +1,136 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<doc-header>Examples</doc-header>
+
+<eds-accordion>
+  <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1" active="true">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+
+    <p>
+      <a href='http://google.com'>Google.com</a>
+    </p>
+  </eds-accordion-panel>
+  <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+  </eds-accordion-panel>
+</eds-accordion>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='multiple' type='boolean' default='false'>
+  Defines whether multiple <code>eds-accordion-panel</code> can be open at the same time.
+
+  <doc-code live>
+
+      <eds-accordion multiple>
+        <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1">
+          Hello I am content 1
+        </eds-accordion-panel>
+        <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+          Hello I am content 2
+        </eds-accordion-panel>
+      </eds-accordion>
+
+  </doc-code>
+</api-option>
+
+<api-option name='wide' type='boolean' default='false'>
+  Enables the wide styling for the accordion.
+
+  <doc-code live>
+
+    <eds-accordion wide>
+      <eds-accordion-panel label="Label 1" subLabel="Sub Label 1">
+        This is wide content 1
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2" subLabel="Sub Label 2" active="true">
+        This is wide content 2
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </doc-code>
+</api-option>
+
+<doc-header><code>eds-accordion-panel</code> Configuration Options</doc-header>
+
+<api-option name='active' type='boolean' default='false'>
+  Toggles the active state of the <code>eds-accordion-panel</code>.
+
+  <doc-code live>
+
+    <eds-accordion>
+      <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1" active>
+        Hello I am content 1
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+        Hello I am content 2
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </doc-code>
+</api-option>
+
+<api-option name='label' type='string'>
+  Gets or sets the text that appears in the label.
+
+  <doc-code live>
+
+    <eds-accordion>
+      <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1" active>
+        Hello I am content 1
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+        Hello I am content 2
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </doc-code>
+</api-option>
+
+<api-option name='expandedLabel' type='string'>
+  Gets or sets the expanded text that appears in the label.
+
+  <doc-note motif="warning">
+    This attribute is only applicable for normal accordion only.
+    If the <code>expandedLabel</code> attribute is not present, <code>label</code> attribute will be used as default.
+  </doc-note>
+
+  <doc-code live>
+
+    <eds-accordion>
+      <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1" active>
+        Hello I am content 1
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2">
+        Hello I am content 2
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </doc-code>
+</api-option>
+
+<api-option name='subLabel' type='string'>
+  Appends a secondary label into the header.
+
+  <doc-note motif="warning">
+    This attribute is only applicable for wide accordion only.
+  </doc-note>
+
+  <doc-code live>
+
+    <eds-accordion wide>
+      <eds-accordion-panel label="Label 1" subLabel=" - Sub Label 1" active="true">
+        This is wide content 1
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2">
+        This is wide content 2
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </doc-code>
+</api-option>

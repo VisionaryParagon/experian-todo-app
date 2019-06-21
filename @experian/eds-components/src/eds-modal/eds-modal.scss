@@ -1,0 +1,85 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "./animations.scss";
+
+$eds-modal-border-color: $eds-border-color;
+$eds-modal-border-radius: $eds-border-radius-large;
+$eds-modal-padding-vertical: 26px;
+$eds-modal-padding-horizontal: 30px;
+$eds-modal-padding: $eds-modal-padding-vertical $eds-modal-padding-horizontal;
+
+eds-modal {
+
+  position: fixed;
+  overflow: scroll;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+
+  opacity: 0;
+  transform: scale(0);
+
+  &.eds-modal-show {
+    opacity: 1;
+    transform: scale(1);
+
+    .eds-modal-box {
+      opacity: 1;
+      transform: scale(1) translate(-50%);
+    }
+  }
+
+  .eds-modal-box {
+    position: absolute;
+    display: block;
+    margin-left: 50%;
+    top: 10%;
+    min-width: 300px;
+    max-width: 80%;
+    background: white;
+    border-radius: $eds-modal-border-radius;
+    @include raised-container-high();
+    @include base-font();
+    padding: $eds-modal-padding;
+
+    opacity: 0;
+    transform: scale(0.75) translate(-60%);
+
+    .eds-close-modal {
+      display: none;
+    }
+
+    &[closable="true"] .eds-close-modal {
+      display: block;
+      position: absolute;
+      top: $eds-modal-padding-vertical - 11px;
+      right: $eds-modal-padding-horizontal - 4px;
+      line-height: $eds-1rem;
+      font-size: 30px;
+      font-weight: 300;
+      color: $eds-blue;
+      cursor: pointer;
+
+      @include reset-button();
+    }
+
+    header {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    main {
+
+    }
+
+    footer {
+      margin-top: 20px;
+    }
+  }
+
+}

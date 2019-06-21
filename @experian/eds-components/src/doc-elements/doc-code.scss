@@ -1,0 +1,69 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+$code-font: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+code {
+  font-family: $code-font;
+  color: $eds-red;
+  background-color: $eds-gray;
+}
+
+doc-code {
+
+  .code-live {
+    display: block;
+    width: 100%;
+    float: none;
+    background-color: white;
+    padding: 1.5em;
+    border: 1px solid #e6e6e6;
+    border-bottom: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    margin-top: 1em;
+  }
+
+  .code-highlight {
+    border: 1px solid #e6e6e6;
+  }
+
+  .code-live + .code-highlight {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0;
+  }
+
+  .code-highlight {
+    border-radius: 2px;
+    margin: 1em 0;
+    background: #f5f5f5;
+    position: relative;
+    padding: 1em;
+    overflow: auto;
+
+    code, kbd, pre, samp {
+      font-family: $code-font;
+      text-shadow: 0 1px white;
+    }
+
+    pre {
+      margin: 0;
+      padding: 0;
+
+      &:after {
+        content: attr(data-language);
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        font-size: 0.8em;
+        font-family: $eds-font-family-base;
+        color: #aaa;
+      }
+    }
+
+    code {
+      font-size: 100%;
+    }
+  }
+}

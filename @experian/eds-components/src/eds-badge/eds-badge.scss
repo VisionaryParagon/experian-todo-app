@@ -1,0 +1,29 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+[eds-badge] {
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: $eds-font-family-base;
+  font-size: 13px;
+  @include font-smoothing();
+  border: 1px solid $eds-white;
+  border-radius: 12px;
+  padding: 4px;
+  background: $eds-error-border;
+  color: $eds-white;
+  min-width: 24px;
+  line-height: 15px;
+  text-align: center;
+}
+
+[eds-button] [eds-badge] {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+}
+
+[eds-button] [eds-badge] + eds-icon {
+  margin-top: 10px;
+}

@@ -1,0 +1,113 @@
+
+
+<style>
+.bottom-align td {
+  padding: 5px;
+  vertical-align: bottom;
+}
+.top-align td {
+  padding: 5px;
+  vertical-align: top;
+}
+.fixed-width td eds-textarea {
+  width: 180px;
+}
+.gray {
+  background-color: #f6f6f6;
+}
+</style>
+<h4>All Attributes - Active</h4>
+<eds-textarea label="All Attributes" placeholder="placeholder" rows="5" cols="50"></eds-textarea>
+
+<h4>All Attributes - Active / Borderless</h4>
+<eds-textarea label="All Attributes" placeholder="placeholder" noborder rows="5" cols="50"></eds-textarea>
+
+<h4>All Attributes - Disabled</h4>
+<eds-textarea label="All Attributes" placeholder="placeholder" disabled rows="5" cols="50"></eds-textarea>
+
+
+<h4>Standard</h4>
+<eds-textarea></eds-textarea>
+
+<h4>Disabled</h4>
+<eds-textarea disabled></eds-textarea>
+
+<h4>Label</h4>
+<eds-textarea label="Name"></eds-textarea>
+
+<h4>Placeholder</h4>
+<eds-textarea placeholder="placeholder"></eds-textarea>
+
+<h4>Borderless</h4>
+
+<div>
+  <eds-textarea noborder placeholder='Type to search...'></eds-textarea>
+</div>
+
+<h4>Programmatic</h4>
+
+<eds-textarea id='value-example'></eds-textarea>
+<button id='value-example-button'>Set Value to "Hello"</button>
+<span id='value-example-output'></span>
+<script>
+(function(textarea, button, output) {
+  function outputValue() {
+    output.innerHTML = `value: ${textarea.value}`;
+  }
+  textarea.addEventListener('input', () => outputValue());
+  button.addEventListener('click', () => {
+    textarea.value = "Hello";
+    outputValue();
+  });
+})(
+  document.getElementById('value-example'),
+  document.getElementById('value-example-button'),
+  document.getElementById('value-example-output')
+);
+</script>
+
+<eds-textarea id='native-methods-example' value='Some text'></eds-textarea>
+<button id='native-methods-example-button-focus'>focus()</button>
+<button id='native-methods-example-button-blur'>blur()</button>
+<button id='native-methods-example-button-select'>select()</button>
+<button id='native-methods-example-button-set-selection-range'>setSelectionRange()</button>
+<span id='native-methods-example-output'></span>
+<script>
+(function() {
+  var textarea = document.getElementById('native-methods-example');
+  function btnHandler(btn, handler) {
+    var btn = document.getElementById('native-methods-example-button-' + btn);
+    btn.addEventListener('click', handler);
+  }
+  btnHandler('focus', function() { textarea.focus(); });
+  btnHandler('blur', function() { textarea.blur(); });
+  btnHandler('select', function() { textarea.select(); });
+  btnHandler('set-selection-range', function() {
+    textarea.focus();
+    textarea.setSelectionRange(0, 3);
+  });
+})();
+</script>
+
+<h4>Events</h4>
+
+<eds-textarea id='event-example'></eds-textarea>
+<span id='input-event-output'></span>
+<span id='change-event-output'></span>
+<script>
+(function(inputEl, outputEl) {
+  let counter = 0;
+  inputEl.addEventListener('input', e => {
+    counter++;
+    outputEl.innerHTML = `${counter} input events`;
+  });
+})(document.getElementById('event-example'), document.getElementById('input-event-output'));
+
+(function(inputEl, outputEl) {
+  let counter = 0;
+  inputEl.addEventListener('change', e => {
+    counter++;
+    outputEl.innerHTML = `${counter} change events`;
+  });
+})(document.getElementById('event-example'), document.getElementById('change-event-output'));
+</script>

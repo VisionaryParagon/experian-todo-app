@@ -15,6 +15,16 @@
   <meta name="msapplication-TileColor" content="#1d4f91">
   <meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
+
+  <script src="webcomponents/webcomponents-loader.js"></script>
+  <script>
+    if (!window.customElements) {
+      document.write('<!--');
+    }
+  </script>
+  <script src="webcomponents/custom-elements-es5-adapter.js"></script>
+  <!-- ! DO NOT REMOVE THIS COMMENT, WE NEED ITS CLOSING MARKER -->
+  <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
 </head>
 <body>
   <app-root></app-root>

@@ -1,0 +1,138 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.examples {
+  display: flex;
+  align-items: flex-start;
+}
+.examples [eds-card] {
+  flex: 0 0 300px;
+  margin: 0;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<div class='examples'>
+  <section eds-card>
+    <header>
+      <h4>Card with sample content.</h4>
+    </header>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <footer>
+      <button eds-button>Confirm</button>
+    </footer>
+  </section>
+  <div style='flex: 0 0 20px'></div>
+  <section eds-card background='gray'>
+    <h4>Card with sample content.</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+  </section>
+</div>
+
+<doc-header>Custom HTML Element</doc-header>
+
+<doc-note motif='warning'>
+  <b>WARNING:</b> The custom html element (<code>&lt;eds-card&gt;</code>) is now deprecated and will be removed in a future release. Please use the class or attribute implementations (see below).
+</doc-note>
+
+<doc-header>Content & Markup</doc-header>
+
+<p>
+  <code>eds-card</code> components are applied as classes (<code>class='eds-card'</code>), or attributes (<code>< ... eds-card></code> or <code>< ... data-eds-card></code>) and limited to styles only. If you need the full range of styles and accessibility features you should use <a href='https://www.w3.org/TR/html5/dom.html#sectioning-content-2'>sectioning tags</a> to support the following content based markup:
+</p>
+
+<ul>
+  <li><code>header</code></li>
+  <li><code>footer</code></li>
+</ul>
+
+<doc-code live>
+  <style>
+    .flex-container {
+      display: flex;
+      align-items: flex-start;
+    }
+    [eds-card] {
+      flex: 0 0 300px;
+    }
+  </style>
+  <div class='flex-container'>
+    <aside eds-card>
+      <header>
+        <h4>Aside Header</h4>
+      </header>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <footer>
+        <button eds-button>Confirm</button>
+      </footer>
+    </aside>
+
+    <div style='flex: 0 0 20px;'></div>
+
+    <section eds-card>
+      <header>
+        <h4>Section Header</h4>
+      </header>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <footer>
+        <button eds-button>Confirm</button>
+      </footer>
+    </section>
+  </div>
+</doc-code>
+
+<p>
+  When using <code>eds-toolbar</code> in the header or footer, you can use the <code>flush</code> class to remove all padding:
+</p>
+
+<doc-code live>
+  <section eds-card>
+    <header class='flush'>
+      <eds-toolbar>
+        <section style='flex-grow: 1;' class='text-only'>
+          <h4>In the header</h4>
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button motif='tertiary'>
+            <eds-icon icon="delete"></eds-icon> Delete
+          </button>
+          <button eds-button motif='tertiary'>
+            <eds-icon icon="cancel"></eds-icon> Cancel
+          </button>
+        </section>
+      </eds-toolbar>
+    </header>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+
+    <footer class='flush'>
+      <eds-toolbar>
+        <section style='flex-grow: 1;' class='text-only'>
+          <h4>In the footer</h4>
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <button eds-button motif='tertiary'>
+            <eds-icon icon="delete"></eds-icon> Delete
+          </button>
+          <button eds-button motif='tertiary'>
+            <eds-icon icon="cancel"></eds-icon> Cancel
+          </button>
+        </section>
+      </eds-toolbar>
+    </footer>
+  </section>
+</doc-code>

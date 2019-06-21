@@ -1,0 +1,10 @@
+@import "../styles/eds-variables";
+
+$alert-tags-color: $eds-error-light;
+// ever so slight adjustment from $eds-error to bump to AAA for small fonts
+$alert-font-color: #CD0026;
+
+eds-tag[motif='error'] {
+    background: $alert-tags-color;
+    color: $alert-font-color;
+}

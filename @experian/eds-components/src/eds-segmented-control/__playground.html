@@ -1,0 +1,39 @@
+<h2>Segmented Control</h2>
+
+<div style="padding: 10px">
+  <ul id="sc1" eds-segmented-control role="tablist" aria-label="Segmented Control Example">
+    <li role="tab" aria-selected="false"><a>Item 1</a></li>
+    <li role="tab" aria-selected="true"><a>Item 2</a></li>
+    <li role="tab" aria-selected="false"><a>Item 3</a></li>
+    <li role="tab" aria-selected="false"><a>Item 4</a></li>
+    <li role="tab" aria-selected="false"><a>Item 5</a></li>
+  </ul>
+</div>
+
+<div background="gray" style="padding: 10px">
+  <ul id="sc2" eds-segmented-control role="tablist" aria-label="Segmented Control Example">
+    <li role="tab" aria-selected="false"><a>Item 1</a></li>
+    <li role="tab" aria-selected="true"><a>Item 2</a></li>
+    <li role="tab" aria-selected="false"><a>Item 3</a></li>
+    <li role="tab" aria-selected="false"><a>Item 4</a></li>
+    <li role="tab" aria-selected="false"><a>Item 5</a></li>
+  </ul>
+</div>
+
+<script>
+  (function(segcons) {
+    segcons.forEach(function(segcon) {
+      segcon.addEventListener('click', function(e) {
+        resetItems();
+        e.target.parentElement.setAttribute('aria-selected', 'true');
+      });
+
+      function resetItems() {
+        var items = segcon.querySelectorAll('li');
+        for (var i = 0; i < items.length; i++) {
+          items[i].setAttribute('aria-selected', 'false');
+        }
+      }
+    });
+  })([document.getElementById('sc1'), document.getElementById('sc2')]);
+</script>

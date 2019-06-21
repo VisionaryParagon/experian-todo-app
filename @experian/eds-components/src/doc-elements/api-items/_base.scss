@@ -1,0 +1,202 @@
+@import "../../styles/eds-variables";
+@import "../../styles/eds-mixins";
+
+$code-font: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+$highlight-color: rgb(249, 252, 255);
+$highlight-bar: $eds-link-color;
+$easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$lineTransition: 0.1s;
+$option-color: #a064af;
+
+.api-item-container {
+
+  display: block;
+  border-top: 1px solid $eds-border-color;
+  margin-top: 1em;
+  padding-bottom: 1em;
+  background-color: transparent;
+
+  box-sizing: border-box;
+  max-height: 65px;
+  overflow: hidden;
+  -webkit-transition: max-height 0.2s $easeOutCubic, background-color 0.3s $easeOutSine;
+  -moz-transition: max-height 0.2s $easeOutCubic, background-color 0.3s $easeOutSine;
+  transition: max-height 0.2s $easeOutCubic, background-color 0.3s $easeOutSine;
+
+  // Prevent tab focus when not expanded
+  .code-live {
+    display: none;
+    box-sizing: border-box;
+  }
+
+  &.expanded {
+    max-height: 2000px;
+    background-color: $highlight-color;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: -1em;
+    margin-right: -1em;
+
+    -webkit-transition: max-height 0.22s $easeInQuad, background-color 0.3s $easeOutSine;
+    -moz-transition: max-height 0.22s $easeInQuad, background-color 0.3s $easeOutSine;
+    transition: max-height 0.22s $easeInQuad, background-color 0.3s $easeOutSine;
+
+    // Restore tab focus when expanded
+    .code-live {
+      display: block;
+      width: 100%;
+      float: none;
+      background-color: white;
+      padding: 1.5em;
+      border: 1px solid #e6e6e6;
+      border-bottom: none;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      margin-top: 1em;
+    }
+
+    .api-item {
+
+      &:before {
+        left: 0;
+        width: 100%;
+        background-color: $highlight-bar;
+        opacity: 1;
+
+        -webkit-transition: left $lineTransition, width $lineTransition $easeOutCubic, opacity $lineTransition;
+        -moz-transition: left $lineTransition, width $lineTransition $easeOutCubic, opacity $lineTransition;
+        transition: left $lineTransition, width $lineTransition $easeOutCubic, opacity $lineTransition;
+      }
+
+    }
+
+    .api-item, .api-item:hover {
+
+      background-color: transparent;
+
+      padding-left: 1em;
+      padding-right: 1em;
+      margin-left: -1em;
+      margin-right: -1em;
+
+      &:after {
+        content: 'collapse';
+        display: block;
+        float: right;
+        padding: 0px 10px;
+        font-size: 0.8em;
+        color: $eds-link-color;
+        font-weight: 400;
+        font-family: $eds-font-family-base;
+      }
+    }
+
+    .summary {
+      color: $eds-font-color;
+    }
+  }
+
+  .api-item {
+
+    position: relative;
+    cursor: pointer;
+    font-family: $code-font;
+    font-weight: 300;
+    font-size: 15px;
+    padding: 10px 0;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0%;
+      height: 2px;
+      background-color: $highlight-bar;
+      opacity: 0;
+
+      -webkit-transition: left $lineTransition, width $lineTransition $easeOutSine, opacity $lineTransition;
+      -moz-transition: left $lineTransition, width $lineTransition $easeOutSine, opacity $lineTransition;
+      transition: left $lineTransition, width $lineTransition $easeOutSine, opacity $lineTransition;
+    }
+
+    &:hover {
+      background-color: $eds-gray;
+
+      &:after {
+        display: block;
+        float: right;
+        padding: 0px 10px;
+        font-size: 0.8em;
+        content: 'expand';
+        color: $eds-link-color;
+        font-weight: 400;
+        font-family: $eds-font-family-base;
+      }
+    }
+
+    > span {
+      display: inline-block;
+    }
+
+    ul, li {
+      margin: 0;
+      list-style: none;
+    }
+
+    .api-name {
+      font-weight: 500;
+      font-family: $eds-font-family-base;
+      font-size: 16px;
+      color: $eds-blue-dark;
+    }
+
+    .required {
+      display: none;
+    }
+
+    .default {
+      display: none;
+      color: #555;
+    }
+
+    .deprecated {
+      display: none;
+      color: red;
+      font-weight: 700;
+      padding-left: 1em;
+    }
+  }
+
+  .summary {
+    @include base-font();
+    @include font-smoothing();
+    color: $eds-form-field-placeholder-font-color;
+    line-height: 1.6rem;
+  }
+
+  &:not(.expanded) {
+    code {
+      color: $eds-form-field-placeholder-font-color;
+    }
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .code-highlight {
+    border: 1px solid #e6e6e6;
+  }
+
+  .code-live + .code-highlight {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0;
+  }
+
+}
+

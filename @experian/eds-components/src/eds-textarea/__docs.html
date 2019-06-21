@@ -1,0 +1,79 @@
+<style>
+table tr td {
+  vertical-align: bottom;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+<table>
+  <tr>
+    <td><eds-textarea label="Email Address"></eds-textarea></td>
+    <td><eds-textarea value="hello"></eds-textarea></td>
+    <td><eds-textarea label="disabled" disabled></eds-textarea></td>
+  </tr>
+</table>
+
+<doc-header>Configuration Options</doc-header>
+
+<p>
+  In addition to custom options listed below, this element inherits attributes from <mdn-doc-link url='HTML/Element/textarea'>&lt;textarea&gt;</mdn-doc-link>.
+</p>
+
+<api-option name='value' type='string'>
+  Sets a label on the textarea.
+
+  <doc-code live>
+    <eds-textarea value='Hello World'></eds-textarea>
+  </doc-code>
+
+</api-option>
+
+<api-option name='label' type='string'>
+  Sets a label on the textarea.
+
+  <doc-code live>
+    <eds-textarea label='Email Address'></eds-textarea>
+  </doc-code>
+
+</api-option>
+
+<api-option name='disabled' type='boolean' default="false">
+    Sets the element's disabled attribute, indicating that the control is not available for interaction.
+  
+    <doc-code live>
+      <eds-textarea disabled></eds-textarea>
+    </doc-code>
+  
+  </api-option>
+
+<api-option name='noborder' type='boolean' default=false>
+  Removes the default border while retaining the focus border.
+
+  <doc-code live>
+    <eds-textarea placeholder='Type to search' noborder></eds-textarea>
+  </doc-code>
+
+</api-option>
+
+<api-option name='rows' type='number'>
+    Sets the element's rows attribute, indicating the number of visible text lines for the control.
+
+  <doc-code live>
+    <eds-textarea rows="5"></eds-textarea>
+  </doc-code>
+
+</api-option>
+
+<api-option name='cols' type='number'>
+    Sets the element's cols attribute, indicating the visible width of the text area.
+
+  <doc-code live>
+    <eds-textarea cols="50"></eds-textarea>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Events</doc-header>
+<p>
+  See <mdn-doc-link url='API/HTMLTextAreaElement'>HTMLTextAreaElement</mdn-doc-link> for a list of input events that <mdn-doc-link url='API/Event/bubbles'>bubble</mdn-doc-link>.
+</p>

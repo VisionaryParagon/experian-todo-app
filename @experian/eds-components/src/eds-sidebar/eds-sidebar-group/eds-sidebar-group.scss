@@ -1,0 +1,43 @@
+@import "../../styles/eds-variables.scss";
+@import "../../styles/eds-mixins.scss";
+@import "./animations.scss";
+
+eds-sidebar-group {
+
+  display: block;
+  position: relative;
+
+  & > eds-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: $eds-link-color;
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .eds-sidebar-group-content {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &[collapsed] {
+
+    cursor: pointer;
+
+    & > eds-icon {
+      opacity: 1;
+      transform: scale(1);
+
+      &:hover {
+        color: $eds-link-hover-color;
+      }
+    }
+
+    .eds-sidebar-group-content {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+  }
+
+}

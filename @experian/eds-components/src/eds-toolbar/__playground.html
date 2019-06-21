@@ -1,0 +1,120 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+eds-table, eds-card {
+  width: 600px;
+  margin-top: 1rem;
+}
+</style>
+
+<eds-toolbar>
+  <section style='flex-grow: 1;'>
+    <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+  </section>
+  <section style='flex-basis: auto; width: auto;'>
+    <eds-button motif='tertiary' icon='backup'>Save to Cloud</eds-button>
+    <eds-button motif='tertiary' icon='archive'>Archive</eds-button>
+  </section>
+</eds-toolbar>
+
+<br />
+<eds-toolbar>
+  <section style='flex-grow: 1;' class='text-only'>
+    <h4>Text only section</h4>
+  </section>
+  <section style='flex-basis: auto; width: auto;'>
+    <eds-button motif='tertiary' icon='delete'>Delete</eds-button>
+    <eds-button motif='tertiary' icon='cancel'>Cancel</eds-button>
+  </section>
+</eds-toolbar>
+
+<eds-table id='table-example' multiSelect>
+  <div slot='header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;'>
+        <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' icon='backup'>Save to Cloud</eds-button>
+        <eds-button motif='tertiary' icon='archive'>Archive</eds-button>
+      </section>
+    </eds-toolbar>
+  </div>
+
+  <div slot='selection-header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;' class='text-only'>
+        <span id='selected-rows'></span> records selected.
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' inverse icon='delete'>Delete</eds-button>
+        <eds-button motif='tertiary' inverse icon='cancel'>Cancel</eds-button>
+      </section>
+    </eds-toolbar>
+  </div>
+</eds-table>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('table-example');
+    var output = document.getElementById('selected-rows');
+    el.columns = [
+      { field: 'id', name: 'ID', width: 50 },
+      { field: 'name', name: 'Name', width: 150 },
+      { field: 'hobby', name: 'Hobby' }
+    ];
+    el.data = [
+      { id: 1, name: 'Alan', hobby: 'Color Grading' },
+      { id: 2, name: 'Nick', hobby: 'Martial Arts' },
+      { id: 3, name: 'Grant', hobby: 'Game Development' }
+    ];
+    el.addEventListener('selectionchange', function(e) {
+      output.innerHTML = `${e.detail.length}`;
+    });
+  });
+})()
+</script>
+
+<eds-card>
+  <header class='flush'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;' class='text-only'>
+        <h4>In the header</h4>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' icon='delete'>Delete</eds-button>
+        <eds-button motif='tertiary' icon='cancel'>Cancel</eds-button>
+      </section>
+    </eds-toolbar>
+  </header>
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+</eds-card>
+
+<eds-card background='gray'>
+  <h4>Card with sample content.</h4>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+  <footer class='flush'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;' class='text-only'>
+        <h4>In the footer</h4>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' icon='delete'>Delete</eds-button>
+        <eds-button motif='tertiary' icon='cancel'>Cancel</eds-button>
+      </section>
+    </eds-toolbar>
+  </footer>
+</eds-card>
+
+
+
+

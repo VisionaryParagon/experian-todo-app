@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "chrome": "30.0.1599",
+          "edge": "0.10.10049",
+          "firefox": "26.0",
+          "ie": "11",
+          "safari": "5.1.10"
+        },
+        "useBuiltIns": "entry"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,83 @@
+// EDS global variables
+/*
+ * These variables are available to all components globally and are thus designated with an "eds-" prefix.
+ * Components may implement these and pass-through to a local variable name.
+ */
+
+// Color palette
+$eds-blue-darkest:  #163c6f;
+$eds-blue-dark:     #1d4f91;
+$eds-blue:          #426da9;
+$eds-purple:        #6d2077;
+$eds-raspberry:     #af1685;
+$eds-magenta:       #e63888;
+$eds-red:           #cd0026;
+$eds-orange:        #ff8f1c;
+$eds-yellow:        #fedb00;
+$eds-lime:          #b7bf10;
+$eds-green:         #009F4D;
+$eds-teal:          #00b2a9;
+$eds-sapphire:      #0081a6;
+
+$eds-black:         #333333;
+$eds-white:         #ffffff;
+$eds-gray:          #f6f6f6;
+$eds-gray-dark:     #dcdcdc;
+$eds-gray-darker:   #888888;
+
+// States
+$eds-error-border:    #e4002b;
+$eds-error-lighter:   #fff5f7;
+$eds-error-light:     #ffdce2;
+$eds-error:           $eds-red;
+$eds-success-light:   #cdf4d2;
+$eds-success:         #007A3B;
+$eds-info-light:      #d2e8f9;
+$eds-info:            $eds-blue;
+$eds-default-light:   $eds-gray-dark;
+$eds-default:         $eds-black;
+$eds-warning-lighter: #fefaeb;
+$eds-warning-light:   #fceeba;
+$eds-warning:         #ad5700;
+$eds-warning-border:  #f5a70a;
+
+$eds-hover-blue:      #eef4fc;
+$eds-selected-purple: #f7e9f9;
+
+// Borders
+$eds-border-color-dark:   #cccccc;
+$eds-border-color:        #d8d8d8;
+$eds-border-color-light:  #e6e6e6;
+$eds-border-focus-color:  $eds-blue;
+$eds-border-radius-small: 4px;
+$eds-border-radius-large: 6px;
+
+$eds-gradient: linear-gradient(to right, $eds-raspberry, $eds-blue-dark);
+
+// Forms
+$eds-form-field-disabled-font-color:   $eds-gray-darker; // deprecate
+$eds-form-field-border-color:          #939393;
+$eds-form-field-disabled-border-color: $eds-border-color-dark;
+$eds-form-field-placeholder-font-color:#b9b9b9; // Deprecate
+$eds-placeholder-color: #b9b9b9;
+$eds-disabled-color:    $eds-gray-darker;
+
+// Typography
+$eds-font-family-base:    "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$eds-font-size-base:      16px;
+$eds-font-weight-base:    400;
+$eds-font-color:          $eds-black;
+$eds-link-color:          $eds-blue;
+$eds-link-hover-color:    $eds-blue-darkest;
+$eds-label-size:          14px;
+
+// Provide sass based rems to allow the flexibility of rem (at build time)
+// while forcing the system standard - some products are using proprietary root
+// font-size that eds elements should not inherit (as low as 10px)
+$eds-1rem: $eds-font-size-base;
+$eds-2rem: $eds-1rem * 2;
+$eds-3rem: $eds-1rem * 3;
+$eds-4rem: $eds-1rem * 4;
+$eds-5rem: $eds-1rem * 5;
+
+$bullet-icon:             "\25CF";

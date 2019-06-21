@@ -1,0 +1,210 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+table tr td {
+  vertical-align: bottom;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+<table>
+  <tr>
+    <td><eds-textbox label="Email Address"></eds-textbox></td>
+    <td><eds-textbox value="hello"></eds-textbox></td>
+    <td><eds-textbox label="disabled" disabled></eds-textbox></td>
+  </tr>
+</table>
+
+<doc-header>Configuration Options</doc-header>
+
+<p>
+  In addition to custom options listed below, this element inherits attributes from <mdn-doc-link url='HTML/Element/input'>&lt;input&gt;</mdn-doc-link> where the input type equals text.
+</p>
+
+<api-option name='error' type='string || boolean'>
+  Sets an error message and state on the textbox. When truthy, an error status will appear even if no message is specified (i.e. when setting via property).
+
+  <doc-code live>
+    <div style='display: flex'>
+      <eds-textbox label='Email Address' error='This field is required'></eds-textbox>
+      <eds-textbox label='Email Address' id='error-example'></eds-textbox>
+    </div>
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('error-example').error = true;
+      });
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='info' type='string'>
+  Sets an info message and state on the textbox.
+
+  <doc-code live>
+    <eds-textbox label='Email Address' info='Press ctrl + h for help'></eds-textbox>
+  </doc-code>
+
+</api-option>
+
+<api-option name='label' type='string'>
+  Sets a label on the textbox.
+
+  <doc-code live>
+    <eds-textbox label='Email Address'></eds-textbox>
+  </doc-code>
+
+</api-option>
+
+<api-option name='mode' type='enum' default='text'>
+  Sets the textbox mode.
+
+  <p>
+    Available Values:
+  </p>
+  <ul>
+    <li>text</li>
+    <li>password</li>
+  </ul>
+
+  <doc-code live>
+    <eds-textbox mode='password' label='Password Mode' placeholder='Enter your password'></eds-textbox>
+    <p></p>
+    <eds-textbox mode='password' label='Visibility Toggle Example' placeholder='Enter your password'>
+      <eds-icon
+        slot='inline'
+        style='cursor: pointer'
+        icon='visibility'
+        onclick="
+          this.parentNode.mode === 'password'
+          ? (this.parentNode.mode = 'text') & (this.icon = 'visibility_off')
+          : (this.parentNode.mode = 'password') & (this.icon = 'visibility')">
+      </eds-icon>
+    </eds-textbox>
+  </doc-code>
+
+</api-option>
+
+<api-option name='noborder' type='boolean' default=false>
+  Removes the default border while retaining the focus border. This option is helpful in certain contexts (for example, within <code>eds-toolbar</code>) where you may want to omit the border.
+
+  <doc-code live>
+    <eds-textbox placeholder='Type to search' noborder></eds-textbox>
+  </doc-code>
+
+</api-option>
+
+<api-option name='warning' type='string || boolean'>
+  Sets a warning message and state on the textbox. When truthy, a warning status will appear even if no message is specified (i.e. when setting via property).
+
+  <doc-code live>
+    <div style='display: flex'>
+      <eds-textbox label='Email Address' warning='Please use a better email, you have been warned'></eds-textbox>
+      <eds-textbox label='Email Address' id='warning-example'></eds-textbox>
+    </div>
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('warning-example').warning = true;
+      });
+    </script>
+
+  </doc-code>
+
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<p>
+  See <mdn-doc-link url='API/HTMLInputElement'>HTMLInputElement</mdn-doc-link> for a list of input events that <mdn-doc-link url='API/Event/bubbles'>bubble</mdn-doc-link>.
+</p>
+
+<doc-header>Content & Icons</doc-header>
+
+<p>
+  You can prepend icons or text to any <code>eds-textbox</code> as well as inline icons. These two patterns are useful for different purposes and they are also intentionally fixed on opposite sides.
+</p>
+
+<p>
+  These design features are accessed via markup, using <code>slot</code>s. Below are some examples.
+</p>
+
+<doc-code live>
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    window.EDS.icons.defaultLibrary = 'material-icon-font';
+  </script> -->
+
+  <style>
+    p eds-textbox {
+      width: 200px;
+    }
+  </style>
+
+  <p>
+    <eds-textbox label='Email Address'>
+      <eds-icon slot='prepend' icon='email'></eds-icon>
+    </eds-textbox>
+  </p>
+  <p>
+    <eds-textbox label='Password'>
+      <eds-icon slot='prepend' icon='lock'></eds-icon>
+    </eds-textbox>
+  </p>
+
+  <p>
+    <eds-textbox><span slot='prepend'>USD</span></eds-textbox>
+  </p>
+
+  <p>
+    <eds-textbox><span slot='prepend'>£</span></eds-textbox>
+  </p>
+
+  <hr />
+
+  <p>
+    <eds-textbox placeholder='$eds-success'>
+      <eds-icon slot='inline' icon='check' style='color: #007a3b;'></eds-icon>
+    </eds-textbox>
+  </p>
+
+  <p>
+    <eds-textbox id='search-icon-example' placeholder='Type to search...'>
+      <eds-icon slot='inline' icon='search'></eds-icon>
+    </eds-textbox>
+  </p>
+
+  <script>
+    window.addEventListener('WebComponentsReady', function() {
+      var el = document.getElementById('search-icon-example');
+      var icon = el.querySelector('eds-icon');
+
+      function handleKey() {
+        if (el.value) setCancel()
+        else setSearch();
+      }
+
+      function setSearch() {
+        el.value = '';
+        el.focus();
+        icon.icon = 'search';
+        icon.style.cursor = 'auto';
+      }
+
+      function setCancel() {
+        icon.icon = 'cancel';
+        icon.style.cursor = 'pointer';
+      }
+
+      el.addEventListener('keydown', handleKey);
+      el.addEventListener('keyup', handleKey);
+      icon.addEventListener('click', setSearch);
+
+    });
+  </script>
+
+</doc-code>

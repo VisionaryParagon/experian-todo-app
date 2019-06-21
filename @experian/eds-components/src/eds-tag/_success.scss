@@ -1,0 +1,9 @@
+@import "../styles/eds-variables";
+
+$good-tags-color: $eds-success-light;
+$default-font-color: $eds-success;
+
+eds-tag[motif='success'] {
+    background: $good-tags-color;
+    color: $default-font-color;
+}

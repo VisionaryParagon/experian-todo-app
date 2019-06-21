@@ -1,0 +1,61 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+<style>
+  .with-background .eds-breadcrumbs {
+    background-color: #EFEFEF;
+  }
+</style>
+
+<doc-header>Examples</doc-header>
+
+<eds-breadcrumbs>
+  <a href="#home">Home</a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+</eds-breadcrumbs>
+
+<eds-breadcrumbs background='gray'>
+  <a href="#home"><eds-icon icon='home'></eds-icon></a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+</eds-breadcrumbs>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='background' type='enum' default='white'>
+  Sets the background color of the breadcrumbs. Available options are:
+
+  <ul>
+    <li><b>white</b> (default)</li>
+    <li><b>gray</b></li>
+  </ul>
+
+  <doc-code live>
+    <eds-breadcrumbs background='gray'>
+      <a href="#home"><eds-icon icon='home'></eds-icon></a>
+      <a>Level 1</a>
+      <a href="#">Level 2</a>
+      <a href="#">Level 3</a>
+    </eds-breadcrumbs>
+  </doc-code>
+
+</api-option>
+
+<api-option name='separator' type='string'>
+    Sets a custom separator.
+
+    <doc-code live>
+      <eds-breadcrumbs separator=">">
+        <a href="#home"><eds-icon icon='home'></eds-icon></a>
+        <a>Level 1</a>
+        <a href="#">Level 2</a>
+        <a href="#">Level 3</a>
+      </eds-breadcrumbs>
+    </doc-code>
+
+  </api-option>

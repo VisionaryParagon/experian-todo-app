@@ -1,0 +1,36 @@
+<h2>normal options</h2>
+<eds-radio name='asdf' label='Option 1'></eds-radio><br/>
+<eds-radio name='asdf' label='Option 2'></eds-radio>
+
+<h2>disabled/checked</h2>
+<eds-radio name='fdsa' label='Option A (Disabled)' disabled></eds-radio><br/>
+<eds-radio name='fdsa' label='Option B (Disabled, Checked)' disabled checked></eds-radio>
+
+<h2>focus/blur</h2>
+<eds-radio label='Testing' id='focusme'></eds-radio>
+<button onclick='document.getElementById("focusme").focus()'>focus</button>
+<button onclick='document.getElementById("focusme").blur()'>blur</button>
+
+<h2>programmatic use of properties</h2>
+
+<h3>label</h3>
+<eds-radio label='Label text' id='labeltest'></eds-radio><br/>
+<input id='labeltext' value='Label text' oninput="document.getElementById('labeltest').label=this.value" />
+<script>document.getElementById('labeltext').value=document.getElementById('labeltest').label</script>
+
+<h3>disabled</h3>
+<eds-radio label='Testing' id='disabledtest'></eds-radio>
+<button onclick="document.getElementById('disabledtest').disabled=!document.getElementById('disabledtest').disabled">
+  toggle disabled
+</button>
+
+<h3>events</h3>
+<eds-radio label='Clicked 0 times' id='clicktest'></eds-radio>
+<script>
+(function(el) {
+  var clickTestCounter = 0;
+  el.addEventListener('click', function(e) {
+    el.label = 'Clicked ' + (clickTestCounter += 1) + ' times';
+  });
+})(document.getElementById('clicktest'))
+</script>

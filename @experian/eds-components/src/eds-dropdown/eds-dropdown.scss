@@ -1,0 +1,243 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+$transition-period: 0.15s;
+$focus-background: white;
+$focus-border-color: $eds-blue;
+$border-color: $eds-form-field-border-color;
+$border-disabled-color: $eds-form-field-disabled-border-color;
+$label-color: $eds-font-color;
+$label-font-size: $eds-label-size;
+$input-font-size: $eds-font-size-base;
+$arrow-color: $eds-blue;
+$options-hover-background-color: $eds-blue;
+$options-hover-color: white;
+
+eds-dropdown {
+
+  overflow: visible;
+
+  .slotted {
+    display: none;
+  }
+
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  vertical-align: bottom;
+
+  > .label {
+    display: none;
+    @include base-font();
+    font-size: $label-font-size;
+    font-weight: 500;
+    line-height: $eds-1rem;
+    margin-bottom: 10px;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  &[warning] {
+    .eds-dropdown-trigger {
+      &::after {
+        opacity: 1;
+        border-color: $eds-warning-border;
+      }
+      background-color: $eds-warning-lighter;
+    }
+  }
+
+  &[error] {
+    .eds-dropdown-trigger {
+      &::after {
+        opacity: 1;
+        border-color: $eds-error-border;
+      }
+      background-color: $eds-error-lighter;
+    }
+  }
+
+  .eds-dropdown-trigger {
+    overflow: visible;
+    text-align: left;
+    position: relative;
+    display: block;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    @include base-font();
+    @include font-smoothing();
+    padding: 5px 30px 5px 10px;
+    line-height: $eds-1rem * 1.4;
+    min-height: 34px;
+    border: 1px solid $border-color;
+    border-radius: $eds-border-radius-small;
+
+    transition:
+      border-color $transition-period ease;
+
+    .eds-dropdown-placeholder {
+      display: none;
+      color: $eds-form-field-placeholder-font-color;
+      font-weight: 400;
+
+      &.show {
+        display: block;
+      }
+    }
+
+    .eds-dropdown-arrow {
+      position: absolute;
+      bottom: 14px;
+      right: 10px;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $arrow-color;
+    }
+
+    // Focus styles
+    outline: none;
+    @include focus-element(-2px);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    .eds-dropdown-trigger, .eds-dropdown-trigger:focus {
+      border-color: $border-disabled-color;
+      color: $eds-form-field-disabled-font-color;
+
+      &::after {
+        opacity: 0;
+      }
+
+      .eds-dropdown-arrow {
+        border-top-color: $border-disabled-color;
+      }
+    }
+  }
+
+}
+
+.eds-dropdown-messages {
+  padding-top: 5px;
+  display: none;
+
+  .info-text, .warning-text, .error-text {
+    font-size: 13px;
+  }
+
+  .warning-text {
+    color: $eds-warning;
+  }
+
+  .error-text {
+    color: $eds-error;
+  }
+}
+
+.eds-dropdown-options {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  z-index: 1100;
+  margin-top: 8px;
+  width: 100%;
+  background-color: white;
+  border-radius: $eds-border-radius-small;
+  border: 1px solid transparent;
+  @include raised-container();
+  background-clip: padding-box;
+  font-weight: 400;
+
+  transition:
+    border-color $transition-period ease,
+    opacity $transition-period ease;
+
+  .eds-dropdown-searchbox {
+    display: none;
+    position: relative;
+    border-bottom: 1px solid $eds-border-color;
+    padding: 5px;
+    $focus-offset: 5px;
+
+    @include focus-element($focus-offset);
+
+    .eds-search-icon {
+      $icon-size: 20px;
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: $icon-size;
+      height: $icon-size;
+
+      svg {
+        fill: $eds-blue;
+        width: $icon-size;
+      }
+    }
+
+    input {
+      outline: none;
+      display: block;
+      width: 100%;
+      padding: 5px 10px;
+      border: none;
+      line-height: $eds-1rem * 1.4;
+      @include base-font();
+      box-sizing: border-box;
+    }
+
+    &.show {
+      display: block;
+    }
+  }
+
+  ul {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    max-height: 280px;
+    overflow: auto;
+
+    li {
+      margin: 0;
+      padding: 10px 20px;
+      white-space: nowrap;
+      cursor: pointer;
+      min-height: 40px;
+      box-sizing: border-box;
+      position: relative;
+      outline: none;
+
+      @include focus-element(0px, 0);
+
+      &:hover {
+        background-color: $options-hover-background-color;
+        color: $options-hover-color;
+      }
+
+      &.eds-checkbox-option {
+        padding-left: 48px;
+      }
+
+      eds-checkbox {
+        position: absolute;
+        top: 12px;
+        left: 20px;
+      }
+
+    }
+
+  }
+
+  &.eds-dropdown-open {
+    display: block;
+    opacity: 1;
+  }
+}

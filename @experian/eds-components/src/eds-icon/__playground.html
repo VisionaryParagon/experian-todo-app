@@ -1,0 +1,161 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+  };
+</script>
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+  // Example custom renderer:
+  //
+  // window.EDS.icons.renderers['foo-bar'] = {
+  //   render: (val, el, host) => {
+  //     el.classList.add('foo-bar-icons', `foo-bar-${val}`);
+  //   }
+  // }
+  //
+  // Use:
+  //
+  // <eds-icon icon='user' library='foo-bar'></eds-icon>
+</script>
+
+<style>
+.large-button-icon .api-icon-element {
+  transform: scale(1.6) !important;
+}
+</style>
+
+<table>
+  <tr>
+    <td colspan=2><h2>Sizes</h2></td>
+  </tr>
+  <tr>
+    <td width='50%'>material-icon-font</td>
+    <td width='50%'>fas-svg (font-awesome solid svg)</td>
+  </tr>
+  <tr>
+    <td>
+      <eds-icon icon="person" class='s18'></eds-icon>
+      <eds-icon icon="person" class='s24'></eds-icon>
+      <eds-icon icon="person" class='s36'></eds-icon>
+      <eds-icon icon="person" class='s48'></eds-icon>
+      <eds-icon icon="person" class='s60'></eds-icon>
+    </td>
+    <td>
+      <eds-icon icon="user" class='s18' library='fas-svg'></eds-icon>
+      <eds-icon icon="user" class='s24' library='fas-svg'></eds-icon>
+      <eds-icon icon="user" class='s36' library='fas-svg'></eds-icon>
+      <eds-icon icon="user" class='s48' library='fas-svg'></eds-icon>
+      <eds-icon icon="user" class='s60' library='fas-svg'></eds-icon>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan=2><h2>Colors</h2></td>
+  </tr>
+
+  <tr>
+    <td width='50%'>material-icon-font</td>
+    <td width='50%'>far-svg (font-awesome regular svg)</td>
+  </tr>
+  <tr>
+    <td>
+      <eds-icon icon="credit_card" class='s36' style='color:#004590;'></eds-icon>
+      <eds-icon icon="credit_card" class='s36' style='color:#72217b;'></eds-icon>
+      <eds-icon icon="credit_card" class='s36' style='color:#477a0c;'></eds-icon>
+      <eds-icon icon="credit_card" class='s36' style='color:#0e6eb7;'></eds-icon>
+      <eds-icon icon="credit_card" class='s36' style='color:#db0048;'></eds-icon>
+    </td>
+    <td>
+      <eds-icon icon="credit-card" class='s36' library='far-svg' style='color:#004590;'></eds-icon>
+      <eds-icon icon="credit-card" class='s36' library='far-svg' style='color:#72217b;'></eds-icon>
+      <eds-icon icon="credit-card" class='s36' library='far-svg' style='color:#477a0c;'></eds-icon>
+      <eds-icon icon="credit-card" class='s36' library='far-svg' style='color:#0e6eb7;'></eds-icon>
+      <eds-icon icon="credit-card" class='s36' library='far-svg' style='color:#db0048;'></eds-icon>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan=2><h2>Buttons</h2></td>
+  </tr>
+
+  <tr>
+    <td width='50%'>material-icon-font</td>
+    <td width='50%'>far-svg (font-awesome regular svg)</td>
+  </tr>
+  <tr>
+    <td>
+      <eds-button><eds-icon icon='person'></eds-icon> My profile</eds-button>
+      <eds-button><eds-icon icon='person' class='large-button-icon'></eds-icon> Alternate size</eds-button>
+    </td>
+    <td>
+      <eds-button motif="primary"><eds-icon icon='copy' library='far-svg'></eds-icon>Copy to clipboard</eds-button>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan=2><h2>Borders</h2></td>
+  </tr>
+
+  <tr>
+    <td width='50%'>material-icon-font</td>
+    <td width='50%'>far-svg (font-awesome regular svg)</td>
+  </tr>
+  <tr>
+    <td>
+      <eds-icon icon='airplanemode_active' border></eds-icon>
+      <eds-icon icon='face' border></eds-icon>
+    </td>
+    <td>
+      <eds-icon icon='paper-plane' library='far-svg' border></eds-icon>
+      <eds-icon icon='smile' library='far-svg' border></eds-icon>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan=2><h2>Animation</h2></td>
+  </tr>
+
+  <tr>
+    <td width='50%'>material-icon-font</td>
+    <td width='50%'>fas-svg (font-awesome solid svg)</td>
+  </tr>
+  <tr>
+    <td>
+      <eds-icon icon='sync' class='s36' spin></eds-icon>
+      <eds-icon icon='star' class='s36' spin></eds-icon>
+    </td>
+    <td>
+      <eds-icon icon='sync' class='s36' library='fas-svg' spin></eds-icon>
+      <eds-icon icon='star' class='s36' library='fas-svg' spin></eds-icon>
+    </td>
+  </tr>
+
+</table>
+
+<h2>Programmatic</h2>
+
+<eds-icon icon='person' class='s36' id='change-example' border></eds-icon>
+<eds-button id='change-example-button'>Change Icon, Library and attrs</eds-button>
+<script>
+(function(icon, button) {
+
+    button.addEventListener('click', e => {
+      if (icon.icon === 'person') {
+        icon.icon = 'user';
+        icon.spin = true;
+        icon.border = false;
+        icon.library = 'far-svg';
+      }
+      else {
+        icon.icon = 'person';
+        icon.spin = false;
+        icon.border = true;
+        icon.library = 'material-icon-font';
+      }
+    });
+
+})(document.getElementById('change-example'), document.getElementById('change-example-button'));
+</script>

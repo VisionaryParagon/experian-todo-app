@@ -1,0 +1,7 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "mixins";
+
+eds-progress:not([motif]), eds-progress[motif='magenta'] {
+  @include eds-progress-theme();
+}

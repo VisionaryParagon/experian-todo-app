@@ -1,0 +1,225 @@
+// Derived from ag-theme-balham.scss
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+$transition-period: 0.15s;
+
+// -------------------
+// EDS Sass Overrides
+// -------------------
+
+// theme shortcuts
+$grid-size: 4px !default;
+$chrome-background: $eds-gray;
+$active: $eds-blue;
+$foreground-color: $eds-black;
+$border-color: $eds-border-color-dark;
+$alt-background: $eds-hover-blue;
+$odd-row-background-color: $eds-gray;
+$secondary-foreground-color: $eds-black;
+$selected-color: $eds-selected-purple;
+
+// these three should be changed in envronment.ts, too
+$row-height: $grid-size * 10;
+$header-height: $grid-size * 9;
+$virtual-item-height: $grid-size * 10;
+
+// Fonts
+$font-family: Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-size: 14px;
+$secondary-font-size: 14px;
+
+// --------------------------------
+// Now import balham sass defaults
+// --------------------------------
+@import "../../node_modules/ag-grid-community/src/styles/ag-theme-balham/vars/ag-theme-balham-vars";
+@import "../../node_modules/ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham-common";
+
+// ---------------------------
+// Now EDS non-sass overrides
+// ---------------------------
+.ag-theme-experian {
+  @include ag-theme-balham($params);
+
+  .ag-header-cell,
+  .ag-header-group-cell {
+    padding-left: 20px;
+  }
+
+  .ag-header-cell::after,
+  .ag-header-group-cell::after {
+      border-right: 1px solid $border-color;
+      height: 100%;
+      margin-top: 0;
+  }
+
+  .ag-header-cell-label {
+    cursor: pointer;
+  }
+
+  .ag-row {
+    border: none;
+  }
+
+  .ag-row-drag {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z'/%3E%3C/svg%3E");
+    background-position: center center;
+    cursor: ns-resize;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
+
+  .ag-cell {
+    border: none;
+    padding-left: 20px;
+  }
+
+  .ag-cell-focus {
+    border: none;
+    box-shadow: 0 0 0 2px $eds-blue inset;
+  }
+
+  .ag-ltr .ag-cell-focus {
+    border: none;
+  }
+
+  .ag-cell-inline-editing {
+    align-items: center;
+    display: flex;
+    padding-right: 20px;
+
+    .ag-cell-edit-input {
+      height: 75%;
+      pointer-events: auto;
+      display: block;
+      background-color: white;
+      width: 100%;
+      box-sizing: border-box;
+      @include base-font();
+      padding: 5px 10px;
+      line-height: 1.4em;
+      outline: none;
+      border: 1px solid $border-color;
+      border-radius: $eds-border-radius-small;
+
+      @include placeholder-style();
+
+      transition:
+        border-color $transition-period ease;
+    }
+  }
+
+  .ag-ltr .ag-cell-last-left-pinned {
+    border-right: none;
+  }
+
+  .ag-ltr .ag-cell-first-right-pinned.ag-cell-focus {
+    padding-left: 21px;
+  }
+
+  .ag-ltr .ag-cell-first-right-pinned {
+    border-left: none;
+  }
+
+  .ag-pinned-left-header {
+    box-shadow: 0px 1px 3px rgba(0,0,0, 0.25);
+
+    .ag-header-cell:last-child,
+    .ag-header-group-cell:last-child {
+
+      &:after {
+        border-right: 1px solid $eds-border-color-dark;
+      }
+    }
+  }
+
+  .ag-pinned-right-header {
+    box-shadow: 0px 1px 3px rgba(0,0,0, 0.25);
+    border-left: 1px solid $eds-border-color-dark;
+  }
+
+  .ag-pinned-left-cols-viewport-wrapper {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 1px 3px rgba(0,0,0, 0.25);
+    border-right: 1px solid $eds-border-color-dark;
+  }
+
+  .ag-pinned-right-cols-viewport-wrapper {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 1px 3px rgba(0,0,0, 0.25);
+    border-left: 1px solid $eds-border-color-dark;
+  }
+
+  .ag-header-cell-resize::after {
+    border-color: transparent;
+  }
+
+  .ag-selection-checkbox span {
+    top: 5px;
+  }
+  .ag-icon-checkbox-checked,
+  .ag-icon-checkbox-checked:empty,
+  .ag-icon-checkbox-unchecked,
+  .ag-icon-checkbox-indeterminate {
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='checkbox-checked'%3E%3Crect id='Rectangle-5-Copy-2' stroke='%23426DA9' fill='%23FFFFFF' x='0.5' y='0.5' width='17' height='17' rx='3'%3E%3C/rect%3E%3Cg id='Group-Copy-28' transform='translate%282.400024, 3.799988%29' fill='%23426DA9'%3E%3Cpath d='M0.236367412,4.6029547 L4.47759413,4.6029547 C5.2583824,4.6029547 5.89133636,5.23590866 5.89133636,6.01669694 L5.89133636,6.01669694 C5.89133636,6.79748522 5.2583824,7.43043918 4.47759413,7.43043918 L0.236367412,7.43043918 L0.236367412,4.6029547 Z' id='Rectangle-2' transform='translate%283.063852, 6.016697%29 rotate%28-135.000000%29 translate%28-3.063852, -6.016697%29 '%3E%3C/path%3E%3Cpath d='M2.41079109,3.61988797 L12.2857911,3.61988797 C13.067274,3.61988797 13.7007911,4.25340503 13.7007911,5.03488793 L13.7007911,5.03488793 C13.7007911,5.81637083 13.067274,6.44988789 12.2857911,6.44988789 L2.41079109,6.44988789 L2.41079109,3.61988797 Z' id='Rectangle-2-Copy' transform='translate%288.055791, 5.034888%29 rotate%28-45.000000%29 translate%28-8.055791, -5.034888%29 '%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-checkbox-unchecked {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Crect id='checkbox-unchecked' stroke='%23939393' fill='%23FFFFFF' x='0.5' y='0.5' width='17' height='17' rx='3'%3E%3C/rect%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-checkbox-indeterminate {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='checkbox-checked-copy' stroke='%23426DA9'%3E%3Crect id='Rectangle-5-Copy-2' fill='%23FFFFFF' x='0.5' y='0.5' width='17' height='17' rx='3'%3E%3C/rect%3E%3Crect id='Rectangle-5-Copy-3' fill='%23426DA9' x='4.5' y='4.5' width='9' height='9' rx='2'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-header-select-all span {
+    height: 100% !important;
+    transform: translateX(-1px);
+  }
+
+  .ag-header-select-all:not(.ag-hidden) + .ag-cell-label-container {
+    width: calc(100% - 18px - 12px);
+  }
+
+  .ag-sort-ascending-icon,
+  .ag-sort-descending-icon,
+  .ag-sort-none-icon {
+    margin-left: 8px !important;
+  }
+
+  .ag-icon-asc {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='9px' height='13px' viewBox='0 0 9 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Group-Copy-32'%3E%3Cpolygon id='Rectangle-35-Copy' fill='%23888888' transform='translate%284.563074, 8.242641%29 rotate%28-45.000000%29 translate%28-4.563074, -8.242641%29 ' points='1.5630737 5.24264069 7.5630737 11.2426407 1.5630737 11.2426407'%3E%3C/polygon%3E%3Cpolygon id='Rectangle-35-Copy-2' fill='%23E63888' transform='translate%284.513260, 4.656272%29 rotate%28-225.000000%29 translate%28-4.513260, -4.656272%29 ' points='1.5837074 1.72671979 7.4428117 7.58582409 1.5837074 7.58582409'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-desc {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='9px' height='13px' viewBox='0 0 9 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Group-Copy-30'%3E%3Cpolygon id='Rectangle-35-Copy' fill='%23E63888' transform='translate%284.563074, 8.242641%29 rotate%28-45.000000%29 translate%28-4.563074, -8.242641%29 ' points='1.5630737 5.24264069 7.5630737 11.2426407 1.5630737 11.2426407'%3E%3C/polygon%3E%3Cpolygon id='Rectangle-35-Copy-2' fill='%23888888' transform='translate%284.563074, 4.606458%29 rotate%28-225.000000%29 translate%28-4.563074, -4.606458%29 ' points='1.5630737 1.60645779 7.5630737 7.60645779 1.5630737 7.60645779'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-none {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='9px' height='13px' viewBox='0 0 9 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Grid-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Group-Copy-31' fill='%23888888'%3E%3Cpolygon id='Rectangle-35-Copy' transform='translate%284.563074, 8.242641%29 rotate%28-45.000000%29 translate%28-4.563074, -8.242641%29 ' points='1.5630737 5.24264069 7.5630737 11.2426407 1.5630737 11.2426407'%3E%3C/polygon%3E%3Cpolygon id='Rectangle-35-Copy-2' transform='translate%284.563074, 4.606458%29 rotate%28-225.000000%29 translate%28-4.563074, -4.606458%29 ' points='1.5630737 1.60645779 7.5630737 7.60645779 1.5630737 7.60645779'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-menu {
+    background-size: 12px 12px;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='12px' viewBox='0 0 12 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='menu' fill='%23426da9'%3E%3Crect id='Rectangle-7' x='1' y='1' width='10' height='2'%3E%3C/rect%3E%3Crect id='Rectangle-7-Copy' x='1' y='5' width='10' height='2'%3E%3C/rect%3E%3Crect id='Rectangle-7-Copy-2' x='1' y='9' width='10' height='2'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .ag-icon-filter {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='12px' viewBox='0 0 12 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='filter' fill='%23e63888'%3E%3Cpath d='M1,2 L11,2 L7,6 L7,11 L5,9 L5,6 L1,2 Z M5,6 L5,7 L7,7 L7,6 L5,6 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+}
+
+[compact] .ag-theme-experian {
+  .ag-cell {
+    line-height: 26px;
+  }
+}

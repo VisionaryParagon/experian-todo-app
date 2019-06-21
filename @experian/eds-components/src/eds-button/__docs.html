@@ -1,0 +1,119 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+  };
+</script>
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.inverse {
+  background-color: #72217b;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<button eds-button>View Details</button>
+<button eds-button motif="primary">Save Changes</button>
+<button eds-button motif="primary" disabled>Disabled</button>
+
+<doc-header>Custom HTML Element</doc-header>
+
+<doc-note motif="warning">
+  <b>WARNING:</b> The custom html element (<code>&lt;eds-button&gt;</code>) is now deprecated and will be removed in a future release. Please use the attribute implementation (see below).
+</doc-note>
+
+<doc-header>Content & Markup</doc-header>
+
+<p>
+  <code>eds-button</code> components are applied to native buttons as attributes (<code>&lt;button eds-button></code>) and limited to styles only.
+</p>
+
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name="inverse" type="boolean" default="false">
+  Sets the inverse style for the given visual motif of the button.
+
+  <doc-code live>
+    <div class="inverse" style="padding: 5px;">
+      <button eds-button inverse>Default</button>
+      <button eds-button inverse motif="basic">Basic</button>
+      <button eds-button inverse motif="primary">Primary</button>
+      <button eds-button inverse motif="tertiary">Tertiary without icon (do not use)</button>
+      <button eds-button inverse motif="tertiary" class="icon-left" aria-label="lock account">
+        <eds-icon icon="lock" aria-hidden="true"></eds-icon> Tertiary with icon
+      </button>
+    </div>
+  </doc-code>
+
+</api-option>
+
+<api-option name="motif" type="enum" default="basic">
+  Sets the visual motif of the button. This is generally used to convey intent. See related design principles for more information.
+
+  <p>
+    Available Values:
+  </p>
+  <ul>
+    <li><code>basic</code></li>
+    <li><code>primary</code></li>
+    <li><code>tertiary</code></li>
+  </ul>
+
+  <doc-note motif="warning">
+    <b>Warning:</b> Tertiary buttons should always use icons per the design spec.
+  </doc-note>
+
+  <doc-code live>
+    <button eds-button>Default</button>
+    <button eds-button motif="basic">Basic</button>
+    <button eds-button motif="primary">Primary</button>
+    <button eds-button motif="tertiary">Tertiary without icon (do not use)</button>
+    <button eds-button motif="tertiary" class="icon-left" aria-label="lock account">
+      <eds-icon icon="lock" aria-hidden="true"></eds-icon> Tertiary with icon
+    </button>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Icon Only Buttons & Icon Placement</doc-header>
+
+<p>
+  Three classes exist to ensure the best placement of icons:
+</p>
+
+<ul>
+  <li><code>icon-left</code></li>
+  <li><code>icon-right</code></li>
+  <li><code>icon-only</code></li>
+</ul>
+
+<doc-code live>
+  <div style="display: flex;">
+    <div style="padding: 5px;">
+      <button eds-button motif="tertiary" class="icon-only" aria-label="print this page">
+        <eds-icon icon="print" aria-hidden="true"></eds-icon>
+      </button>
+      <button eds-button motif="tertiary" class="icon-only" aria-label="open settings">
+        <eds-icon icon="settings" aria-hidden="true"></eds-icon>
+      </button>
+      <button eds-button motif="tertiary" class="icon-only" aria-label="chat with a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+    <div class="inverse" style="padding: 5px;">
+      <button eds-button inverse motif="tertiary" class="icon-left" aria-label="print this page">
+        <eds-icon icon="print" aria-hidden="true"></eds-icon> Print
+      </button>
+      <button eds-button inverse motif="tertiary" class="icon-right" aria-label="chat with a representative">
+        Chat <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+  </div>
+
+</doc-code>

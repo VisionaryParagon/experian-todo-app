@@ -1,0 +1,233 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  eds-sidebar {
+    width: 270px;
+    height: 600px;
+    display: inline-block !important;
+    margin-right: 20px;
+  }
+  eds-sidebar.small {
+    width: 250px;
+  }
+  eds-sidebar.small .api-sidebar {
+    font-size: 14px;
+  }
+</style>
+
+<eds-sidebar>
+  <eds-sidebar-group icon='reorder'>
+    <h4 caps>Package Configuration</h4>
+
+    <eds-menu-item>
+      Acquire Customers Faster
+      <div slot='children'>
+        <eds-menu-item>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 2</h4>
+
+  <eds-menu-item icon='person' selected>Profile A</eds-menu-item>
+  <eds-menu-item icon='person'>Profile B</eds-menu-item>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-menu-item>No Icon 1</eds-menu-item>
+    <eds-menu-item>No Icon 2</eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 3</h4>
+
+  <eds-menu-item icon='favorite'>
+    Group 1
+    <div slot='children'>
+      <eds-menu-item icon='person'>Profile</eds-menu-item>
+      <eds-menu-item icon='favorite'>
+        Group 1.1
+        <div slot='children'>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </div>
+  </eds-menu-item>
+</eds-sidebar>
+
+<eds-sidebar class='small' collapsable>
+  <eds-sidebar-group icon='reorder'>
+    <h4 caps>Package Configuration</h4>
+
+    <eds-menu-item>
+      Acquire Customers Faster
+      <div slot='children'>
+        <eds-menu-item>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 2</h4>
+
+  <eds-menu-item icon='person' selected>Profile A</eds-menu-item>
+  <eds-menu-item icon='person'>Profile B</eds-menu-item>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-menu-item>No Icon 1</eds-menu-item>
+    <eds-menu-item>No Icon 2</eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 3</h4>
+
+  <eds-menu-item icon='favorite'>
+    Group 1
+    <div slot='children'>
+      <eds-menu-item icon='person'>Profile</eds-menu-item>
+      <eds-menu-item icon='favorite'>
+        Group 1.1
+        <div slot='children'>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </div>
+  </eds-menu-item>
+</eds-sidebar>
+
+<eds-sidebar class='small' collapsable compact>
+  <eds-sidebar-group icon='reorder'>
+    <h4 caps>Package Configuration</h4>
+
+    <eds-menu-item>
+      Acquire Customers Faster
+      <div slot='children'>
+        <eds-menu-item>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 2</h4>
+
+  <eds-menu-item icon='person' selected>Profile A</eds-menu-item>
+  <eds-menu-item icon='person'>Profile B</eds-menu-item>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-menu-item>No Icon 1</eds-menu-item>
+    <eds-menu-item>No Icon 2</eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 3</h4>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-tree-item>
+      Group 1
+      <div slot='children'>
+        <eds-tree-item>Profile</eds-tree-item>
+        <eds-tree-item>
+          Group 1.1
+          <div slot='children'>
+            <eds-tree-item>Profile</eds-tree-item>
+            <eds-tree-item>Profile</eds-tree-item>
+          </div>
+        </eds-tree-item>
+      </div>
+    </eds-tree-item>
+  </eds-sidebar-group>
+</eds-sidebar>
+
+<h3>Auto-width</h3>
+
+<eds-sidebar style='font-size: 14px; width: auto;' collapsable compact>
+  <eds-sidebar-group icon='reorder'>
+    <h4 caps>Package Configuration</h4>
+
+    <eds-menu-item>
+      Really, really, really long title for width
+      <div slot='children'>
+        <eds-menu-item>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 2</h4>
+
+  <eds-menu-item icon='person' selected>Profile A</eds-menu-item>
+  <eds-menu-item icon='person'>Profile B</eds-menu-item>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-menu-item>No Icon 1</eds-menu-item>
+    <eds-menu-item>No Icon 2</eds-menu-item>
+  </eds-sidebar-group>
+
+  <hr aria-hidden="true" />
+  <h4 caps>Section 3</h4>
+
+  <eds-sidebar-group icon='reorder'>
+    <eds-tree-item>
+      Group 1
+      <div slot='children'>
+        <eds-tree-item>Profile</eds-tree-item>
+        <eds-tree-item>
+          Group 1.1
+          <div slot='children'>
+            <eds-tree-item>Profile</eds-tree-item>
+            <eds-tree-item>Profile</eds-tree-item>
+          </div>
+        </eds-tree-item>
+      </div>
+    </eds-tree-item>
+  </eds-sidebar-group>
+</eds-sidebar>
+
+
+<eds-sidebar id='reset-width-method-example' style='height: 250px; width: auto;' collapsable>
+  <eds-sidebar-group icon='reorder'>
+    <h5 caps>Phrases</h5>
+    <hr aria-hidden="true" />
+    <eds-menu-item id='language1-example'>Excuse Me</eds-menu-item>
+    <eds-menu-item id='language2-example'>May I pass?</eds-menu-item>
+  </eds-sidebar-group>
+</eds-sidebar>
+
+<div>
+  <eds-button id='english-button'>English</eds-button>
+  <eds-button id='german-button'>German</eds-button>
+</div>
+
+<script>
+window.addEventListener('WebComponentsReady', function() {
+  var sidebar = document.getElementById('reset-width-method-example');
+  var item1 = document.getElementById('language1-example');
+  var item2 = document.getElementById('language2-example');
+
+  document.getElementById('english-button').addEventListener('click', function() {
+    item1.innerHTML = 'Excuse Me';
+    item2.innerHTML = 'May I pass?';
+    sidebar.resetWidth();
+  });
+
+  document.getElementById('german-button').addEventListener('click', function() {
+    item1.innerHTML = 'Entschuldigen Sie mich';
+    item2.innerHTML = 'Darf ich weitergeben?';
+    sidebar.resetWidth();
+  });
+});
+</script>

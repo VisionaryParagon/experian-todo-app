@@ -1,0 +1,10 @@
+eds-icon {
+  &[spin] {
+    animation: eds-spin 2s infinite linear;
+  }
+
+  @keyframes eds-spin {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(360deg); }
+  }
+}

@@ -1,0 +1,24 @@
+@import "../styles/eds-variables.scss";
+
+eds-menu-item {
+
+  &.has-children {
+    & > .eds-menu-item-children {
+      transition: transform 150ms ease 0ms, height 150ms ease 0ms, opacity 130ms ease 0ms;
+      transform-origin: 0 0;
+    }
+    &[expanded] > .eds-menu-item-children {
+      transition: transform 150ms ease 0ms, height 150ms ease 0ms, opacity 130ms ease 0ms;
+      transform-origin: 0 0;
+    }
+
+    & > .eds-menu-item-main > .eds-menu-item-caret {
+      transition: transform 150ms ease 0ms;
+    }
+
+    &[expanded] > .eds-menu-item-main > .eds-menu-item-caret {
+      transition: transform 150ms ease 0ms;
+    }
+  }
+
+}

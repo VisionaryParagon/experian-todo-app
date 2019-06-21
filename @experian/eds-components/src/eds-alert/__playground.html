@@ -1,0 +1,181 @@
+<h3>Motifs</h3>
+
+<eds-alert motif="success" background="gray" closable ariaLabelClose="enough already!">
+  <h4>Success</h4>
+  <ul>
+    <li>Everything was set correctly</li>
+    <li>You will receive an email notification shortly</li>
+  </ul>
+</eds-alert>
+
+<eds-alert motif="error" background="gray">
+  <h4>Error</h4>
+  <ul>
+    <li>Requested loan amount is out of range</li>
+    <li>Please declare an existing customer number</li>
+    <li>Please ensure that months at this address are more than 12</li>
+  </ul>
+</eds-alert>
+
+<eds-alert motif="warning" background="gray">
+  <h4>Warning</h4>
+  <ul>
+    <li>Just to let you know something just happened</li>
+    <li>You may want to double-check your settings</li>
+  </ul>
+</eds-alert>
+
+<eds-alert motif="info" background="gray">
+  <h4>Info</h4>
+  <ul>
+    <li>Just to let you know something just happened</li>
+    <li>There's no need to take further action</li>
+  </ul>
+</eds-alert>
+
+<h3>Backgrounds & Borders</h3>
+
+<eds-alert motif="info" background="gray">
+  <h4>Alert</h4>
+  <p>This alert has a <strong>gray</strong> background.</p>
+</eds-alert>
+
+<eds-alert motif="info" background="white" border>
+  <h4>Alert</h4>
+  <p>This alert has a <strong>white</strong> background.</p>
+</eds-alert>
+
+<h3>Compact</h3>
+
+<eds-alert motif="error" background="gray" compact>
+  <strong>5 missed payments</strong> - Nov 5, 2017, Dec 5, 2017 and 3 others
+</eds-alert>
+
+<eds-alert motif="error" background="gray" compact style='font-size: 14px;'>
+  <strong>5 missed payments</strong> - Nov 5, 2017, Dec 5, 2017 and 3 others
+</eds-alert>
+
+<eds-alert motif="info" background="gray" compact closable style='font-size: 14px;'>
+  <strong>Account info</strong> - This alert can be dismissed.
+</eds-alert>
+
+<h3>Regions</h3>
+<p>
+  The buttons below will programmatically generate a new alert each time.
+</p>
+
+<eds-button onclick="regionalAlertGenerator('top-left')">
+  Top left
+</eds-button>
+<eds-button onclick="regionalAlertGenerator('top-center')">
+  Top Center
+</eds-button>
+<eds-button onclick="regionalAlertGenerator('top-right')">
+  Top right
+</eds-button>
+
+<br />
+
+<eds-button onclick="regionalAlertGenerator('bottom-left')">
+  Bottom left
+</eds-button>
+<eds-button onclick="regionalAlertGenerator('bottom-center')">
+  Bottom Center
+</eds-button>
+<eds-button onclick="regionalAlertGenerator('bottom-right')">
+  Bottom right
+</eds-button>
+
+<script>
+  function regionalAlertGenerator(region) {
+    window.EDS.alerts.create("Sample alert text " + new Date(), {
+      motif: 'warning',
+      region: region,
+      timeout: 2000
+    });
+  }
+</script>
+
+<p>
+  However, there is also support for showing regional alerts that already exist in the mark-up.
+</p>
+
+<eds-alert motif="error" background="gray" region="top-left" id="region-alert-test" timeout='never' hidden>
+  <h3>Sample alert text</h3>
+</eds-alert>
+<eds-button onclick="document.getElementById('region-alert-test').show()">
+  Show region alert
+</eds-button>
+<eds-button onclick="document.getElementById('region-alert-test').hide()">
+  Hide region alert
+</eds-button>
+
+<h3>Programmatic control</h3>
+
+<h4>Toggling alerts</h4>
+<eds-alert motif="warning" hidden closable background="gray" id="show-alert-test">
+  <h4>Warning</h4>
+  <ul>
+    <li>Requested loan amount is out of range</li>
+    <li>Please declare an existing customer number</li>
+    <li>Please ensure that months at this address are more than 12</li>
+  </ul>
+</eds-alert>
+
+<eds-button id="toggle-alert-button">Toggle alert</eds-button>
+<eds-button id="toggle-closable-button">Toggle "closable"</eds-button>
+
+<script>
+(function(toggleButton, toggleClosableButton, alert) {
+  toggleButton.addEventListener("click", function() {
+    alert.hidden = !alert.hidden;
+  });
+  toggleClosableButton.addEventListener("click", function() {
+    alert.closable = !alert.closable;
+  });
+}(
+  document.getElementById('toggle-alert-button'),
+  document.getElementById('toggle-closable-button'),
+  document.getElementById('show-alert-test')
+));
+</script>
+
+<h4>Adding/Changing Regions</h4>
+<eds-alert motif="warning" closable id="change-region-alert-test" timeout="never" background="gray">
+  <h4>Warning</h4>
+  <p>
+    Once moved to a region, this alert cannot be restored to its original position.
+  </p>
+</eds-alert>
+
+<eds-button id="change-region-alert-button">Cycle regions</eds-button>
+
+<script>
+(function(button, toggleClosableButton, alert) {
+  button.addEventListener("click", function() {
+    alert.show();
+    switch (alert.region) {
+      case 'top-left':
+        alert.region = 'top-right';
+        break;
+      case 'top-right':
+        alert.region = 'bottom-right';
+        break;
+      case 'bottom-right':
+        alert.region = 'bottom-left';
+        break;
+      case 'bottom-left':
+        alert.region = 'top-left';
+        break;
+      default:
+        alert.region = 'top-left';
+    }
+  });
+  toggleClosableButton.addEventListener("click", function() {
+    alert.closable = !alert.closable;
+  });
+}(
+  document.getElementById('change-region-alert-button'),
+  document.getElementById('toggle-closable-button'), document.getElementById('change-region-alert-test')
+));
+</script>

@@ -1,0 +1,162 @@
+<doc-header>Examples</doc-header>
+<div class='examples'>
+  <eds-tabs>
+    <eds-tab label="Tab Item 1">
+      <p>Hello I am tab content 1.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 2">
+      <p>Hello I am tab content 2.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 3">
+      <p>Hello I am tab content 3.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 4">
+      <p>Hello I am tab content 4.</p>
+    </eds-tab>
+  </eds-tabs>
+</div>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name="ariaLabelClose" type="string" default="close">
+  Defines the value of the <code>aria-label</code> attribute of the button on the top right side of the tab label that allows the tab to be closed.
+
+  <doc-note>
+    Only applicable when the <code>closable</code> attribute is also provided on one or more <code>eds-tab</code> children.
+  </doc-note>
+
+  <doc-code live>
+    <eds-tabs ariaLabelClose="ferme">
+      <eds-tab label="Not Closable"><p>You can't close this tab.</p></eds-tab>
+      <eds-tab label="Closable" closable><p>Go ahead: Try to close me!</p></eds-tab>
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name='tabs' type='HTMLElement[]' default='[]' readOnly propertyOnly>
+  An array of <code>eds-tab</code>s.
+</api-option>
+
+<api-option name='vertical' type='boolean' default='false'>
+  Sets whether the tabs are displayed in a vertical orientation.
+
+  <doc-code live>
+    <eds-tabs vertical>
+      <eds-tab label="Tab Item 1">
+        <p>Hello I am tab content 1.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 2">
+        <p>Hello I am tab content 2.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 3">
+        <p>Hello I am tab content 3.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 4">
+        <p>Hello I am tab content 4.</p>
+      </eds-tab>
+    </eds-tabs>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='selectTab' args="index: number">
+  Select the tab at the specified index if it exists.
+
+</api-method>
+
+<doc-header><code>eds-tab</code> Configuration Options</doc-header>
+
+<api-option name='active' type='boolean' default='false' deprecated>
+  <doc-note motif='warning'>
+    This option is deprecated, use <code>selected</code> instead.
+  </doc-note>
+</api-option>
+
+<api-option name="closable" type="boolean" default="false">
+  Sets whether the tab can be closed by the user.
+
+  <doc-code live>
+    <eds-tabs>
+      <eds-tab label="Tab Item 1">
+        <p>Hello I am tab content 1.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 2" closable>
+        <p>Hello I am tab content 2 and I am selected.</p>
+      </eds-tab>
+    </eds-tabs>
+  </doc-code>
+
+</api-option>
+
+<api-option name='label' type='string'>
+  Sets the tab label. This is what is shown above the tab and what needs to be clicked to activate it.
+
+  The label for each tab is inserted into an unordered list above the tab panels. This list contains all
+  the tab labels to control each tab, as well as the necessary roles for accessibility purposes.
+
+  <doc-code live>
+    <eds-tabs>
+      <eds-tab label="Tab Item 1">
+        <p>Hello I am tab content 1.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 2">
+        <p>Hello I am tab content 2.</p>
+      </eds-tab>
+    </eds-tabs>
+  </doc-code>
+
+</api-option>
+
+<api-option name='selected' type='boolean' default='false'>
+  Sets whether the tab is currently selected and visible.
+
+  <doc-code live>
+    <eds-tabs>
+      <eds-tab label="Tab Item 1">
+        <p>Hello I am tab content 1.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 2" selected>
+        <p>Hello I am tab content 2 and I am selected.</p>
+      </eds-tab>
+    </eds-tabs>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Tab Content</doc-header>
+
+<p>
+  Tab content is handled via markup. If you want to style tab content you can do so by styling <code>eds-tab</code> directly, or by using a container for your tab content.
+</p>
+
+<doc-code live>
+  <style>
+    #custom-padding eds-tab:first-of-type {
+      padding: 50px;
+      background: #f3f3f3;
+    }
+    .my-container {
+      padding: 12px;
+      background: #333333;
+      color: white;
+    }
+  </style>
+
+  <eds-tabs id='custom-padding'>
+    <eds-tab label="Tab Item 1">
+      Hello I am tab content 1.
+    </eds-tab>
+    <eds-tab label="Tab Item 2">
+      <p>
+        Hello I am tab content 2.
+      </p>
+    </eds-tab>
+    <eds-tab label="Tab Item 3">
+      <div class='my-container'>
+        Hello I am tab content 3.
+      </div>
+    </eds-tab>
+  </eds-tabs>
+</doc-code>

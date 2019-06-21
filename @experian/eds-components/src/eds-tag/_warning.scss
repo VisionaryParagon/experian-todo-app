@@ -1,0 +1,10 @@
+@import "../styles/eds-variables";
+
+$warning-tags-color: $eds-warning-light;
+// ever so slight adjustment from $eds-warning to bump to AAA for small fonts
+$warning-font-color: #AA5400;
+
+eds-tag[motif='warning'] {
+    background: $warning-tags-color;
+    color: $warning-font-color;
+}

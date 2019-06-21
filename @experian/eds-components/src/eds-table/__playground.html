@@ -1,0 +1,231 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  eds-table {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .muted, .muted span {
+    color: #999 !important;
+  }
+
+  .hobby:before {
+    content: '★';
+    display: inline-block;
+    padding-right: 10px;
+  }
+</style>
+
+<eds-table></eds-table>
+
+<h4>Compact</h4>
+
+<eds-table compact></eds-table>
+
+<h4>Multiselect</h4>
+
+<eds-table multiSelect></eds-table>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+
+    var hobbyFormatter = function(value) {
+      return {
+        class: "hobby",
+        html: "<span style='color: red';>" + value + "</span>"
+      }
+    }
+
+    var rowClasses = function(row) {
+      return (row.name === 'Alan') ? ['muted'] : [];
+    }
+
+    Array.from(document.querySelectorAll('eds-table')).forEach(function(el) {
+      el.columns = [
+        { field: 'id', name: 'ID', width: 50 },
+        { field: 'name', name: 'Name', width: 150 },
+        { field: 'hobby', name: 'Hobby', formatter: hobbyFormatter },
+        { field: 'optional', name: 'Optional', width: 100 },
+        { field: 'complex.nested', name: 'Nested', width: 100 }
+      ];
+      el.rowClasses = rowClasses;
+      el.data = [
+        { id: 1, name: 'Alan', hobby: 'Color Grading', complex: { nested: 'nested1' } },
+        { id: 2, name: 'Nick', hobby: 'Martial Arts', complex: { nested: 'nested2' } },
+        { id: 3, name: 'Grant', hobby: 'Game Development', complex: { nested: 'nested3' } }
+      ];
+    });
+
+  });
+
+})()
+</script>
+
+<h4>Row Actions</h4>
+
+<eds-table class='row-actions-example' multiSelect>
+  <div slot='row-actions'>
+    <eds-icon icon='edit' data-action='edit'></eds-icon>
+    <eds-icon icon='delete' data-action='delete'></eds-icon>
+  </div>
+</eds-table>
+
+<eds-table class='row-actions-example' compact multiSelect>
+  <div slot='row-actions'>
+    <eds-icon icon='edit' data-action='edit'></eds-icon>
+    <eds-icon icon='delete' data-action='delete'></eds-icon>
+  </div>
+</eds-table>
+
+<p id='row-actions-output'></p>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var output = document.getElementById('row-actions-output');
+    Array.from(document.querySelectorAll('eds-table')).forEach(function(el) {
+      el.addEventListener('rowactionclick', function(e) {
+        output.innerHTML = `${e.detail.action} ${e.detail.row.name}`;
+      });
+    });
+  });
+})()
+</script>
+
+<h4>Row Click</h4>
+
+<eds-table id='rowclick-example'></eds-table>
+<p id='rowclick-output'></p>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('rowclick-example')
+    var output = document.getElementById('rowclick-output');
+    el.addEventListener('rowclick', function(e) {
+      output.innerHTML = `${e.detail.field} ${e.detail.row[e.detail.field]}`;
+    });
+  });
+})()
+</script>
+
+<h4>Column Span</h4>
+
+<eds-table id='column-span-example'></eds-table>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('column-span-example');
+    var colspan = function(column, row) {
+      if (row.columnHeader) return 5;
+      return 1;
+    };
+    el.columns = [
+      { field: 'id', name: 'ID', width: 50, colspan: colspan },
+      { field: 'name', name: 'Name', width: 150 },
+      { field: 'hobby', name: 'Hobby' },
+      { field: 'optional', name: 'Optional', width: 100 },
+      { field: 'complex.nested', name: 'Nested', width: 100 }
+    ];
+    el.data = [
+      { id: 'People at Work', columnHeader: true },
+      { id: 1, name: 'Alan', hobby: 'Color Grading', complex: { nested: 'nested1' } },
+      { id: 2, name: 'Nick', hobby: 'Martial Arts', complex: { nested: 'nested2' } },
+      { id: 3, name: 'Grant', hobby: 'Game Development', complex: { nested: 'nested3' } }
+    ];
+  });
+})()
+</script>
+
+<h4>Headers & Footers</h4>
+
+<eds-table id='header-example' multiSelect>
+  <div slot='header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;'>
+        <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' icon='backup'>Save to Cloud</eds-button>
+        <eds-button motif='tertiary' icon='archive'>Archive</eds-button>
+      </section>
+    </eds-toolbar>
+    <section background='gray'>
+      <eds-textbox label='Description' value='Configuration 1'></eds-textbox>
+      <eds-dropdown label='Product' style='width: 200px;'>
+        <eds-option>Product A</eds-option>
+        <eds-option selected>Product B</eds-option>
+        <eds-option>Product C</eds-option>
+      </eds-dropdown>
+    </section>
+  </div>
+
+  <div slot='selection-header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1; padding: 12px 16px;'>
+        <span id='selected-rows'></span> records selected.
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button inverse>Combine</eds-button>
+        <eds-button inverse>Save to List...</eds-button>
+        <eds-button inverse motif='tertiary' icon='cancel'>Cancel</eds-button>
+      </section>
+    </eds-toolbar>
+  </div>
+</eds-table>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('header-example');
+    var output = document.getElementById('selected-rows');
+    el.addEventListener('selectionchange', function(e) {
+      output.innerHTML = `${e.detail.length}`;
+    });
+  });
+})()
+</script>
+
+<eds-table id='header-example2' multiSelect>
+  <div slot='header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1;'>
+        <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button motif='tertiary' icon='backup'>Save to Cloud</eds-button>
+        <eds-button motif='tertiary' icon='archive'>Archive</eds-button>
+      </section>
+    </eds-toolbar>
+  </div>
+
+  <div slot='selection-header'>
+    <eds-toolbar>
+      <section style='flex-grow: 1; padding: 12px 16px;'>
+        <span id='selected-rows2'></span> records selected.
+      </section>
+      <section style='flex-basis: auto; width: auto;'>
+        <eds-button inverse motif='tertiary' icon='delete'>Delete</eds-button>
+        <eds-button inverse motif='tertiary' icon='cancel'>Cancel</eds-button>
+      </section>
+    </eds-toolbar>
+  </div>
+</eds-table>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('header-example2');
+    var output = document.getElementById('selected-rows2');
+    el.addEventListener('selectionchange', function(e) {
+      output.innerHTML = `${e.detail.length}`;
+    });
+  });
+})()
+</script>

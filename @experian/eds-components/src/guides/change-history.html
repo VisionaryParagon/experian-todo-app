@@ -1,0 +1,117 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+<script src="ag-grid-community.min.noStyle.js"></script>
+
+<h1>Change History</h1>
+
+<style>
+#change-history eds-toolbar .input-wrap {
+  display: block;
+}
+
+#change-history .deprecation-warning {
+  color: #b35900;
+}
+#change-history .breaking-change {
+  color: #cd0026;
+}
+#change-history .new-element {
+  color: #007a3b;
+}
+
+</style>
+
+<eds-data-grid id="change-history" style='height: 500px;'>
+  <div slot='header'>
+    <eds-toolbar style='display: flex;'>
+      <section style='flex-grow: 1;'>
+        <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+      </section>
+      <section style='flex-basis: auto; width: auto; display: flex;'>
+        <eds-icon icon="filter_list" style="align-self: center; margin: -5px 10px 0 5px;"></eds-icon>
+        <eds-dropdown style="width: 150px;">
+          <eds-option selected>Any</eds-option>
+          <eds-option>Deprecation</eds-option>
+          <eds-option>Breaking</eds-option>
+          <eds-option>New Element</eds-option>
+        </eds-dropdown>
+      </section>
+    </eds-toolbar>
+  </div>
+</eds-data-grid>
+
+<script>
+document.addEventListener('WebComponentsReady', () => {
+  const grid = document.getElementById('change-history');
+  let data = `{{inject change history}}`;
+  const renderChange = params => {
+    if (params.data.breaking) return `BREAKING: ${params.value}`;
+    else if (params.data.deprecation) return `DEPRECATION: ${params.value}`;
+    else return params.value;
+  }
+  const renderDocs = params => {
+    if (params.value+''.indexOf('#code/') !== -1) {
+      return `<a href='http://eds.experian.local/${params.data.element}.html${params.value}' target='_blank'>Docs</a>`;
+    }
+    return '';
+  }
+
+  grid.agOptions = {
+    columnDefs: [
+      { field: 'version', headerName: 'Version', width: 100 },
+      { field: 'element', headerName: 'Element', width: 130 },
+      { field: 'change', headerName: 'Change', cellRenderer: renderChange },
+      { field: 'docs', headerName: 'Docs', width: 100, pinned: 'right', cellRenderer: renderDocs }
+    ],
+    rowData: data,
+    rowClassRules: {
+      'deprecation-warning': params => params.data.deprecation,
+      'breaking-change': params => params.data.breaking,
+      'new-element': params => params.data.new
+    }
+  }
+
+  grid.addEventListener('eds-data-grid-ready', () => {
+    grid.agOptions.columnApi.autoSizeColumns(['change']);
+  });
+
+  const searchEl = grid.querySelector('eds-toolbar eds-textbox');
+  const filterEl = grid.querySelector('eds-toolbar eds-dropdown');
+  let filterData = data;
+  let searchData = data;
+  const filter = () => {
+    filterData = data.filter(item => {
+      const query = filterEl.value.toLowerCase();
+      switch (query) {
+        case 'deprecation':
+          if (item.deprecation) return true;
+          else return false;
+        case 'breaking':
+          if (item.breaking) return true;
+          else return false;
+        case 'new element':
+          if (item.new) return true;
+          else return false;
+        default:
+          return true;
+      }
+    });
+  }
+  const search = () => {
+    filter();
+    searchData = filterData.filter(item => {
+      const query = searchEl.value.toLowerCase();
+      const element = item.element.toLowerCase();
+      const change = item.change.toLowerCase();
+      return (element.indexOf(query) !== -1) || (change.indexOf(query) !== -1);
+    });
+    grid.api.setRowData(searchData);
+  }
+
+  filterEl.addEventListener('change', search);
+  searchEl.addEventListener('input', search);
+
+});
+</script>

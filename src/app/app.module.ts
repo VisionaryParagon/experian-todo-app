@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,10 +9,17 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { TodoListsComponent } from './todo-lists/todo-lists.component';
-import { ListComponent } from './list/list.component';
-import { TaskComponent } from './task/task.component';
-import { ArchiveComponent } from './archive/archive.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
+// Routes
+import { HomeComponent } from './routes/home/home.component';
+import { ListComponent } from './routes/list/list.component';
+import { ArchiveComponent } from './routes/archive/archive.component';
+import { ErrorComponent } from './routes/error/error.component';
+
+// Modals
+import { NewListComponent } from './modals/new-list/new-list.component';
+import { NewItemComponent } from './modals/new-item/new-item.component';
 
 @NgModule({
   imports: [
@@ -24,11 +31,19 @@ import { ArchiveComponent } from './archive/archive.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TodoListsComponent,
+    SidebarComponent,
+    HomeComponent,
     ListComponent,
-    TaskComponent,
-    ArchiveComponent
+    ArchiveComponent,
+    ErrorComponent,
+    NewListComponent,
+    NewItemComponent
   ],
+  entryComponents: [
+    NewListComponent,
+    NewItemComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

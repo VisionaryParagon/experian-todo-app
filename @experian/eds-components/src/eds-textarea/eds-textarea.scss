@@ -1,0 +1,71 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+$border-color: $eds-form-field-border-color;
+$border-disabled-color: $eds-form-field-placeholder-font-color;
+$label-font-size: $eds-label-size;
+
+eds-textarea {
+
+  position: relative;
+  display: inline-block;
+
+  .input-wrap {
+    pointer-events: none;
+    position: relative;
+    border: 1px solid $border-color;
+    border-radius: $eds-border-radius-small;
+    @include focus-element(-2px);
+
+    display: inline-flex;
+  }
+
+
+  &[noborder] {
+    .input-wrap {
+      border-color: transparent;
+    }
+    textarea {
+      border: none;
+      
+      &.focus, &:focus {
+        input {
+          background-color: $eds-white;
+        }
+      }
+    }
+  }
+
+  label {
+    display: none;
+    @include base-font();
+    font-size: $label-font-size;
+    font-weight: 500;
+    line-height: $eds-1rem;
+    margin-bottom: 10px;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  textarea {
+    pointer-events: auto;
+    @include base-font();
+    padding: 5px 10px;
+    line-height: $eds-1rem * 1.4;
+    outline: none;
+    border: none;
+    border-radius: $eds-border-radius-small;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    .input-wrap {
+      border-color: $border-disabled-color;
+      border-style: dotted;
+    }
+  }
+
+}

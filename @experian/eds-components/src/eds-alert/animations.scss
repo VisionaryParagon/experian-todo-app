@@ -1,0 +1,17 @@
+
+
+eds-alert {
+  transition:
+    transform 100ms ease 0ms,
+    opacity 75ms ease 25ms,
+    max-height 100ms ease 0ms,
+    margin 100ms ease 0ms;
+
+  &[hidden] {
+    transition:
+      transform 250ms ease 0ms,
+      opacity 75ms ease 0ms,
+      max-height 250ms ease 0ms,
+      margin 250ms ease 0ms;
+  }
+}

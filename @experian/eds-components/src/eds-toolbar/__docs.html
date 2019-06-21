@@ -1,0 +1,61 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<doc-header>Examples</doc-header>
+
+<eds-toolbar>
+  <section style='flex-grow: 1;'>
+    <eds-textbox placeholder='Type to search...' noborder style='width: 100%'></eds-textbox>
+  </section>
+  <section style='flex-basis: auto; width: auto;'>
+    <eds-button motif='tertiary' icon='backup'>Save to Cloud</eds-button>
+    <eds-button motif='tertiary' icon='archive'>Archive</eds-button>
+  </section>
+</eds-toolbar>
+
+<br />
+<eds-toolbar>
+  <section style='flex-grow: 1;' class='text-only'>
+    <h4>Text only section</h4>
+  </section>
+  <section style='flex-basis: auto; width: auto;'>
+    <eds-button motif='tertiary' icon='delete'>Delete</eds-button>
+    <eds-button motif='tertiary' icon='cancel'>Cancel</eds-button>
+  </section>
+</eds-toolbar>
+
+<doc-header>Content & Markup</doc-header>
+
+<p>
+  <code>eds-toolbar</code> is a flex container and expects its content to be grouped in <code>section</code> tags. When using text only, add the <code>text-only</code> class which adjusts padding. Otherwise the padding is optimized for form fields and buttons.
+</p>
+
+<doc-code live>
+  <eds-card>
+    <header class='flush'>
+      <eds-toolbar>
+        <section style='flex-grow: 1;' class='text-only'>
+          <h4>Text only section</h4>
+        </section>
+        <section>
+          <eds-button motif='tertiary' icon='print' class='icon-only'></eds-button>
+          <eds-button motif='tertiary' icon='settings' class='icon-only'></eds-button>
+          <eds-button motif='tertiary' icon='chat' class='icon-only'></eds-button>
+          <eds-button motif='tertiary' icon='delete' class='icon-only'></eds-button>
+        </section>
+        <section style='flex-basis: auto; width: auto;'>
+          <eds-button motif='tertiary' icon='delete'>Delete</eds-button>
+          <eds-button motif='tertiary' icon='cancel'>Cancel</eds-button>
+        </section>
+      </eds-toolbar>
+    </header>
+    <main>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </main>
+    <footer>
+      <eds-button>Confirm</eds-button>
+    </footer>
+  </eds-card>
+</doc-code>

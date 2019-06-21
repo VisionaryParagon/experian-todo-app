@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- livereload -->
+    <script>
+      function livereloadWarning(warning) {
+        console.warn('There was a problem with livereload:');
+        console.warn(warning);
+      }
+      if (!window.fetch) livereloadWarning('fetch api not supported in this browser.');
+      else {
+        fetch(new Request('livereload-port')).then(function(res) {
+          if (!res.ok) {
+            livereloadWarning('Could not fetch "livereload-port"');
+            return;
+          }
+
+          res.text().then(function(port) {
+            var livereload = document.createElement("script");
+            livereload.src = "http://"
+              + (location.host || 'localhost').split(':')[0]
+              + ':'
+              + port
+              + '/livereload.js?snipver=1';
+            document.head.appendChild(livereload);
+          })
+        });
+      }
+    </script>
+
+    <script>
+      window.EDS = {
+        hideUntilReady: true,
+        icons: {
+          defaultLibrary: 'material-icon-font'
+        }
+      };
+    </script>
+    <script src='dist/eds-core.js'></script>
+    <script src='dist/eds-menu-item.js'></script>
+    <script src='dist/eds-sidebar.js'></script>
+    <script src='dist/eds-primary-header.js'></script>
+    <script src='dist/eds-icon.js'></script>
+    <style>
+      #app {
+        margin: 0;
+        padding: 0;
+        background: #f2f2f2;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      #body-content {
+        display: flex;
+        height: calc(100% - 66px);
+        overflow: hidden;
+      }
+
+      #sidenav {
+        font-size: 14px;
+        flex-basis: 180px;
+      }
+
+      eds-dropdown {
+        width: 200px;
+        vertical-align: bottom;
+      }
+
+      .test-area, .docs {
+        border-right: 1px solid #ccc;
+        background: white;
+        box-sizing: border-box;
+        padding: 0;
+        flex: 1 1 auto;
+      }
+
+      .docs {
+        border: 0;
+      }
+
+      .docs.hide {
+        flex: 0 0 0;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body id='app'>
+    <eds-primary-header title='EDS Components - Development Environment' motif='light'></eds-primary-header>
+    <div id='body-content'>
+      <eds-sidebar id='sidenav' background='gray' compact collapsable>
+        <eds-sidebar-group icon="reorder">
+          <h5 caps>Guides</h5>
+          <eds-menu-item selected data-url='guides/getting-started.html'>Getting Started</eds-menu-item>
+          <eds-menu-item data-url='guides/custom-elements.html'>Custom Elements</eds-menu-item>
+          <eds-menu-item data-url='guides/eds-element.html'>EDSElement</eds-menu-item>
+          <eds-menu-item data-url='guides/styling-elements.html'>Styling Elements</eds-menu-item>
+          <eds-menu-item data-url='guides/change-history.html'>Change History</eds-menu-item>
+
+          <h5 caps>Components</h5>
+          <eds-menu-item>eds-accordion</eds-menu-item>
+          <eds-menu-item>eds-alert</eds-menu-item>
+          <eds-menu-item>eds-badge</eds-menu-item>
+          <eds-menu-item>eds-breadcrumbs</eds-menu-item>
+          <eds-menu-item>eds-button</eds-menu-item>
+          <eds-menu-item>eds-card</eds-menu-item>
+          <eds-menu-item>eds-checkbox</eds-menu-item>
+          <eds-menu-item>eds-cta-link</eds-menu-item>
+          <eds-menu-item>eds-data-grid</eds-menu-item>
+          <eds-menu-item>eds-dropdown</eds-menu-item>
+          <eds-menu-item>eds-icon</eds-menu-item>
+          <eds-menu-item>eds-menu-item</eds-menu-item>
+          <eds-menu-item>eds-modal</eds-menu-item>
+          <eds-menu-item>eds-popover</eds-menu-item>
+          <eds-menu-item>eds-primary-header</eds-menu-item>
+          <eds-menu-item>eds-progress</eds-menu-item>
+          <eds-menu-item>eds-radio</eds-menu-item>
+          <eds-menu-item>eds-sidebar</eds-menu-item>
+          <eds-menu-item>eds-slider</eds-menu-item>
+          <eds-menu-item>eds-step-sequence</eds-menu-item>
+          <eds-menu-item>eds-switch</eds-menu-item>
+          <eds-menu-item>eds-table</eds-menu-item>
+          <eds-menu-item>eds-tabs</eds-menu-item>
+          <eds-menu-item>eds-tag</eds-menu-item>
+          <eds-menu-item>eds-textarea</eds-menu-item>
+          <eds-menu-item>eds-textbox</eds-menu-item>
+          <eds-menu-item>eds-token</eds-menu-item>
+          <eds-menu-item>eds-toolbar</eds-menu-item>
+          <eds-menu-item>eds-tooltip</eds-menu-item>
+          <eds-menu-item>eds-tree-item</eds-menu-item>
+        </eds-sidebar-group>
+
+        <hr />
+        <eds-sidebar-group>
+          <h5 caps>Examples</h5>
+          <eds-menu-item>examples</eds-menu-item>
+        </eds-sidebar-group>
+
+      </eds-sidebar>
+
+      <div class='test-area'>
+        <iframe
+          id='playgroundFrame'
+          src=''
+          frameBorder='0'>
+        </iframe>
+      </div>
+
+      <div class='docs'>
+        <iframe
+          id='docsFrame'
+          src=''
+          frameBorder='0'>
+        </iframe>
+      </div>
+    </div>
+
+    <script>
+    (function(win) {
+
+      // Detect whether to automatically collapse the sidebar
+      var sidebarStorageKey = 'eds-sidebar.collapsed';
+      if (localStorage.getItem(sidebarStorageKey) === 'true') {
+        sidenav.setAttribute('collapsed', true);
+      }
+
+      win.addEventListener('WebComponentsReady', function() {
+        var location = win.location;
+        var document = win.document;
+
+        var sidenav = document.getElementById('sidenav');
+        var playground = document.getElementById('playgroundFrame');
+        var docs = document.getElementById('docsFrame');
+
+        win.addEventListener('hashchange', function() {
+          loadFrames(location.hash ? location.hash.substring(1) : sidenav.selectedItem.innerHTML);
+        });
+
+        sidenav.addEventListener('itemclick', function(e) {
+          const hash = e.detail.dataset.url || e.detail.innerHTML;
+          location.hash = '#' + hash;
+        });
+
+        sidenav.addEventListener('collapsed', function(e) {
+          localStorage.setItem(sidebarStorageKey, e.detail);
+        });
+
+        loadFrames(location.hash ? location.hash.substring(1) : 'guides/getting-started.html');
+
+        function loadFrames(name) {
+          var path = 'local-build/' + name;
+
+          if (name.indexOf('guides/') !== -1) {
+            playground.src = path;
+            docs.src = '';
+            docs.parentNode.classList.add('hide');
+            sidenav.selectedItem = sidenav.querySelector('[data-url="' + name + '"]');
+          } else {
+            playground.src = path + '/__playground.html';
+            docs.src = path + '/__docs.html';
+            docs.parentNode.classList.remove('hide');
+            sidenav.selectedItem = name;
+          }
+
+        }
+      });
+
+    })(window);
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,5 @@
+.git
+local-build
+node_modules
+npm-debug.log
+livereload-port

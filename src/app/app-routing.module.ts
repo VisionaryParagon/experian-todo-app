@@ -1,18 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// App Routes
-import { TodoListsComponent } from './todo-lists/todo-lists.component';
-import { ArchiveComponent } from './archive/archive.component';
+// Route Components
+import { HomeComponent } from './routes/home/home.component';
+import { ListComponent } from './routes/list/list.component';
+import { ArchiveComponent } from './routes/archive/archive.component';
+import { ErrorComponent } from './routes/error/error.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TodoListsComponent
+    component: HomeComponent
+  },
+  {
+    path: 'list/:slug',
+    component: ListComponent
   },
   {
     path: 'archive',
     component: ArchiveComponent
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
   },
   {
     path: '**',

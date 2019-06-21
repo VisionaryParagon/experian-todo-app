@@ -1,0 +1,25 @@
+@import "../../styles/eds-variables";
+@import "../../styles/eds-mixins";
+
+$doc-note-border-color: $eds-border-color;
+$doc-note-border-radius: $eds-border-radius-large;
+$doc-note-background-color: white;
+
+$doc-note-warning-border-color: #fceedb;
+$doc-note-warning-background-color: #fef9f3;
+
+doc-note {
+  display: block;
+  margin: 1rem 0;
+  padding: 1rem;
+  @include base-font();
+  @include font-smoothing();
+  border-radius: $doc-note-border-radius;
+  border: 1px solid $doc-note-border-color;
+  background-color: $doc-note-background-color;
+}
+
+doc-note[motif='warning'] {
+  border-color: $doc-note-warning-border-color;
+  background-color: $doc-note-warning-background-color;
+}

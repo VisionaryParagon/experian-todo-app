@@ -1,0 +1,44 @@
+<style>
+eds-token:first-of-type {
+  margin-right: 20px;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<eds-token><strong>Color:</strong> Red</eds-token>
+<eds-token closable>Blue</eds-token>
+<eds-token closable><strong>Color:</strong> Green</eds-token>
+
+<doc-header>Configuration Options</doc-header>
+
+</api-option>
+
+<api-option name='closable' type='boolean' default='false'>
+  Displays a close icon and triggers a <code>close</code> event when clicked.
+
+  <doc-code live>
+    <eds-token>Transformers</eds-token>
+    <eds-token><strong>Movie:</strong> Transformers</eds-token>
+    <eds-token closable><strong>Movie:</strong> Transformers</eds-token>
+  </doc-code>
+
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name='close' type='CustomEvent'>
+  Fires when the close icon is clicked.
+
+  <doc-code live>
+    <eds-token id='close-event-example' closable><strong>Movie:</strong> Transformers</eds-token>
+    <p id='close-event-example-output'></p>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('close-event-example').addEventListener('close', function(e) {
+          document.getElementById('close-event-example-output').innerHTML = "Close event fired!";
+        });
+      });
+    </script>
+  </doc-code>
+</api-event>

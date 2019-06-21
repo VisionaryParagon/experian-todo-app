@@ -1,14 +1,19 @@
-<header>
-  <div class="container-fluid h-100 d-flex align-items-center justify-content-between">
-    <a routerLink="/" class="logo" (click)="closeMenu()"></a>
+<eds-primary-header logoHref="/" [motif]="theme" title="ToDo App">
+  <span slot="icons">
+    <eds-textbox class="searchbar" placeholder="Search ToDos..." noborder>
+      <eds-icon slot="prepend" icon="search"></eds-icon>
+    </eds-textbox>
 
-    <mat-icon class="menu" (click)="toggleMenu()">menu</mat-icon>
-  </div>
+    <span class="user">
+      <span class="avatar" [style.backgroundImage]="'url(' + user.details.image + ')'"></span>
+      <span class="name">{{ user.details.firstName }} {{ user.details.lastName }}</span>
+      <eds-icon icon="arrow_drop_down"></eds-icon>
+    </span>
+  </span>
+</eds-primary-header>
 
-  <nav [@topDown]="true" *ngIf="navActive">
-    <div class="container-fluid text-right">
-      <a routerLink="/" (click)="closeMenu()">Lists</a>
-      <a routerLink="/archive" (click)="closeMenu()">Archive</a>
-    </div>
-  </nav>
-</header>
+<eds-popover targetClass="user" padding="false" position="bottom">
+  <h4 caps>Header Theme</h4>
+  <eds-menu-item [selected]="theme === 'light'" (click)="changeTheme('light')">Experian White</eds-menu-item>
+  <eds-menu-item [selected]="theme === 'dark'" (click)="changeTheme('dark')">Experian Blue</eds-menu-item>
+</eds-popover>

@@ -1,0 +1,72 @@
+@import "../../styles/eds-variables";
+@import "../../styles/eds-mixins";
+
+doc-guideline {
+  display: block;
+  margin: 2rem 0;
+  @include base-font();
+  @include font-smoothing();
+
+  .doc-guideline-example {
+    border-radius: $eds-border-radius-small;
+    background: $eds-gray;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+  .doc-guideline-motif {
+    border-radius: $eds-border-radius-small;
+    padding: 4px 12px 4px 40px;
+    font-weight: bold;
+    position: relative;
+    margin: 1rem 0;
+
+    &::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      display: block;
+      background-size: contain;
+      position: absolute;
+      top: 7px;
+      left: 12px;
+    }
+  }
+
+  .doc-guideline-guideline {
+    font-size: 16px;
+  }
+}
+
+doc-guideline:not([motif]), doc-guideline[motif='success'] {
+  .doc-guideline-motif {
+    background-color: $eds-success-light;
+    color: $eds-success;
+
+    &::after {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA3QTNCIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+DQogICAgPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bS0yIDE1bC01LTUgMS40MS0xLjQxTDEwIDE0LjE3bDcuNTktNy41OUwxOSA4bC05IDl6Ii8+DQo8L3N2Zz4=");
+    }
+  }
+}
+
+doc-guideline[motif='warning'] {
+  .doc-guideline-motif {
+    background-color: $eds-warning-light;
+    color: $eds-warning;
+
+    &::after {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjQjI1QjAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0xIDIxaDIyTDEyIDIgMSAyMXptMTItM2gtMnYtMmgydjJ6bTAtNGgtMnYtNGgydjR6Ii8+Cjwvc3ZnPg==");
+    }
+  }
+}
+
+doc-guideline[motif='error'] {
+  .doc-guideline-motif {
+    background-color: $eds-error-light;
+    color: $eds-error;
+
+    &::after {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRTQwMDJCIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+DQogICAgPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTEgMTVoLTJ2LTJoMnYyem0wLTRoLTJWN2gydjZ6Ii8+DQo8L3N2Zz4=");
+    }
+  }
+}

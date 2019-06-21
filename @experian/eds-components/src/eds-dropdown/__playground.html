@@ -1,0 +1,187 @@
+<style>
+td {
+  padding: 5px;
+  vertical-align: bottom;
+}
+.gray {
+  background-color: #f6f6f6;
+}
+
+.top-align td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+eds-dropdown {
+  width: 150px;
+}
+</style>
+
+<table class='language-data'>
+  <tr>
+    <td></td>
+    <td>No Label</td>
+    <td>Label</td>
+    <td>Multiple</td>
+    <td>Disabled</td>
+  </tr>
+  <tr>
+    <td>Not searchable</td>
+    <td><eds-dropdown></eds-dropdown></td>
+    <td><eds-dropdown label='Language'></eds-dropdown></td>
+    <td><eds-dropdown label='Language' multiple></eds-dropdown></td>
+    <td><eds-dropdown label='Language' disabled></eds-dropdown></td>
+  </tr>
+  <tr>
+    <td>Searchable</td>
+    <td><eds-dropdown searchable></eds-dropdown></td>
+    <td><eds-dropdown label='Language' searchable></eds-dropdown></td>
+    <td><eds-dropdown label='Language' searchable multiple></eds-dropdown></td>
+    <td><eds-dropdown label='Language' searchable disabled></eds-dropdown></td>
+  </tr>
+  <tr>
+    <td>With placeholder</td>
+    <td><eds-dropdown placeholder='Select...'></eds-dropdown></td>
+    <td><eds-dropdown label='Language' placeholder='Select...'></eds-dropdown></td>
+    <td><eds-dropdown label='Language' placeholder='Select...' multiple></eds-dropdown></td>
+    <td><eds-dropdown label='Language' placeholder='Select...' disabled></eds-dropdown></td>
+  </tr>
+</table>
+
+<h3>Setting values programmatically</h3>
+
+<eds-dropdown id='valuetest' class='language-data' multiple></eds-dropdown>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+
+    var els = Array.from(document.querySelectorAll('.language-data eds-dropdown'));
+    els = els.concat(Array.from(document.querySelectorAll('eds-dropdown.language-data')));
+
+    els.forEach(function(el) {
+      el.options = [
+        { value: 'en', content: 'English' },
+        { value: 'de', content: 'German' },
+        { value: 'lv', content: 'Latvian' },
+        { value: 'th', content: 'Thai' },
+        { value: 'uk', content: 'Ukrainian' },
+        { value: 'ji', content: 'Yiddish' }
+      ];
+    });
+
+    document.getElementById('valuetest').value = ['de', 'th'];
+  });
+
+})()
+</script>
+
+<h3>Events</h3>
+
+<eds-dropdown id='event-test'>
+  <eds-option value='opt1'>Option 1</eds-option>
+  <eds-option>Option 2</eds-option>
+  <eds-option>Option 3</eds-option>
+</eds-dropdown>
+
+<script>
+(() => {
+  window.addEventListener('WebComponentsReady', () => {
+    const el = document.getElementById('event-test');
+
+    ['blur', 'focus', 'change', 'open', 'close'].forEach(eventType => {
+      // Initialise a count for each event type
+      let count = 0;
+
+      // Create an output element to render the count
+      const outputEl = document.createElement('p');
+      outputEl.setAttribute('id', `${eventType}-event-output`);
+      el.parentNode.insertBefore(outputEl, el.nextSibling);
+
+      // Bind an event listener for each event type and update the count
+      ((c, o) => el.addEventListener(eventType, () => o.innerHTML = `${eventType} event: ${++c}`))(count, outputEl);
+    });
+  });
+})()
+</script>
+
+<h3>Options display outside overflow: hidden</h3>
+
+<div style='overflow: hidden; width: 300px; height: 100px; border: 1px solid #aaa;' background='gray'>
+  <eds-dropdown>
+    <eds-option>Option 1</eds-option>
+    <eds-option>Option 2</eds-option>
+    <eds-option>Option 3</eds-option>
+  </eds-dropdown>
+</div>
+
+<h3>Autowidth</h3>
+
+
+<eds-dropdown style='width: auto;' optionWidth='auto' placeholder='Select...'>
+  <eds-option>Option 1 - very long option</eds-option>
+  <eds-option>Option 2</eds-option>
+  <eds-option>Option 3</eds-option>
+</eds-dropdown>
+
+
+<h4>States & Messages</h4>
+
+<table class='top-align language-data'>
+  <tr>
+    <td><eds-dropdown value='en' info='Use your native language here'></eds-dropdown></td>
+    <td><eds-dropdown value='de' warning='Note: You must have 4 years experience'></eds-dropdown></td>
+    <td><eds-dropdown value='' error='This field is required'></eds-dropdown></td>
+    <td>
+      <eds-dropdown value='alan@'
+        info='Use your native language here'
+        warning='Note: You must have 4 years experience'
+        error='This field is required'
+      ></eds-dropdown>
+    </td>
+  </tr>
+  <tr background='gray'>
+    <td><eds-dropdown value='en' info='Use your native language here'></eds-dropdown></td>
+    <td><eds-dropdown value='de' warning='Note: You must have 4 years experience'></eds-dropdown></td>
+    <td><eds-dropdown value='' error='This field is required'></eds-dropdown></td>
+    <td>
+      <eds-dropdown value='alan@'
+        info='Use your native language here'
+        warning='Note: You must have 4 years experience'
+        error='This field is required'
+      ></eds-dropdown>
+    </td>
+  </tr>
+</table>
+
+<h4>Slot change</h4>
+
+<eds-dropdown value='en' id='slotchange-example' class='language-data'></eds-dropdown>
+<eds-button id='slotchange-example-button'>Add option via slot</eds-button>
+<eds-button id='slotchange-example-button2'>Set value to first option</eds-button>
+
+<script>
+(function() {
+  window.addEventListener('WebComponentsReady', function() {
+    var el = document.getElementById('slotchange-example');
+    var button = document.getElementById('slotchange-example-button');
+    var button2 = document.getElementById('slotchange-example-button2');
+    var idx = 0;
+
+    button.addEventListener('click', function(e) {
+      idx += 1;
+      var option = document.createElement('eds-option');
+      option.innerHTML = 'Option ' + idx;
+      option.setAttribute('selected');
+      option.setAttribute('value', idx);
+      el.appendChild(option);
+    });
+
+    button2.addEventListener('click', function(e) {
+      if (el.options.length) el.value = [el.options[0].value];
+    });
+
+  });
+
+})()
+</script>

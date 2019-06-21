@@ -1,0 +1,55 @@
+$ease-out-expo: cubic-bezier(0, 1, 0, 0.97);
+
+eds-data-grid {
+
+  .eds-data-grid-row-actions {
+    transform-origin: right;
+    transition:
+      transform 100ms ease-in 0ms,
+      opacity 0ms ease 0ms,
+      background-color 0ms ease 0ms,
+      box-shadow 0ms ease 0ms;
+
+    &.show {
+      transition: transform 100ms ease-out 0ms, opacity 40ms ease 10ms;
+    }
+    eds-icon {
+      transition: transform 100ms ease, color 100ms ease;
+
+      &:hover {
+        transition: transform 100ms ease, color 100ms ease;
+      }
+    }
+  }
+
+  table {
+    .eds-table-cell {
+      transition: padding 100ms ease;
+    }
+
+    tr {
+      transition: background-color 50ms ease 0ms;
+      &.eds-selected {
+        transition: background-color 50ms ease 0ms;
+      }
+      &.hover {
+        transition: background-color 0ms ease 0ms;
+      }
+    }
+
+  }
+
+  &[compact] {
+    table .eds-table-cell {
+      transition: padding 100ms ease;
+    }
+  }
+
+  .eds-data-grid-selection-header {
+    transition: transform 80ms ease-in 0ms, opacity 40ms linear 10ms;
+
+    &.show {
+      transition: transform 50ms $ease-out-expo 0ms, opacity 30ms $ease-out-expo 10ms;
+    }
+  }
+}

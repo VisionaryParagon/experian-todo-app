@@ -1,0 +1,24 @@
+<h2>Example pages</h2>
+<ul id="change-example">
+  <li><a href="#" data-file="__theme-light.html">Light theme</a></li>
+  <li><a href="#" data-file="__theme-dark.html">Dark theme</a></li>
+  <li><a href="#" data-file="__max-width-container.html">Max width container</a></li>
+</ul>
+
+<script>
+  (function(window) {
+    function loadPage(file) {
+      window.document.getElementById("playgroundFrame").src = "../local-build/examples/" + file;
+    }
+
+    document.getElementById("change-example").addEventListener("click", function(e){
+      if(e.target && e.target.nodeName == "A") {
+        e.preventDefault();
+        loadPage(e.target.getAttribute("data-file"));
+      }
+    });
+
+    // Default
+    loadPage("__theme-dark.html");
+  })(window.top);
+</script>

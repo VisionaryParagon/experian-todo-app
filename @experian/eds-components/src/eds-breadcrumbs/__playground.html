@@ -1,0 +1,60 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  .with-background .eds-breadcrumbs-container {
+    background-color: #f6f6f6;
+  }
+
+  #changeIcon .eds-breadcrumbs-container {
+    margin-bottom: 20px;
+  }
+</style>
+
+<h4>Normal</h4>
+<eds-breadcrumbs>
+  <a href="#home"><eds-icon icon='home'></eds-icon></a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+</eds-breadcrumbs>
+
+<h4>With background</h4>
+<eds-breadcrumbs background='gray'>
+  <a href="#home"><eds-icon icon='home'></eds-icon></a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+</eds-breadcrumbs>
+
+<h4>Custom separator</h4>
+<eds-breadcrumbs separator=">">
+  <a href="#home"><eds-icon icon='home'></eds-icon></a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+</eds-breadcrumbs>
+
+<h4>Custom home icon</h4>
+<eds-breadcrumbs>
+  <a href="#home"><eds-icon id="changeIcon" icon='person'></eds-icon></a>
+  <a>Level 1</a>
+  <a href="#">Level 2</a>
+  <a href="#">Level 3</a>
+  <a href="#">Level 4</a>
+</eds-breadcrumbs>
+
+<eds-button icon='settings' class='icon-only' onClick="changeIcon('settings')"></eds-button>
+<eds-button icon='person' class='icon-only' onClick="changeIcon('person')"></eds-button>
+<eds-button icon='home' class='icon-only' onClick="changeIcon('home')"></eds-button>
+
+<script>
+
+  function changeIcon(icon) {
+    document.getElementById('changeIcon').icon = icon;
+  };
+
+</script>

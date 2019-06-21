@@ -1,0 +1,148 @@
+<style>
+  .space {
+    padding: 20px 0;
+  }
+
+  .no-background,
+  .gray-background {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+
+  .gray-background {
+    background-color: #f6f6f6;
+  }
+
+  .half {
+    display: flex;
+    padding: 0;
+  }
+
+  .block {
+    flex: 50%;
+    padding: 10px;
+  }
+
+  .block:first-child {
+    padding-left: 20px;
+  }
+
+  .block:last-child {
+    padding-right: 20px;
+  }
+
+</style>
+
+<h1>Standard accordion</h1>
+
+<div class="no-background half">
+  <div class="block">
+
+    <eds-accordion>
+      <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 3">
+        Vestibulum et quam venenatis, feugiat nisl in, convallis est.
+        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Donec sit amet enim sed mi luctus pharetra.
+        Aenean arcu ante, fermentum at lectus nec, molestie posuere urna.
+        Nunc varius congue mauris, at elementum felis dictum eget.
+        Aliquam tristique eros vel massa suscipit, tincidunt suscipit metus rhoncus.
+        Morbi mauris nulla, porta eget pulvinar et, mattis cursus urna.
+        Quisque varius nisi a volutpat fermentum. Donec at consequat ligula.
+        Pellentesque nunc justo, volutpat fermentum dolor vel, dignissim venenatis nulla.
+        Nullam at velit auctor, sodales leo in, varius nulla.
+        Nunc nec feugiat elit.
+        In lobortis, lacus vel vestibulum consectetur, elit mauris cursus quam, non mattis ipsum tortor eu est.
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 4" expandedLabel="Label Expanded 4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </div>
+  <div class="block">
+    <h3>Sample Content</h3>
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur lobortis lorem, et vulputate purus congue ut.
+    Proin feugiat magna at nunc pellentesque, ut dictum mauris scelerisque. Mauris eu dignissim mauris.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+  </div>
+</div>
+
+<div class="gray-background half">
+  <div class="block">
+    <h3>Sample Content</h3>
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur lobortis lorem, et vulputate purus congue ut.
+    Proin feugiat magna at nunc pellentesque, ut dictum mauris scelerisque. Mauris eu dignissim mauris.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+  </div>
+  <div class="block">
+
+    <eds-accordion multiple>
+      <eds-accordion-panel label="Label 1" expandedLabel="Label Expanded 1" active="true">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+      </eds-accordion-panel>
+      <eds-accordion-panel label="Label 2" expandedLabel="Label Expanded 2">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+      </eds-accordion-panel>
+    </eds-accordion>
+
+  </div>
+</div>
+
+
+<h1>Wide accordion</h1>
+
+<div class="no-background">
+
+  <div class="space">
+    <eds-button motif="primary" onClick="document.querySelector('#wide-accordion eds-accordion-panel:nth-child(1)').toggle()">Panel 1 toggle()</eds-button>
+    <eds-button motif="primary" onClick="document.getElementById('accordion-panel').toggle()">Panel 2 toggle()</eds-button>
+    <eds-button onClick="alert(document.querySelector('#wide-accordion eds-accordion-panel:nth-child(1)').isActive())">Panel 1 isActive()</eds-button>
+    <eds-button onClick="alert(document.getElementById('accordion-panel').isActive())">Panel 2 isActive()</eds-button>
+  </div>
+
+  <eds-accordion id="wide-accordion" wide>
+    <eds-accordion-panel label="Label 1" subLabel=" - Sub Label 1">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </eds-accordion-panel>
+    <eds-accordion-panel id="accordion-panel" label="Label 2" active="true">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </eds-accordion-panel>
+    <eds-accordion-panel label="Label 3" subLabel=" - Sub Label 3">
+      Vestibulum et quam venenatis, feugiat nisl in, convallis est.
+      Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+      Donec sit amet enim sed mi luctus pharetra.
+      Aenean arcu ante, fermentum at lectus nec, molestie posuere urna.
+      Nunc varius congue mauris, at elementum felis dictum eget.
+      Aliquam tristique eros vel massa suscipit, tincidunt suscipit metus rhoncus.
+      Morbi mauris nulla, porta eget pulvinar et, mattis cursus urna.
+      Quisque varius nisi a volutpat fermentum. Donec at consequat ligula.
+      Pellentesque nunc justo, volutpat fermentum dolor vel, dignissim venenatis nulla.
+      Nullam at velit auctor, sodales leo in, varius nulla.
+      Nunc nec feugiat elit.
+      In lobortis, lacus vel vestibulum consectetur, elit mauris cursus quam, non mattis ipsum tortor eu est.
+    </eds-accordion-panel>
+    <eds-accordion-panel label="Label 4" subLabel=" - Sub Label 4">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </eds-accordion-panel>
+  </eds-accordion>
+
+</div>

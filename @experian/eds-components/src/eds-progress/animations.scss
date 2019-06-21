@@ -1,0 +1,19 @@
+eds-progress {
+
+  .eds-progress-baseline-fill {
+    transition: width 150ms ease;
+  }
+
+  .eds-progress-fill {
+    transition: width 150ms ease;
+  }
+
+  @keyframes animate-gradient {
+    100% { background-position: 120px 0px; }
+  }
+
+  .eds-progress-indeterminate {
+    animation: animate-gradient 0.5s linear infinite;
+  }
+
+}

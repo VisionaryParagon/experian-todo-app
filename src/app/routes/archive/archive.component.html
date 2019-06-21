@@ -1,0 +1,36 @@
+<div class="eds">
+  <div class="mainHeading">
+    <h1 caps>Archived Items</h1>
+  </div>
+
+  <eds-table multiSelect [columns]="columns" [data]="items" (selectionchange)="changeSelected($event)" #listTable>
+    <div slot="header">
+      <eds-toolbar>
+        <section class="flex-grow-1 text-only">
+          <h4>{{ items.length }} Items</h4>
+        </section>
+      </eds-toolbar>
+    </div>
+  
+    <div slot="selection-header">
+      <eds-toolbar>
+        <section class="flex-grow-1 text-only">
+          {{ selectedItems.length }} Items selected
+        </section>
+        <section>
+          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="archive selected items" (click)="unarchiveItems()">
+            <eds-icon icon="unarchive" aria-hidden="true"></eds-icon> Unarchive
+          </button>
+          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="delete selected items" (click)="deleteItems()">
+            <eds-icon icon="delete" aria-hidden="true"></eds-icon> Delete
+          </button>
+        </section>
+        <section>
+          <button eds-button class="icon-left" inverse motif="tertiary" aria-label="cancel selection" (click)="clearSelected()">
+            <eds-icon icon="cancel" aria-hidden="true"></eds-icon> Cancel
+          </button>
+        </section>
+      </eds-toolbar>
+    </div>
+  </eds-table>
+</div>

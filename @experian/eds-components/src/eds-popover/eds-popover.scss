@@ -1,0 +1,147 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+@import "./animations";
+
+$popover-min-width: 215px;
+$tip-color: $eds-white;
+$border-unit: 8px;
+$border-unit-x2: $border-unit * 2;
+
+eds-popover {
+
+  .eds-popover-wrapper {
+    position: absolute;
+    display: none;
+    z-index: 90;
+
+    &.show {
+      display: block;
+    }
+
+    &[x-placement^="top"] {
+      margin-bottom: $border-unit-x2;
+
+      [x-arrow], [x-arrow]:before {
+        border-width: $border-unit $border-unit 0 $border-unit;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        bottom: -$border-unit;
+        left: calc(50% - #{$border-unit});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      [x-arrow]:before {
+        bottom: -1px;
+      }
+    }
+
+    &[x-placement^="right"] {
+      margin-left: $border-unit-x2;
+
+      [x-arrow], [x-arrow]:before {
+        border-width: $border-unit $border-unit $border-unit 0;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        left: -$border-unit;
+        top: calc(50% - #{$border-unit});
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      [x-arrow]:before {
+        left: -1px;
+      }
+    }
+
+    &[x-placement^="bottom"] {
+      margin-top: $border-unit-x2;
+
+      [x-arrow], [x-arrow]:before {
+        border-width: 0 $border-unit $border-unit $border-unit;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        top: -$border-unit;
+        left: calc(50% - #{$border-unit});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      [x-arrow]:before {
+        top: -1px;
+      }
+    }
+
+    &[x-placement^="left"] {
+      margin-right: $border-unit-x2;
+
+      [x-arrow], [x-arrow]:before {
+        border-width: $border-unit 0 $border-unit $border-unit;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        right: -$border-unit;
+        top: calc(50% - #{$border-unit});
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      [x-arrow]:before {
+        right: -1px;
+      }
+    }
+
+  }
+
+  .eds-popover-content {
+    font-family: $eds-font-family-base;
+    @include font-smoothing();
+    min-width: $popover-min-width;
+    border-radius: $eds-border-radius-small;
+    @include raised-container-high();
+    background-color: $eds-white;
+    box-sizing: border-box;
+    padding: 20px;
+    transform: scale(0);
+    opacity: 0;
+
+    [x-arrow] {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: $tip-color;
+      position: absolute;
+      margin: $border-unit;
+
+      &:before {
+        content: '';
+        border-color: $eds-border-color-dark;
+        border-style: solid;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    &.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    // Ensure rounded corners on all content
+    .eds-popover-content-inner {
+      border-radius: $eds-border-radius-large;
+      overflow: hidden;
+    }
+  }
+
+  &[padding="false"] {
+    .eds-popover-content {
+      padding: 0;
+    }
+  }
+
+}
+

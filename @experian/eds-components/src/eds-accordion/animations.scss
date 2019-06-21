@@ -1,0 +1,17 @@
+@import "../styles/eds-variables.scss";
+
+eds-accordion eds-accordion-panel {
+  .eds-accordion-panel-content  {
+    transition: padding 100ms ease 0ms, opacity 75ms ease 25ms;
+  }
+
+  .eds-accordion-panel-caret {
+    transition: transform 150ms ease 0ms;
+  }
+
+  &.active {
+    .eds-accordion-panel-content {
+      transition: padding 150ms ease 0ms;
+    }
+  }
+}

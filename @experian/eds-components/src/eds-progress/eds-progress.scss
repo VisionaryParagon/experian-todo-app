@@ -1,0 +1,45 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "magenta.scss";
+@import "purple.scss";
+@import "animations.scss";
+
+eds-progress {
+  display: inline-block;
+  position: relative;
+  height: 8px;
+  border-radius: $eds-border-radius-small;
+  background-color: $eds-white;
+
+  min-width: 100px;
+
+  .eds-progress-baseline-fill {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    opacity: 0.3;
+  }
+
+  .eds-progress-fill {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+  }
+
+  .eds-progress-indeterminate {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: 120px 100%;
+  }
+
+}

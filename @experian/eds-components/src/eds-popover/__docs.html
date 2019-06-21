@@ -1,0 +1,251 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  a {
+    cursor: pointer;
+  }
+  eds-popover .api-popover {
+    max-width: 400px;
+  }
+</style>
+
+<doc-header>Examples</doc-header>
+
+<button eds-button motif="primary" class="example-basic" id="example-basic" aria-haspopup="true">Popover</button>
+<eds-popover position="right" targetClass="example-basic" aria-labelledby="example-basic">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra lobortis odio eu dignissim.
+</eds-popover>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name="padding" type="boolean" default="true">
+  If true, sets content padding, otherwise leaves padding at 0.
+
+  <doc-code live>
+    <a><eds-icon icon="more_horiz" class="example-padding" id="example-padding" aria-haspopup="true"></eds-icon></a>
+    <eds-popover padding="false" position="right" targetClass="example-padding" aria-labelledby="example-padding">
+      <eds-menu-item><eds-icon icon="print"></eds-icon>Print</eds-menu-item>
+      <eds-menu-item><eds-icon icon="picture_as_pdf"></eds-icon>Save as PDF</eds-menu-item>
+      <eds-menu-item><eds-icon icon="delete_forever"></eds-icon>Delete</eds-menu-item>
+    </eds-popover>
+  </doc-code>
+</api-option>
+
+<api-option name="position" type="string" default="window.EDS.popovers.defaults.position || top">
+  The position of the popover in relation to the trigger element. The valid values are:
+
+  <ul>
+    <li><code>top</code> (<code>-start</code>/<code>-end</code>)</li>
+    <li><code>bottom</code> (<code>-start</code>/<code>-end</code>)</li>
+    <li><code>left</code> (<code>-start</code>/<code>-end</code>)</li>
+    <li><code>right</code> (<code>-start</code>/<code>-end</code>)</li>
+  </ul>
+
+  <p>
+    You can optionally align the popover with the target element by adding a <code>-start</code> or <code>-end</code> modifier to any of the positions above.
+  </p>
+
+  <doc-code live>
+    <button eds-button class="example-position-top" id="example-position-top" aria-haspopup="true">Top</button>
+    <button eds-button class="example-position-bottom" id="example-position-bottom" aria-haspopup="true">Bottom</button>
+    <button eds-button class="example-position-right" id="example-position-right" aria-haspopup="true">Right</button>
+    <button eds-button class="example-position-left" id="example-position-left" aria-haspopup="true">Left</button>
+
+    <eds-popover targetClass="example-position-top" aria-labelledby="example-position-top">
+      Position: <strong>top</strong>
+    </eds-popover>
+    <eds-popover position="bottom" targetClass="example-position-bottom" aria-labelledby="example-position-bottom">
+      Position: <strong>bottom</strong>
+    </eds-popover>
+    <eds-popover position="right" targetClass="example-position-right" aria-labelledby="example-position-right">
+      Position: <strong>right</strong>
+    </eds-popover>
+    <eds-popover position="left" targetClass="example-position-left" aria-labelledby="example-position-left">
+      Position: <strong>left</strong>
+    </eds-popover>
+
+    <br />
+    <br />
+
+    <button eds-button class="example-position-top-start" id="example-position-top-start" aria-haspopup="true">Top Start</button>
+    <button eds-button class="example-position-top-end" id="example-position-top-end" aria-haspopup="true">Top End</button>
+    <button eds-button class="example-position-right-start" id="example-position-right-start" aria-haspopup="true">Right Start</button>
+    <button eds-button class="example-position-right-end" id="example-position-right-end" aria-haspopup="true">Right End</button>
+
+    <eds-popover position="top-start" targetClass="example-position-top-start" aria-labelledby="example-position-top-start">
+      Position: <strong>top-start</strong>
+    </eds-popover>
+    <eds-popover position="top-end" targetClass="example-position-top-end" aria-labelledby="example-position-top-end">
+      Position: <strong>top-end</strong>
+    </eds-popover>
+    <eds-popover position="right-start" targetClass="example-position-right-start" aria-labelledby="example-position-right-start">
+      Position: <br /><strong>right-start</strong>
+    </eds-popover>
+    <eds-popover position="right-end" targetClass="example-position-right-end" aria-labelledby="example-position-right-end">
+      Position: <br /><strong>right-end</strong>
+    </eds-popover>
+  </doc-code>
+</api-option>
+
+<api-option name="targetClass" type="string">
+  A CSS class on elements the popover should attach itself to. <code>eds-popover</code>s use document level event listeners to determine when the mouse clicks elements in the document. These listeners check elements for the class specified in <code>targetClass</code>, and if present the popover will be shown.
+
+  <p>
+    Using event delegation in this way allows you to change which elements a popover should attach to at any time, and also allows you to add and remove elements to the document after popovers have initialized.
+  </p>
+
+  <doc-code live>
+    <button eds-button class="example-target-class" id="example-target-class-1" aria-haspopup="true">Same Popover (1)</button>
+    <button eds-button class="example-target-class" id="example-target-class-2" aria-haspopup="true">Same Popover (2)</button>
+    <button eds-button class="example-target-class" id="example-target-class-3" aria-haspopup="true">Same Popover (3)</button>
+    <button eds-button class="example-target-class2" id="example-target-class2" aria-haspopup="true">Different Popover</button>
+
+    <eds-popover targetClass="example-target-class" aria-labelledby="example-target-class-1 example-target-class-2 example-target-class-3">
+      One popover to rule them all.
+    </eds-popover>
+    <eds-popover targetClass="example-target-class2" aria-labelledby="example-target-class2">
+      A popover for just one element... unless you add more with the same class.
+    </eds-popover>
+  </doc-code>
+</api-option>
+
+<api-option name="visible" type="boolean" default="false">
+  Shows or hides the popover.
+
+  <doc-code live>
+    <script>
+    let examplePopoverInterval = undefined;
+
+    const startExample = () => {
+      if (examplePopoverInterval) {
+        return;
+      }
+      const popover = document.getElementById('visible-popover');
+      examplePopoverInterval = setInterval(() => {
+        popover.visible = !popover.visible;
+      }, 1000);
+    }
+
+    const stopExample = () => {
+      if (!examplePopoverInterval) {
+        return;
+      }
+      clearInterval(examplePopoverInterval);
+      examplePopoverInterval = undefined;
+    }
+    </script>
+
+    <button eds-button onclick="startExample()">Start example running&hellip;</button>
+    <br />
+    <button eds-button class="example-visible" id="example-visible" aria-haspopup="true">Popover</button>
+    <br />
+    <button eds-button onclick="stopExample()">&hellip;stop example running</button>
+
+    <eds-popover id="visible-popover" position="right" targetClass="example-visible" aria-labelledby="example-visible">
+      Popover is visible
+    </eds-popover>
+  </doc-code>
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name="hide" type="CustomEvent" detail="HTMLElement">
+  Fires when the popover is hidden. This event fires after all animations are complete. <code>e.detail</code> contains the element this popover attached to.
+
+  <doc-code live>
+    <button eds-button icon="visibility_off" motif="tertiary" class="hide-popover-event-example" id="hide-popover-event-example" aria-haspopup="true">Toggle popover</button>
+    <eds-popover id="hide-popover-event-example" targetClass="hide-popover-event-example" aria-labelledby="hide-popover-event-example">Now you see me!</eds-popover>
+
+    <script>
+      var hideEventPopover = document.getElementById('hide-popover-event-example');
+      hideEventPopover.addEventListener('show', (e) => {
+        e.detail.icon = 'visibility';
+      });
+      hideEventPopover.addEventListener('hide', (e) => {
+        e.detail.icon = 'visibility_off';
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<api-event name="show" type="CustomEvent" detail="HTMLElement">
+  Fires when the popover is shown. This event fires before animations are complete. <code>e.detail</code> contains the element this popover is attached to.
+
+  <doc-code live>
+    <button eds-button icon="visibility_off" motif="tertiary" class="show-popover-event-example" id="show-popover-event-example" aria-haspopup="true">Toggle popover</button>
+    <eds-popover id="show-popover-event-example" targetClass="show-popover-event-example" aria-labelledby="show-popover-event-example">Now you see me!</eds-popover>
+
+    <script>
+      var showEventPopover = document.getElementById('show-popover-event-example');
+      showEventPopover.addEventListener('show', (e) => {
+        e.detail.icon = 'visibility';
+      });
+      showEventPopover.addEventListener('hide', (e) => {
+        e.detail.icon = 'visibility_off';
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Methods</doc-header>
+
+<api-method name="hide" args="callback: fn">
+  Hides the popover (async). Accepts a callback to execute when complete.
+
+  <doc-code live>
+    <button eds-button class="example-hide-target" id="example-hide-target" aria-haspopup="true">Popover Target</button>
+    <button eds-button id="example-hide-trigger">Hide Popover</button>
+
+    <eds-popover id="hide-popover" targetClass="example-hide-target" aria-labelledby="example-hide-target">
+      Popover to hide
+    </eds-popover>
+
+    <script>
+    window.addEventListener('WebComponentsReady', () => {
+      const popover = document.getElementById('hide-popover');
+      const trigger = document.getElementById('example-hide-trigger');
+      trigger.addEventListener('click', () => {
+        popover.hide(() => {
+          console.log('hide');
+        });
+      })
+    });
+    </script>
+  </doc-code>
+</api-method>
+
+<on-first-visible></on-first-visible>
+
+<api-method name="show" args="callback: fn, [el: HTMLElement]">
+  Shows the popover (async). Accepts a callback to execute when complete. Optionally you can provide an element to bind to as a second argument.
+
+  <doc-code live>
+    <button eds-button class="example-show-target">Popover Target</button>
+    <button eds-button id="example-show-trigger">Show Popover</button>
+    <button eds-button id="example-show-trigger2">Show Popover (alternate target)</button>
+
+    <eds-popover id="show-popover" targetClass="example-show-target">
+      Popover to show
+    </eds-popover>
+
+    <script>
+    window.addEventListener('WebComponentsReady', () => {
+      const popover = document.getElementById('show-popover');
+      const trigger = document.getElementById('example-show-trigger');
+      const trigger2 = document.getElementById('example-show-trigger2');
+      trigger.addEventListener('click', () => {
+        popover.show(() => {
+          console.log('shown');
+        });
+      });
+      trigger2.addEventListener('click', () => {
+        popover.show(null, trigger2);
+      });
+    });
+    </script>
+  </doc-code>
+</api-method>
+

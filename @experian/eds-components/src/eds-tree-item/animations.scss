@@ -1,0 +1,16 @@
+@import "../styles/eds-variables.scss";
+
+eds-tree-item {
+
+  &.has-children {
+    & > .eds-tree-item-children {
+      transition: transform 150ms ease 0ms, height 150ms ease 0ms, opacity 130ms ease 0ms;
+      transform-origin: 0 0;
+    }
+    &[expanded] > .eds-tree-item-children {
+      transition: transform 150ms ease 0ms, height 150ms ease 0ms, opacity 130ms ease 0ms;
+      transform-origin: 0 0;
+    }
+  }
+
+}

@@ -1,0 +1,217 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+
+  .gray-background {
+    background-color: #f6f6f6;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+  }
+
+  .container eds-popover {
+    margin: 1px;
+  }
+
+  eds-popover h4 {
+    margin: 0 0 5px 0;
+  }
+
+  .custom-width .eds-popover-content {
+    min-width: 240px;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .cell {
+    flex: 0 0 50%;
+    height: 50px;
+    margin-bottom: 1px;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cell h5 {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .profile .profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #CCC;
+    border-radius: 50%;
+    display: flex;
+  }
+
+  .profile .profile-content {
+    display: flex;
+    padding-left: 15px;
+    flex: 1;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .profile-content h4 {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 3px;
+  }
+
+  .popover-profile eds-popover-content {
+    width: 235px;
+  }
+
+  .avatar {
+    display: inline-block;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    background-size: 30px 30px;
+    background-image: url("data:image/jpeg;base64,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");
+  }
+
+  eds-popover .api-popover {
+    max-width: 400px;
+  }
+</style>
+
+<h1>Popover</h1>
+
+<h4>Within other components</h4>
+
+<eds-popover padding="false" position="bottom-end" targetClass="example-icon1" aria-labelledby="example-icon1">
+  <eds-menu-item icon="calendar_today">Calendar</eds-menu-item>
+  <eds-menu-item selected icon="place">Maps</eds-menu-item>
+  <eds-menu-item icon="show_chart">Reports</eds-menu-item>
+</eds-popover>
+
+<eds-popover padding="false" position="bottom-end" targetClass="example-icon2" aria-labelledby="example-icon2">
+  <eds-menu-item>Settings</eds-menu-item>
+  <eds-menu-item>My account</eds-menu-item>
+  <eds-menu-item>Sign out</eds-menu-item>
+</eds-popover>
+
+<eds-primary-header title="Acme Services" motif="dark">
+  <span slot="icons">
+    <span class="example-icon1" id="example-icon1">
+      <eds-icon icon="apps" class="s24"></eds-icon>
+    </span>
+    <span class="example-icon2" id="example-icon2">
+      <span class="avatar"></span>
+    </span>
+  </span>
+</eds-primary-header>
+
+<h4>Positioning</h4>
+
+<eds-popover position="top" targetClass="example-top" aria-labelledby="example-top">
+  <h4>Top</h4> This is a popover that opens at the <strong>top</strong> of the target button.
+</eds-popover>
+
+<eds-popover position="bottom" targetClass="example-bottom" aria-labelledby="example-bottom">
+  <h4>Bottom</h4> This is a popover that opens at the <strong>bottom</strong> of the target button.
+</eds-popover>
+
+<eds-popover position="left" targetClass="example-left" aria-labelledby="example-left">
+  <h4>Left</h4> This is a popover that opens to the <strong>left</strong> of the target button.
+</eds-popover>
+
+<eds-popover position="right" targetClass="example-right" aria-labelledby="example-right">
+  <h4>Right</h4> This is a popover that opens to the <strong>right</strong> of the target button.
+</eds-popover>
+
+<div class="grid">
+  <div class="cell"><button eds-button class="example-top" id="example-top">Top</button></div>
+  <div class="cell"><button eds-button class="example-bottom" id="example-bottom">Bottom</button></div>
+  <div class="cell"><button eds-button class="example-right" id="example-right">Right</button></div>
+  <div class="cell"><button eds-button class="example-left" id="example-left">Left</button></div>
+</div>
+
+<h4>Contents</h4>
+
+<div class="container buttons gray-background">
+
+  <button eds-button motif="primary" class='example-profile'>Profile</button>
+  <eds-popover position="top-left" class="custom-width" targetClass='example-profile'>
+    <div class="profile">
+      <div class="profile-icon"></div>
+      <div class="profile-content">
+        <div>
+
+          <h4>John Smith</h4>
+          jsmith@experian.com
+          <br/>
+          555-123-4567
+
+        </div>
+      </div>
+    </div>
+  </eds-popover>
+
+  <button eds-button motif="primary" icon='menu' class='example-menu'>Menu</button>
+  <eds-popover padding="false" targetClass='example-menu'>
+    <eds-menu-item>Hello</eds-menu-item>
+    <eds-menu-item selected>Profile</eds-menu-item>
+    <eds-menu-item>What up?</eds-menu-item>
+  </eds-popover>
+
+</div>
+
+<h4>State</h4>
+
+<div class="container buttons gray-background">
+  <button eds-button motif="primary" class="example-visible">Button</button>
+  <eds-popover visible position="top" targetClass="example-visible">
+    Shows the popover content on load
+  </eds-popover>
+</div>
+
+<h4>targetClass & Shadow DOM</h4>
+
+<script>
+(() => {
+  const tag = 'example-custom-element';
+  const html = '<div style="padding: 20px; background: #555;"><slot></slot><button eds-button class="custom-element-target">Shadow DOM</button></div>';
+
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html);
+      this._refs = { target: this.$('.shadow-dom') };
+    }
+  });
+})();
+</script>
+
+<div class="gray-background">
+  <example-custom-element style="display: block;">
+    <button eds-button class='custom-element-target'>Light DOM</button>
+  </example-custom-element>
+
+  <eds-popover id='popover-target-example' targetClass='custom-element-target'>
+    I work for both Light DOM and shadow DOM.
+  </eds-popover>
+</div>
+

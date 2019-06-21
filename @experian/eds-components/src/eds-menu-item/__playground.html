@@ -1,0 +1,158 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.container {
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.container.small {
+  font-size: 14px;
+  display: inline-block;
+}
+
+[background='gray'] {
+  background-color: #f6f6f6;
+}
+</style>
+
+<table>
+  <tr>
+    <td>
+      <nav class='container'>
+        <eds-menu-item>Hello</eds-menu-item>
+        <eds-menu-item selected>Profile</eds-menu-item>
+        <eds-menu-item>What up?</eds-menu-item>
+      </nav>
+    </td>
+    <td>
+      <nav class='container' background='gray'>
+        <eds-menu-item selected>Hello</eds-menu-item>
+        <eds-menu-item>Profile</eds-menu-item>
+        <eds-menu-item>What up?</eds-menu-item>
+      </nav>
+    </td>
+    <td>
+      <nav class='container small'>
+        <eds-menu-item>Hello</eds-menu-item>
+        <eds-menu-item>Profile</eds-menu-item>
+        <eds-menu-item selected>What up?</eds-menu-item>
+      </nav>
+    </td>
+  </tr>
+</table>
+
+<h4>Icons</h4>
+
+<table>
+  <tr>
+    <td>
+      <nav class='container'>
+        <eds-menu-item icon='favorite'>Hello</eds-menu-item>
+        <eds-menu-item icon='person' selected>Profile</eds-menu-item>
+        <eds-menu-item icon='help_outline'>What up?</eds-menu-item>
+      </nav>
+    </td>
+    <td>
+      <nav class='container' background='gray'>
+        <eds-menu-item icon='favorite' selected>Hello</eds-menu-item>
+        <eds-menu-item icon='person'>Profile</eds-menu-item>
+        <eds-menu-item icon='help_outline'>What up?</eds-menu-item>
+      </nav>
+    </td>
+    <td>
+      <nav class='container small'>
+        <eds-menu-item icon='favorite'>Hello</eds-menu-item>
+        <eds-menu-item icon='person'>Profile</eds-menu-item>
+        <eds-menu-item icon='help_outline' selected>What up?</eds-menu-item>
+      </nav>
+    </td>
+  </tr>
+</table>
+
+<h4>Nested</h4>
+
+<nav class='container small'>
+  <eds-menu-item icon='favorite' id='events2'>
+    Group 1
+    <nav slot='children'>
+      <eds-menu-item icon='person'>Profile</eds-menu-item>
+      <eds-menu-item icon='favorite'>
+        Group 1.1
+        <nav slot='children'>
+          <eds-menu-item icon='person' selected>Profile</eds-menu-item>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+          <eds-menu-item icon='person'>
+              Group 1.2
+              <nav slot='children'>
+                <eds-menu-item icon='person'>Profile</eds-menu-item>
+                <eds-menu-item icon='person'>Profile</eds-menu-item>
+                <eds-menu-item icon='person'>Profile</eds-menu-item>
+              </nav>
+          </eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+  </eds-menu-item>
+</nav>
+
+<h4>Compact</h4>
+
+<nav class='container small eds-item-compact'>
+  <eds-menu-item>Hello</eds-menu-item>
+  <eds-menu-item selected>Profile</eds-menu-item>
+  <eds-menu-item>What up?</eds-menu-item>
+</nav>
+
+<h4>Events</h4>
+
+<nav class='container' id='events-example'>
+  <eds-menu-item>Hello</eds-menu-item>
+  <eds-menu-item selected>Profile</eds-menu-item>
+  <eds-menu-item>What up?</eds-menu-item>
+</nav>
+
+<p id='events-example-output'></p>
+
+<script>
+  (function(items, output) {
+    items.forEach(function(el) {
+      el.addEventListener('itemclick', function(e) {
+        console.log(e);
+        output.innerHTML = `You clicked: ${e.detail.getAttribute('data-content')}`;
+      });
+    });
+  })(
+    Array.from(document.querySelectorAll('#events-example eds-menu-item')),
+    document.getElementById('events-example-output')
+  );
+
+  document.getElementById('events2').addEventListener('heightchange', e => {
+    console.log(e);
+  });
+
+  document.getElementById('events2').addEventListener('itemclick', e => {
+    console.log('itemclick');
+    console.log(e);
+  });
+</script>
+
+<h4>External Links</h4>
+
+<nav class='container' id='external-links-example'>
+  <eds-menu-item href='http://google.com' target='_blank'>Google.com (target='_blank')</eds-menu-item>
+  <eds-menu-item href='http://github.com'>Github.com</eds-menu-item>
+  <eds-menu-item href='http://amazon.com'>Amazon.com</eds-menu-item>
+  <eds-menu-item href='http://www.experian.com'>
+    Experian sites
+    <nav slot='children'>
+      <eds-menu-item href='http://bitbucketglobal.experian.local'>Bitbucket</eds-menu-item>
+      <eds-menu-item href='http://jiraglobal.experian.local'>Jira</eds-menu-item>
+    </nav>
+  </eds-menu-item>
+</nav>
+

@@ -1,0 +1,440 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
+<script>
+  window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+  };
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.container {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.container.small {
+  font-size: 14px;
+}
+
+[background='gray'] {
+  background-color: #f6f6f6;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+
+<nav class='container'>
+  <eds-menu-item selected>Hello</eds-menu-item>
+  <eds-menu-item>Profile</eds-menu-item>
+  <eds-menu-item>What up?</eds-menu-item>
+</nav>
+
+<nav class='container small'>
+  <eds-menu-item>Hello</eds-menu-item>
+  <eds-menu-item selected>Profile</eds-menu-item>
+  <eds-menu-item>What up?</eds-menu-item>
+</nav>
+
+<nav class='container small' background='gray'>
+  <eds-menu-item icon='favorite'>Hello</eds-menu-item>
+  <eds-menu-item icon='favorite'>Profile</eds-menu-item>
+  <eds-menu-item icon='favorite' selected>What up?</eds-menu-item>
+</nav>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='expanded' type='boolean' default='false'>
+  Gets or sets whether slotted <code>eds-menu-item</code> elements are displayed. This option is only meaningful where there are slotted <code>eds-menu-item</code>s. Also, this option is set automatically through user interaction (when the user clicks the parent <code>eds-menu-item</code>).
+
+  <doc-note motif='warning'>
+    <b>Nesting <code>eds-menu-item</code>s</b>: You can nest <code>eds-menu-item</code>s by wrapping them with a <code>div slot='children'</code> tag.
+  </doc-note>
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item>
+        Level 1
+        <nav slot='children'>
+          <eds-menu-item>Level 2a</eds-menu-item>
+          <eds-menu-item>Level 2b</eds-menu-item>
+          <eds-menu-item>Level 2c</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+      <eds-menu-item expanded>
+        Level 1 (expanded)
+        <nav slot='children'>
+          <eds-menu-item>Level 2a</eds-menu-item>
+          <eds-menu-item>Level 2b</eds-menu-item>
+          <eds-menu-item>Level 2c</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+  </doc-code>
+
+</api-option>
+
+<api-option name='hasChildren' type='boolean' default='false' readOnly propertyOnly deprecated>
+  A convenience property that exposes whether <code>eds-menu-item</code>s have been slotted.
+
+  <doc-note motif='warning'>
+    This method is deprecated, please use <code>slottedChildren.length</code> instead.
+  </doc-note>
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item id='has-children-example1'>No children</eds-menu-item>
+      <eds-menu-item id='has-children-example2'>
+        Children
+        <nav slot='children'>
+          <eds-menu-item>Level 2a</eds-menu-item>
+          <eds-menu-item>Level 2b</eds-menu-item>
+          <eds-menu-item>Level 2c</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        const result1 = document.getElementById('has-children-example1').hasChildren;
+        const result2 = document.getElementById('has-children-example2').hasChildren;
+        console.log('hasChildren example1: ' + result1); // false
+        console.log('hasChildren example2: ' + result2); // true
+      });
+
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='href' type='string'>
+  Equivalent to an <mdn-doc-link url='HTML/Element/a'>anchor element</mdn-doc-link> href. Will cause <code>eds-menu-item</code> to navigate via url (does not silence the <code>itemclick</code> event). Can be used in conjunction with <code>target</code>.
+
+  <doc-note motif='warning'>
+    This option is ignored if <code>slottedChildren.length</code> is greater than 0.
+  </doc-note>
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item href='http://google.com'>Google.com</eds-menu-item>
+      <eds-menu-item href='http://google.com' target='_blank'>Google.com (with target)</eds-menu-item>
+      <eds-menu-item href-'http://google.com'>
+        Google.com (href ignored)
+        <nav slot='children'>
+          <eds-menu-item href='http://www.google.com/search?q=tacos'>Tacos</eds-menu-item>
+          <eds-menu-item href='http://www.google.com/search?q=cats'>Cats</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+  </doc-code>
+</api-option>
+
+<api-option name='icon' type='string'>
+  Displays an icon on the menu item. This value is passed through directly to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+  <doc-note motif='warning'>
+    <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+  </doc-note>
+
+  <doc-code live>
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <!-- <script src='eds-icon.js'></script> -->
+    <!-- <script>
+      window.EDS.icons.defaultLibrary = 'material-icon-font';
+    </script> -->
+    <nav>
+      <eds-menu-item icon='favorite'>Hello</eds-menu-item>
+    </nav>
+  </doc-code>
+
+</api-option>
+
+<api-option name='iconLibrary' type='string'>
+  The icon library to use when <code>icon</code> is also specified. This value is passed through as <code>library</code> to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+  <doc-note motif='warning'>
+    <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+  </doc-note>
+
+  <doc-code live>
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <!-- <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: false
+      };
+    </script> -->
+    <!-- <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script> -->
+    <!-- <script src='eds-icon.js'></script> -->
+    <!-- <script>
+      window.EDS.icons.defaultLibrary = 'material-icon-font';
+    </script> -->
+    <nav>
+      <eds-menu-item icon='favorite'>Material Design Heart</eds-menu-item>
+      <eds-menu-item icon='heart' iconLibrary='fas-svg'>Font Awesome Heart</eds-menu-item>
+    </nav>
+  </doc-code>
+
+</api-option>
+
+<api-option name='selected' type='boolean' default='false'>
+  Gets or sets the selected state.
+
+  <doc-note motif='warning'>
+    <b>Selection State Management</b>
+    <p>
+      At the <code>eds-menu-item</code> level there is no concept of single select or multi select paradigms. This setting will set the selected state of the component regardless of its siblings, parents, or children. Other components such as <code>eds-sidebar</code> manage selection models, and you'll need to do the same for any custom components you create.
+    </p>
+  </doc-note>
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item selected>Selected</eds-menu-item>
+      <eds-menu-item>Not Selected</eds-menu-item>
+    </nav>
+  </doc-code>
+
+</api-option>
+
+<api-option name='slottedChildren' type='HTMLCollection' default='[]' readOnly propertyOnly>
+  A convenience property that exposes the <code>eds-menu-item</code>s that have been slotted.
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item id='slotted-children-example1'>No children</eds-menu-item>
+      <eds-menu-item id='slotted-children-example2'>
+        Children
+        <div slot='children'>
+          <eds-menu-item>Level 2a</eds-menu-item>
+          <eds-menu-item>Level 2b</eds-menu-item>
+          <eds-menu-item>Level 2c</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </nav>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        const result1 = document.getElementById('slotted-children-example1').slottedChildren;
+        const result2 = document.getElementById('slotted-children-example2').slottedChildren;
+        console.log('slottedChildren example1: ' + result1); // []
+        console.log('slottedChildren example2: ' + result2); // [eds-menu-item, eds-menu-item, eds-menuitem, item]
+      });
+
+    </script>
+  </doc-code>
+
+</api-option>
+
+<api-option name='target' type='enum'>
+  Equivalent to an <mdn-doc-link url='HTML/Element/a'>anchor element</mdn-doc-link> target. Specifies where to display the linked url. Should be used in conjunction with <code>href</code>.
+
+  <p>
+    Available Values:
+  </p>
+  <ul>
+    <li>_self</li>
+    <li>_blank</li>
+    <li>_parent</li>
+    <li>_top</li>
+  </ul>
+
+  <doc-note motif='warning'>
+    This option is ignored if <code>slottedChildren.length</code> is greater than 0.
+  </doc-note>
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item href='http://google.com'>Google.com</eds-menu-item>
+      <eds-menu-item href='http://google.com' target='_blank'>Google.com (_blank)</eds-menu-item>
+      <eds-menu-item href-'http://google.com' target='_blank'>
+        Google.com (href ignored)
+        <div slot='children'>
+          <eds-menu-item href='http://www.google.com/search?q=tacos' target='_parent'>Tacos (_parent)</eds-menu-item>
+          <eds-menu-item href='http://www.google.com/search?q=cats' target='_top'>Cats (_top)</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </nav>
+  </doc-code>
+</api-option>
+
+<doc-header>Events</doc-header>
+
+<api-event name='itemclick' type='CustomEvent' detail='HTMLElement'>
+  Fires when the menu item is clicked. <code>event.detail</code> contains the target element. For convenience the text content of this element is available via the <code>data-content</code> attribute.
+
+  <doc-note>
+    This event is suppressed for <code>eds-menu-item</code>s that contain children. If you want to test for click on any <code>eds-menu-item</code>, use <code>click</code> instead.
+  </doc-note>
+</api-event>
+
+<api-event name='toggle' type='CustomEvent'>
+  Fires when the menu item is expanded or collapsed.
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item id='toggle-event-example'>
+        Children
+        <nav slot='children'>
+          <eds-menu-item>Level 2a</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+    <p id='toggle-event-example-output'></p>
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        document.getElementById('toggle-event-example').addEventListener('toggle', function(e) {
+          var str = e.target.expanded ? 'expanded' : 'collapsed';
+          document.getElementById('toggle-event-example-output').innerHTML = str;
+        });
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='focus'>
+  Focuses the element. If the element is a hidden child the parents are expanded until the element becomes visisble.
+
+  <doc-code live>
+    <nav>
+      <eds-menu-item id='focus-example1'>Item 1</eds-menu-item>
+      <eds-menu-item id='focus-example2'>
+        Item 2
+        <nav slot='children'>
+          <eds-menu-item>Item 2.1</eds-menu-item>
+          <eds-menu-item>Item 2.2</eds-menu-item>
+          <eds-menu-item>Item 2.3</eds-menu-item>
+          <eds-menu-item>
+            Item 2.4
+            <nav slot='children'>
+              <eds-menu-item>Item 2.4.1</eds-menu-item>
+              <eds-menu-item>Item 2.4.2</eds-menu-item>
+              <eds-menu-item>Item 2.4.3</eds-menu-item>
+              <eds-menu-item>
+                Item 2.4.4
+                <nav slot='children'>
+                  <eds-menu-item id='focus-example3'>Item 2.4.4.1</eds-menu-item>
+                  <eds-menu-item>Item 2.4.4.2</eds-menu-item>
+                  <eds-menu-item>Item 2.4.4.3</eds-menu-item>
+                </nav>
+              </eds-menu-item>
+            </nav>
+          </eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+    <eds-button id='focus-example-button1'>Focus Item 1</eds-button>
+    <eds-button id='focus-example-button2'>Focus Item 2</eds-button>
+    <eds-button id='focus-example-button3'>Focus Item 2.4.4.1</eds-button>
+    <script>
+      document.getElementById('focus-example-button1').addEventListener('click', function() {
+        document.getElementById('focus-example1').focus();
+      });
+
+      document.getElementById('focus-example-button2').addEventListener('click', function() {
+        document.getElementById('focus-example2').focus();
+      });
+
+      document.getElementById('focus-example-button3').addEventListener('click', function() {
+        document.getElementById('focus-example3').focus();
+      });
+    </script>
+  </doc-code>
+</api-method>
+
+<on-first-visible></on-first-visible>
+
+<api-method name='refresh'>
+  Refreshes the element. Can be used to correct rare render errors such as changing the element state while hidden.
+
+  <doc-code live>
+    <nav id='refresh-example-wrapper'>
+      <eds-menu-item id='refresh-example'>
+        Item 1
+        <nav slot='children'>
+          <eds-menu-item>Item 1.1</eds-menu-item>
+          <eds-menu-item>Item 1.2</eds-menu-item>
+          <eds-menu-item>Item 1.3</eds-menu-item>
+        </nav>
+      </eds-menu-item>
+    </nav>
+
+    <eds-button id='refresh-example-button1'>1. Set collapsed</eds-button>
+    <eds-button id='refresh-example-button2'>2. Hide & Expand</eds-button>
+    <eds-button id='refresh-example-button3'>3. Show Error</eds-button>
+    <eds-button id='refresh-example-button4'>4. Refresh</eds-button>
+
+    <script>
+      document.getElementById('refresh-example-button1').addEventListener('click', function() {
+        document.getElementById('refresh-example').expanded = false;
+      });
+
+      document.getElementById('refresh-example-button2').addEventListener('click', function() {
+        document.getElementById('refresh-example-wrapper').style.display = 'none';
+        // Generates a render error as height is unknown while hidden
+        document.getElementById('refresh-example').expanded = true;
+      });
+
+      document.getElementById('refresh-example-button3').addEventListener('click', function() {
+        document.getElementById('refresh-example-wrapper').style.display = 'block';
+      });
+
+      document.getElementById('refresh-example-button4').addEventListener('click', function() {
+        document.getElementById('refresh-example').refresh();
+      });
+    </script>
+  </doc-code>
+</api-method>
+
+<doc-header>Compact Style</doc-header>
+
+<p>
+  Containers that wish to implement the compact style should use the <code>eds-item-compact</code> class.
+</p>
+
+<doc-code live>
+  <nav class='eds-item-compact' style='font-size: 14px; width: 200px;'>
+    <eds-menu-item>Compact Item 1</eds-menu-item>
+    <eds-menu-item selected>Compact Item 2</eds-menu-item>
+    <eds-menu-item>Compact Item 3</eds-menu-item>
+    <eds-menu-item>Compact Item 4</eds-menu-item>
+  </nav>
+</doc-code>
+
+<doc-header>Gray/White Backgrounds</doc-header>
+
+  <p>
+    <code>eds-menu-item</code>s automatically adapt to the color scheme of their containers. Specifically:
+  </p>
+
+  <ul>
+    <li>If the container implements <code>[background='gray']</code>, <code>eds-menu-item</code> will render gray and use white for its selected state.</li>
+    <li>In all other cases, <code>eds-menu-item</code> will render white and use gray as its selected state.</li>
+  </ul>
+
+  <doc-code live>
+    <nav class='container' background='gray'>
+      <eds-menu-item selected>Hello</eds-menu-item>
+      <eds-menu-item>Profile</eds-menu-item>
+      <eds-menu-item>What up?</eds-menu-item>
+    </nav>
+    <nav class='container'>
+      <eds-menu-item selected>Hello</eds-menu-item>
+      <eds-menu-item>Profile</eds-menu-item>
+      <eds-menu-item>What up?</eds-menu-item>
+    </>
+  </doc-code>
+
+<doc-header>Accessibility</doc-header>
+
+<p>
+  Keyboard behavior is as follows:
+</p>
+
+<ul>
+  <li><code>tab</code> and <code>shift+tab</code> changes focus between visible <code>eds-menu-item</code>s as they are laid out in the regular tab order of the page. This includes <code>eds-menu-item</code>s placed in different containers and markup regions.</li>
+  <li><code>down arrow</code> & <code>up arrow</code> changes focus between sibling <code>eds-menu-item</code>s. <code>down arrow</code> expands collapsed <code>eds-menu-item</code>s automatically.</li>
+  <li><code>space</code> & <code>enter</code> expands and collapses <code>eds-menu-item</code>s.</li>
+  <li><code>enter</code> triggers the click event.</li>
+</ul>

@@ -1,9 +1,0 @@
-<mat-card>
-  <input type="text" class="description" [value]="task.description" (change)="updateTask($event)" #description>
-
-  <div class="d-flex justify-content-around">
-    <button class="m-0" title="Done" *ngIf="!archive" (click)="archiveTask()"><mat-icon>done</mat-icon></button>
-    <button class="m-0" title="Unarchive" *ngIf="archive" (click)="unarchiveTask()"><mat-icon>unarchive</mat-icon></button>
-    <button class="m-0" title="Delete" (click)="deleteTask()"><mat-icon>delete</mat-icon></button>
-  </div>
-</mat-card>

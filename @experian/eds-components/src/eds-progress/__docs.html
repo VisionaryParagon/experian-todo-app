@@ -1,0 +1,93 @@
+
+<doc-header>Examples</doc-header>
+
+<eds-progress style='width: 200px;' value='0.5'></eds-progress>
+<br />
+<eds-progress id='animation-example' style='width: 200px;' value='5' baselineValue='7' max='10' motif='purple'></eds-progress>
+
+<script>
+(function() {
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  var el = document.getElementById('animation-example');
+  setInterval(function() {
+    if (el.value >= 10) {
+      el.removeAttribute('value');
+    }
+    else if (isNaN(el.value)) {
+      el.value = 0;
+      el.baselineValue = 2;
+    }
+    else {
+      el.value = parseInt(el.value + getRandomInt(1, 7));
+      el.baselineValue = el.value + parseInt(el.value + getRandomInt(1, 3));
+    }
+  }, 500);
+})();
+</script>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='baselineValue' type='number'>
+  Sets a baseline value. Can be any float up to <code>Number.MAX_VALUE</code> in Javascript. A baseline value is similar to <code>value</code> except it renders with a lighter color. This option can be used for cases such as displaying a visual buffer or additional target value.
+
+  <doc-note motif='warning'>
+    <b>NOTE:</b> <code>baselineValue</code> is ignored if <code>value</code> is not set.
+  </doc-note>
+
+  <doc-code live>
+    <eds-progress baselineValue='6' value='5' max='10'></eds-progress>
+    <eds-progress baselineValue='8' value='4' max='10'></eds-progress>
+    <eds-progress baselineValue='8' max='10'></eds-progress>
+  </doc-code>
+
+</api-option>
+
+<api-option name='max' type='number' default='1'>
+  Sets the max value. Can be any float up to <code>Number.MAX_VALUE</code> in Javascript.
+
+  <doc-code live>
+    <eds-progress value='5' max='10'></eds-progress>
+    <eds-progress value='5' max='100'></eds-progress>
+  </doc-code>
+
+</api-option>
+
+<api-option name='motif' type='enum' default='magenta'>
+  Sets the color of the progress element.
+
+  <p>
+    Available values:
+  </p>
+  <ul>
+    <li>magenta</li>
+    <li>purple</li>
+  </ul>
+
+  <doc-code live>
+    <eds-progress></eds-progress>
+    <eds-progress value='0.5' baselineValue='0.7'></eds-progress>
+    <br />
+    <eds-progress motif='purple'></eds-progress>
+    <eds-progress value='0.5' baselineValue='0.7' motif='purple'></eds-progress>
+  </doc-code>
+</api-option>
+
+<api-option name='value' type='number'>
+  Sets the value. Can be any float up to <code>Number.MAX_VALUE</code> in Javascript. If unset the progress element will display in 'indeterminate' mode.
+
+  <doc-note motif='warning'>
+    <b>NOTE:</b> <code>baselineValue</code> is ignored if <code>value</code> is not set.
+  </doc-note>
+
+  <doc-code live>
+    <eds-progress value='.5'></eds-progress>
+    <eds-progress></eds-progress>
+  </doc-code>
+
+</api-option>

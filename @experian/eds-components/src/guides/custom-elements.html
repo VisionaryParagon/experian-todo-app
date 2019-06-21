@@ -1,0 +1,22 @@
+<h1>HTML Custom Elements</h1>
+
+<p>
+  EDS components are nothing more than custom html elements. We've tried to keep the "framework" aspects of this project to a minimum, and where possible we seek to mirror native apis and adhere to the spirit of the native web platform. As a result, there is a lot of documentation elsewhere that you can read to familiarize yourself with this project. Before diving into code, we suggest reading through the guides listed below and getting comfortable with the concepts they contain.
+</p>
+
+<ul>
+  <li><a href="https://developers.google.com/web/fundamentals/web-components/customelements">Custom Elements v1: Resuable Web Components</a> (Google)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">Using Custom Elements</a> (MDN)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">Using Shadow DOM</a> (MDN)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots">Using Templates and Slots</a> (MDN)</li>
+</ul>
+
+<h2>Webcomponents.js Polyfill</h2>
+
+<p>
+  Custom elements are not natively available in all browsers, but polyfills make them possible to use today. EDS components make use of the webcomponents.js polyfill for a subset of shadow DOM support known as <a href="https://github.com/webcomponents/shadydom">ShadyDOM</a>. This polyfill is forced, even in browsers that support shadow DOM natively, to ensure we have consistent behavior across all platforms.
+</p>
+
+<eds-alert motif='warning' background='gray'>
+  It's important to note that while we make use of shadow DOM apis for custom element composition, we are <em>NOT</em> using anything related to shadow DOM styling. Styling the shadow DOM requires css custom properties and we've chosen not to use a polyfill for various technical reasons. This means, effectively, that styling is handled via normal css, though we've made some preparations for a future switch to native shadow DOM. (See the <a href="/#guides/styling-elements.html">Styling Elements</a> for more detail)
+</eds-alert>

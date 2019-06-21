@@ -1,0 +1,56 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.inverse {
+  background-color: #72217b;
+  display: inline-block;
+  padding: 10px;
+}
+</style>
+
+<!-- used only for metalsmith imports -->
+<eds-button style="display: none;"></eds-button>
+
+<doc-header>Basic Examples</doc-header>
+
+<doc-code live>
+  <div eds-badge>9</div>
+  <div eds-badge>99</div>
+  <div eds-badge>999</div>
+  <div eds-badge>9,999</div>
+</doc-code>
+
+<doc-header>Inverse Background Examples</doc-header>
+
+<doc-code live>
+  <div class="inverse">
+    <div eds-badge>9</div>
+    <div eds-badge>99</div>
+    <div eds-badge>999</div>
+    <div eds-badge>9,999</div>
+  </div>
+</doc-code>
+
+<doc-header>Button Examples</doc-header>
+
+<doc-code live>
+  <button eds-button motif="tertiary">
+    <div eds-badge>9</div>
+    <eds-icon icon="mail_outline" class="s18"></eds-icon>
+  </button>
+  <div class="inverse">
+    <button eds-button inverse motif="tertiary">
+      <div eds-badge>9</div>
+      <eds-icon icon="mail_outline" class="s18"></eds-icon>
+    </button>
+  </div>
+</doc-code>
+
+<doc-header>Content & Markup</doc-header>
+
+<p>
+  <code>eds-badge</code> components are applied to native elements as attributes (<code>&lt;div eds-badge></code>) and limited to styles only.
+</p>

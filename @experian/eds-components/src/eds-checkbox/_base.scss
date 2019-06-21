@@ -1,0 +1,94 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+$checkbox-box-size: 18px;
+$checkbox-check-size: $checkbox-box-size - 6px;
+$checkbox-box-outline-color: $eds-form-field-border-color;
+$checkbox-box-background-color: $eds-white;
+$checkbox-checked-box-background-color: $eds-blue;
+$checkbox-checked-disabled-box-background-color: $eds-form-field-disabled-border-color;
+$checkbox-mark-color: $eds-blue;
+$checkbox-checked-mark-color: $eds-white;
+$checkbox-checked-box-outline-color: $eds-blue;
+$checkbox-label-font-size: 14px;
+
+eds-checkbox {
+  display: inline-block;
+  outline: none;
+
+  .box {
+    box-sizing: border-box;
+    width: $checkbox-box-size;
+    height: $checkbox-box-size;
+    border-radius: 3px;
+    border: 1px solid $checkbox-box-outline-color;
+    display: inline-block;
+    background: $checkbox-box-background-color;
+    position: relative;
+
+    .check {
+      position: absolute;
+      width: $checkbox-check-size;
+      height: $checkbox-check-size;
+      fill: $checkbox-mark-color;
+      top: 2px;
+      left: 2px;
+    }
+  }
+
+  .label {
+    display: inline-block;
+    font-size: $checkbox-label-font-size;
+    position: relative;
+    top: $checkbox-label-font-size - $checkbox-box-size;
+  }
+
+  &:not([checked]) {
+    .box .check {
+      display: none;
+    }
+  }
+
+  &[checked] {
+    .box {
+      border-color: $checkbox-checked-box-outline-color;
+      background-color: $checkbox-checked-box-background-color;
+
+      .check {
+        fill: $checkbox-checked-mark-color;
+      }
+    }
+  }
+
+  &[disabled] {
+    color: $eds-form-field-disabled-font-color;
+
+    .box {
+      border-color: $eds-form-field-disabled-border-color;
+      .check {
+        fill: $eds-form-field-disabled-border-color;
+      }
+    }
+
+    &[checked] .box {
+      background: $checkbox-checked-disabled-box-background-color;
+      .check {
+        fill: $checkbox-checked-mark-color;
+      }
+    }
+
+    label {
+      cursor: not-allowed;
+    }
+  }
+
+  &:not([disabled]) {
+    .box {
+      @include focus-element(-2px);
+    }
+  }
+
+  input {
+    @include hide-focusable;
+  }
+}

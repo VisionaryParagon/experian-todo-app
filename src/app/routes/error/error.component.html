@@ -1,0 +1,11 @@
+<div class="eds">
+  <div class="mainHeading">
+    <h1 caps>Uh Oh...</h1>
+  </div>
+    
+  <p>It looks like the list you're looking for doesn't exist. Would you like to <a (click)="openModal()">create a new one</a>?</p>
+</div>
+
+<eds-modal (hide)="reset()" #newListModal>
+  <app-new-list [list]="list" (close)="closeModal($event)"></app-new-list>
+</eds-modal>

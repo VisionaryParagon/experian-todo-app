@@ -1,0 +1,16 @@
+<header>Add New List</header>
+
+<form #listForm="ngForm" novalidate>
+  <div class="edsTextbox" [ngClass]="{ 'focus': isFocused, 'error': invalid }">
+    <input type="text" placeholder="Enter list name..." autocomplete="off" name="listName" #listName [(ngModel)]="list.name" (focus)="toggleFocus()" (blur)="toggleFocus()" (ngModelChange)="hideError()">
+  </div>
+  <div class="edsInputMsg" [class.show]="invalid">
+    <div class="error-text">A list already exists with this name.</div>
+    <a (click)="goTo(listName.value)">View List</a>
+  </div>
+
+  <footer>
+    <button eds-button type="submit" motif="primary" [disabled]="!listName.value" (click)="submit(listName.value)">Add</button>
+    <button eds-button type="button" class="ml-3" motif="default" (click)="cancel()">Cancel</button>
+  </footer>
+</form>

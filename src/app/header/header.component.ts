@@ -1,26 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { TopDownAnimation } from '../animations';
+import { User } from '../services/todo.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  animations: [ TopDownAnimation ]
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  navActive = false;
+  @Input() user: User = new User();
+  theme: 'dark'|'light' = 'light';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleMenu() {
-    this.navActive = !this.navActive;
-  }
-
-  closeMenu() {
-    this.navActive = false;
+  changeTheme(color) {
+    this.theme = color;
   }
 }

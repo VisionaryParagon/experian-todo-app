@@ -1,0 +1,54 @@
+<h1>Developer Getting Started Guide</h1>
+
+<p>
+  Welcome to the EDS Components project! First, thank you for considering a development contribution to this project. This guide, and subsequent linked guides, will provide a foundation for building your own web components. While focused specifically on EDS components, you can apply the same principles to web components of any kind such as those you may author exclusively for your product or project.
+</p>
+
+<h2>Developer Workflow</h2>
+
+<h3>Clean Master Repository Policy</h3>
+
+<p>
+  We are committed to building and releasing often with a simple merging paradigm. As part of this strategy we've chosen not to maintain development branches on the main repository and require all updates come by way of pull requests. This means that when you begin work on a new feature or component, you should not create a feature branch in the main repository. Instead, all development work should be done in a separate fork.
+</p>
+
+<p>
+  Because all development is done in a separate fork, we have no branching policy and you are free to manage your fork as you see fit. Once you are ready to commit code into the main repository, you'll open a pull request from your fork and this pull request is treated as a single commit into the main repository.
+</p>
+
+<h3>Code Reviews</h3>
+
+<p>
+  All pull requests are subject to code review by other engineers. We encourage sharing opinions (both conforming and dissenting) and ask that all feedback be thoughtful and considerate. Remember that you are dealing with human beings and fellow employees all working on the same team, and often outside normal day-to-day tasks. While we encourage everyone to join the discussion, approving pull requests is reserved for EDS leads. Once approved, you or an EDS lead may merge into the main repository.
+</p>
+
+<eds-alert motif='warning' background='gray'>
+  We ask that you make your forks publicly available so that anyone can clone and run your work locally. This can be done in Bitbucket by clicking on <strong>Settings > Repository Permissions > Public Access > Enable (checkbox)</strong>
+</eds-alert>
+
+<h2>Environment Setup</h2>
+
+<p>
+  The version of node required for developing EDS components is always current in the project's <code>.nvmrc</code> file. You can open this file and check the version manually, but the easiest way to stay in sync is to <a href="https://github.com/creationix/nvm">install NVM</a> and run the following commands from the project root:
+</p>
+
+<doc-code language="bash">
+  nvm install
+
+  # or if already installed
+  nvm use
+</doc-code>
+
+<p>
+  Doing so will ensure you are always using the same version of node as everyone else, including our build server.
+</p>
+
+<eds-alert motif='info' background='gray'>
+  Consuming eds-components in another project does not require a specific version of node. That is only necessary for development.
+</eds-alert>
+
+<h2>Next Steps</h2>
+
+<p>
+  Now that you have your own fork and the correct version of node it's time to review code concepts and structure. Take a look at the additional guides starting with <a href='/#guides/custom-elements.html'>Custom Elements</a>.
+</p>

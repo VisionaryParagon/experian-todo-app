@@ -1,0 +1,50 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+eds-breadcrumbs {
+
+  display: flex;
+  align-items: center;
+  height: 48px;
+  border-bottom: 1px solid $eds-border-color-dark;
+  font-size: 14px;
+  padding-left: 40px;
+  background-color: $eds-white;
+
+  &[background='gray'] {
+    background-color: $eds-gray;
+  }
+
+  a {
+    text-decoration: none;
+    color: $eds-blue;
+
+    &:before {
+      content: attr(data-separator-symbol);
+      color: #bcbcbc;
+      padding: 0 12px;
+    }
+
+    &:first-child {
+
+      eds-icon {
+        margin: 0;
+        line-height: 0.8; // First word is always caps, this provides better optical alignment
+      }
+
+      &:before {
+        content: "";
+        padding: 0;
+      }
+    }
+
+    &:last-child {
+      color: $eds-font-color;
+      font-weight: 500;
+    }
+
+    &:not(last-child) {
+      cursor: pointer;
+    }
+  }
+}

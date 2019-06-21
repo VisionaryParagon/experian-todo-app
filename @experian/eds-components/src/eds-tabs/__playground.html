@@ -1,0 +1,313 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+<style>
+  eds-tabs[vertical] eds-tab {
+    padding-left: 20px;
+  }
+</style>
+<h3>Standard tabs</h3>
+<eds-tabs>
+  <eds-tab label="Tab Item 1">
+    <p>Hello I am tab content 1.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 2" selected>
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 3">
+    <p>Hello I am tab content 3. I have a form.</p>
+
+    <form>
+      <div><eds-textbox label="Name"></eds-textbox></div><br />
+      <div>
+        <eds-radio name='gender' label='Male'></eds-radio><br/>
+        <eds-radio name='gender' label='Female'></eds-radio></div><br />
+      <div><eds-checkbox label='I agree with the terms and conditions'></eds-checkbox></div><br />
+      <div><eds-switch label='Enabled'></eds-switch></div><br />
+      <div>
+        <eds-dropdown label="Country" style="width: 150px">
+          <eds-option value='MYS'>Malaysia</eds-option>
+          <eds-option value="GBR">United Kingdom</eds-option>
+          <eds-option value="USA">United States</eds-option>
+        </eds-dropdown>
+      </div><br />
+      <eds-button type='submit' motif='primary'>Submit</eds-button>
+    </form>
+  </eds-tab>
+  <eds-tab label="Tab Item 4">
+    <p>Hello I am tab content 4.</p>
+
+    <eds-alert motif="error" background="gray">
+      <h4>Error</h4>
+      <ul>
+        <li>Requested loan amount is out of range</li>
+        <li>Please declare an existing customer number</li>
+        <li>Please ensure that months at this address are more than 12</li>
+      </ul>
+    </eds-alert>
+  </eds-tab>
+</eds-tabs>
+
+<h3>Icon tabs</h3>
+<eds-tabs>
+  <eds-icon-tab>
+    <eds-icon icon="chat" aria-hidden="true" slot="icon"></eds-icon>
+    <p>Hello I am tab content 1.</p>
+  </eds-icon-tab>
+  <eds-icon-tab selected>
+    <eds-icon icon="person" aria-hidden="true" slot="icon"></eds-icon>
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-icon-tab>
+  <eds-icon-tab>
+    <eds-icon icon="edit" aria-hidden="true" slot="icon"></eds-icon>
+    <p>Hello I am tab content 3.</p>
+  </eds-icon-tab>
+</eds-tabs>
+
+<h3>Mixed tabs</h3>
+<eds-tabs>
+  <eds-icon-tab>
+    <eds-icon icon="chat" aria-hidden="true" slot="icon"></eds-icon>
+    <p>Hello I am tab content 1.</p>
+  </eds-icon-tab>
+  <eds-tab label="Tab 2" selected>
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-tab>
+  <eds-tab label="Tab 3">
+    <p>Hello I am tab content 3.</p>
+  </eds-tab>
+</eds-tabs>
+
+<h3>Vertical tabs</h3>
+<eds-tabs vertical>
+  <eds-tab label="Tab Item 1">
+    <p>Hello I am tab content 1.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 2">
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 3">
+    <p>Hello I am tab content 3. I have a form.</p>
+
+    <form>
+      <div><eds-textbox label="Name"></eds-textbox></div><br />
+      <div>
+        <eds-radio name='gender' label='Male'></eds-radio><br/>
+        <eds-radio name='gender' label='Female'></eds-radio></div><br />
+      <div><eds-checkbox label='I agree with the terms and conditions'></eds-checkbox></div><br />
+      <div><eds-switch label='Enabled'></eds-switch></div><br />
+      <div>
+        <eds-dropdown label="Country" style="width: 150px">
+          <eds-option value='MYS'>Malaysia</eds-option>
+          <eds-option value="GBR">United Kingdom</eds-option>
+          <eds-option value="USA">United States</eds-option>
+        </eds-dropdown>
+      </div><br />
+      <eds-button type='submit' motif='primary'>Submit</eds-button>
+    </form>
+  </eds-tab>
+  <eds-tab label="Tab Item 4">
+    <p>Hello I am tab content 4.</p>
+
+    <eds-alert motif="error" background="gray">
+      <h4>Error</h4>
+      <ul>
+        <li>Requested loan amount is out of range</li>
+        <li>Please declare an existing customer number</li>
+        <li>Please ensure that months at this address are more than 12</li>
+      </ul>
+    </eds-alert>
+  </eds-tab>
+</eds-tabs>
+
+<h3>Vertical icon tabs</h3>
+<eds-tabs vertical>
+  <eds-icon-tab>
+    <eds-icon icon="chat" aria-hidden="true" slot="icon"></eds-icon>
+    <div>Hello I am tab content 1.</div>
+  </eds-icon-tab>
+  <eds-icon-tab selected>
+    <eds-icon icon="person" aria-hidden="true" slot="icon"></eds-icon>
+    <div>Hello I am tab content 2. I have more text than the other tabs.</div>
+  </eds-icon-tab>
+  <eds-icon-tab>
+    <eds-icon icon="edit" aria-hidden="true" slot="icon"></eds-icon>
+    <div>Hello I am tab content 3.</div>
+  </eds-icon-tab>
+</eds-tabs>
+
+<h3>Mixed vertical tabs</h3>
+<eds-tabs vertical>
+  <eds-icon-tab>
+    <eds-icon icon="chat" aria-hidden="true" slot="icon"></eds-icon>
+    <p>Hello I am tab content 1.</p>
+  </eds-icon-tab>
+  <eds-tab label="Tab 2" selected>
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-tab>
+  <eds-tab label="Tab 3">
+    <p>Hello I am tab content 3.</p>
+  </eds-tab>
+</eds-tabs>
+
+<h3>Nested tabs</h3>
+
+<eds-tabs>
+  <eds-tab label="Tab Item 1">
+    <p>Hello I am tab content 1.</p>
+    <eds-tabs>
+      <eds-tab label="Nested 1">
+        <p>Nested content 1.</p>
+      </eds-tab>
+      <eds-tab label="Nested 2" selected>
+        <p>Nested content 2.</p>
+      </eds-tab>
+    </eds-tabs>
+  </eds-tab>
+  <eds-tab label="Tab Item 2" selected>
+    <p>Hello I am tab content 2. I have more text than the other tabs.</p>
+  </eds-tab>
+</eds-tabs>
+
+<h3>Gray background</h3>
+<div style='padding: 10px;' background='gray'>
+  <eds-tabs>
+    <eds-tab label="Tab Item 1">
+      <p>Hello I am tab content 1.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 2">
+      <p>Hello I am tab content 2.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 3">
+      <p>Hello I am tab content 3.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 4">
+      <p>Hello I am tab content 4.</p>
+    </eds-tab>
+  </eds-tabs>
+</div>
+
+<h3>Closable tabs</h3>
+<div style="padding: 10px;">
+  <eds-tabs ariaLabelClose="Close!">
+    <eds-tab label="Tab Item 1">
+      <p>Hello I am tab content 1.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 2">
+      <p>Hello I am tab content 2.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 3" closable>
+      <p>Hello I am tab content 3.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 4" closable>
+      <p>Hello I am tab content 4.</p>
+    </eds-tab>
+  </eds-tabs>
+</div>
+
+<div style="padding: 10px;">
+  <eds-tabs vertical>
+    <eds-tab label="Tab Item 1">
+      <p>Hello I am tab content 1.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 2">
+      <p>Hello I am tab content 2.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 3" closable>
+      <p>Hello I am tab content 3.</p>
+    </eds-tab>
+    <eds-tab label="Tab Item 4" closable>
+      <p>Hello I am tab content 4.</p>
+    </eds-tab>
+  </eds-tabs>
+</div>
+
+<h3>Programmatic Selection</h3>
+
+<eds-tabs id='programmatic-example'>
+  <eds-tab label="Tab Item 1">
+    <p>Hello I am tab content 1.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 2">
+    <p>Hello I am tab content 2.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 3">
+    <p>Hello I am tab content 3.</p>
+  </eds-tab>
+  <eds-tab label="Tab Item 4">
+    <p>Hello I am tab content 4.</p>
+  </eds-tab>
+  <eds-tab label="Nested Content">
+    <eds-tabs>
+      <eds-tab label="Tab Item 1">
+        <p>Hello I am tab content 1.</p>
+      </eds-tab>
+      <eds-tab label="Tab Item 2" id="programmatic-nested-example">
+        <p>Hello I am tab content 2.</p>
+      </eds-tab>
+    </eds-tabs>
+  </eds-tab>
+</eds-tabs>
+
+<eds-button id='programmatic-example-button1'>Select Tab 2 (tabs api)</eds-button>
+<eds-button id='programmatic-example-button2'>Select Tab 4 (tab api)</eds-button>
+<eds-button id='programmatic-example-button3'>Select Tab 5 > Tab 2 (both apis)</eds-button>
+
+<script>
+window.addEventListener('WebComponentsReady', function() {
+  var tabs = document.getElementById('programmatic-example');
+  var tab = tabs.querySelectorAll('eds-tab')[3];
+  var nestedTab = document.getElementById('programmatic-nested-example');
+
+  document.getElementById('programmatic-example-button1').addEventListener('click', function() {
+    tabs.selectTab(1);
+  });
+
+  document.getElementById('programmatic-example-button2').addEventListener('click', function() {
+    tab.selected = true;
+  });
+
+  document.getElementById('programmatic-example-button3').addEventListener('click', function() {
+    tabs.selectTab(4);
+    nestedTab.selected = true;
+  });
+});
+</script>
+
+<h3>Programmatic Tab Addition / Removal</h3>
+
+<eds-tabs id='programmatic-slot-example'></eds-tabs>
+
+<eds-button id='programmatic-slot-example-button1'>Add Tab</eds-button>
+<eds-button id='programmatic-slot-example-button2'>Remove Tab</eds-button>
+<eds-button id='programmatic-slot-example-button3'>Rename Last Tab</eds-button>
+
+<script>
+window.addEventListener('WebComponentsReady', function() {
+  var tabs = document.getElementById('programmatic-slot-example');
+
+  document.getElementById('programmatic-slot-example-button1').addEventListener('click', function() {
+    var el = document.createElement('eds-tab');
+    var index = tabs.tabs.length;
+    el.label = 'Tab ' + index;
+    el.innerHTML = 'Content ' + index;
+    tabs.appendChild(el);
+    tabs.selectTab(index);
+  });
+
+  document.getElementById('programmatic-slot-example-button2').addEventListener('click', function() {
+    var index = tabs.tabs.length;
+    if (!index) return;
+    tabs.removeChild(tabs.tabs[tabs.tabs.length - 1]);
+    tabs.selectTab(index - 2);
+  });
+
+  document.getElementById('programmatic-slot-example-button3').addEventListener('click', function() {
+    var index = tabs.tabs.length;
+    if (!index) return;
+
+    tabs.tabs[tabs.tabs.length - 1].label = 'Renamed label! ' + (index - 1);
+  });
+});
+</script>

@@ -1,0 +1,10 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+.eds-item-compact eds-tree-item {
+
+  & > .eds-tree-item-main {
+    padding: 0.40em 0;
+  }
+
+}

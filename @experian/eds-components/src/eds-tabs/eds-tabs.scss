@@ -1,0 +1,159 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+$eds-tabs-label-padding: 20px;
+$eds-tabs-border-width: 4px;
+$eds-tabs-selected-color: $eds-magenta;
+
+eds-tabs {
+  display: block;
+
+  .tab-labels {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+
+    &:not(.has-icon-tab) {
+      border-bottom: 1px solid $eds-border-color-dark;
+    }
+
+    li {
+      height: 46px;
+      line-height: 46px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      text-align: center;
+      border-bottom: $eds-tabs-border-width solid transparent;
+
+      &:hover {
+        border-color: $eds-border-color;
+        color: $eds-link-hover-color;
+      }
+
+      &.selected {
+        border-color: $eds-tabs-selected-color;
+        color: $eds-black;
+      }
+
+      a {
+        padding: 0 0 0 $eds-tabs-label-padding;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        color: $eds-link-color;
+        text-decoration: none;
+      }
+
+      > *:last-child {
+        padding-right: $eds-tabs-label-padding;
+      }
+
+      .close-button {
+        margin-left: $eds-tabs-label-padding / 2;
+        border: 0;
+        border-bottom: ($eds-tabs-border-width / 2) solid transparent;
+        background: transparent;
+        color: $eds-link-color;
+        font-size: 24px;
+        cursor: pointer;
+
+        &:hover {
+          color: $eds-link-hover-color;
+        }
+      }
+    }
+
+    &.has-icon-tab li {
+      height: 26px;
+      line-height: 26px;
+      border-color: transparent;
+      &.selected a {
+        color: $eds-tabs-selected-color;
+      }
+    }
+  }
+
+  eds-tab, eds-icon-tab {
+    display: none;
+    opacity: 0;
+    transition: opacity .15s linear;
+
+    &[selected] {
+      display: block;
+      opacity: 1;
+    }
+
+    // Essentially clearfix the tab content panels. Useful, for example, if we ever need to apply a background.
+    // This ensures it will cover all the tab's box model. e.g. a child paragraph's margin.
+    &:after, &:before {
+      content: " ";
+      display: table
+    }
+  }
+
+  // Overrides for vertical tabs
+  @mixin verticalTabs() {
+    display: flex;
+
+    .tab-labels {
+      width: auto;
+      height: fit-content;
+      flex-flow: column nowrap;
+
+      &:not(.has-icon-tab) {
+        border: 1px solid $eds-border-color;
+        border-top: none;
+        border-bottom: none;
+      }
+
+      li {
+        height: 50px;
+        line-height: 50px;
+        text-align: left;
+        overflow: hidden;
+        border-top: 1px solid $eds-border-color;
+        border-left: $eds-tabs-border-width solid transparent;
+        border-bottom-width: 0;
+
+        &:last-child {
+          border-bottom-width: 1px;
+        }
+
+        &:hover {
+          border-left-color: $eds-border-color;
+        }
+
+        &.selected {
+          border-left-color: $eds-magenta;
+        }
+      }
+
+      &.has-icon-tab li {
+        height: 32px;
+        line-height: 32px;
+        border: 0;
+        &.selected a {
+          color: $eds-tabs-selected-color;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    @include verticalTabs();
+  }
+
+  &[vertical] {
+    @include verticalTabs();
+  }
+}

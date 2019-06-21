@@ -1,0 +1,116 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<div>
+
+  <div class='heading'>
+    <h1>Tooltips</h1>
+  </div>
+
+  <eds-tooltip targetclass='tooltip-target' delay='700' id='tip1'>
+    Shared tooltips will switch instantly<br />
+    between adjacent targets.
+  </eds-tooltip>
+
+  <eds-button class='tooltip-target'>
+    Click me
+  </eds-button>
+
+  <eds-button class='tooltip-target'>
+    Click me 2
+  </eds-button>
+
+  <br />
+  <br />
+  <br />
+
+  <eds-icon icon='help' class='tooltip-target2'></eds-icon>
+
+  <script>
+    window.addEventListener('WebComponentsReady', () => {
+      const el = document.createElement('eds-tooltip');
+      el.setAttribute('position', 'right');
+      el.setAttribute('delay', '700');
+      el.setAttribute('id', 'tip2');
+      el.targetClass = 'tooltip-target2';
+      el.innerHTML = '<b>Look out!</b> This is another long tooltip.'
+      document.body.appendChild(el);
+    });
+  </script>
+
+</div>
+
+<h4>Shadow DOM</h4>
+
+<script>
+(function() {
+  var tag = 'example-custom-element';
+  var html = '<div style="padding: 20px; background: #555;"><slot></slot><eds-button class="custom-element-target">Shadow DOM</eds-button><eds-tooltip>I work for Shadow DOM</eds-tooltip></div>';
+
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html);
+      this._refs = {
+        button: this.$('eds-button'),
+        tooltip: this.$('eds-tooltip')
+      };
+
+      this._refs.tooltip.targetElements = [this._refs.button];
+    }
+  });
+})();
+</script>
+
+<div class="gray-background">
+  <example-custom-element style="display: block;">
+    <eds-button id='element-example-button'>Light DOM</eds-button>
+  </example-custom-element>
+
+  <eds-tooltip id='element-example-tooltip'>
+    I work for Light DOM
+  </eds-tooltip>
+
+  <script>
+    window.addEventListener('WebComponentsReady', () => {
+      const button = document.getElementById('element-example-button');
+      const tooltip = document.getElementById('element-example-tooltip');
+      tooltip.targetElements = [button];
+    });
+  </script>
+</div>
+
+<h4>Disconnect/Reconnect</h4>
+
+<p>Tooltips work when first connected to the DOM, they should continue to work after being disconnected and reconnected (something frameworks may do regularly).</p>
+
+<p><a href='javacript:void();' id='reconnect-example-target'>Hover me</a></p>
+<eds-tooltip id='reconnect-example-tooltip'>
+  I work when first initialized.
+</eds-tooltip>
+
+<eds-button id='disconnect-example-button'>Disconnect Tooltip</eds-button>
+<eds-button id='reconnect-example-button'>Reconnect Tooltip</eds-button>
+
+<script>
+  window.addEventListener('WebComponentsReady', () => {
+    const target = document.getElementById('reconnect-example-target');
+    const disconnectButton = document.getElementById('disconnect-example-button');
+    const reconnectButton = document.getElementById('reconnect-example-button');
+    const tooltip = document.getElementById('reconnect-example-tooltip');
+    tooltip.targetElements = [target];
+
+    disconnectButton.addEventListener('click', () => {
+      tooltip.parentNode.removeChild(tooltip);
+      target.innerHTML = 'Tooltip disconnected';
+    })
+
+    reconnectButton.addEventListener('click', () => {
+      tooltip.innerHTML = 'I work reconnected to the DOM as well.';
+      target.parentNode.appendChild(tooltip);
+      target.innerHTML = 'Tooltip reconnected';
+    });
+
+  });
+</script>

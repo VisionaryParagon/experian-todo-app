@@ -1,0 +1,11 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+eds-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 12px;
+  margin-left: 2px;
+  line-height: 1 !important;
+}

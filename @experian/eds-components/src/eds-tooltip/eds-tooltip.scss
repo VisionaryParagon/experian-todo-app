@@ -1,0 +1,117 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+@import "./animations";
+
+$tip-color: $eds-black;
+$border-unit: 8px;
+$border-unit-x2: $border-unit * 2;
+
+eds-tooltip {
+
+  .eds-tooltip-wrapper {
+
+    position: absolute;
+    display: none;
+    z-index: 1000;
+
+    &.show {
+      display: block;
+    }
+
+    &[x-placement^="top"] {
+      margin-bottom: $border-unit-x2;
+
+      [x-arrow] {
+        border-width: $border-unit $border-unit 0 $border-unit;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        bottom: -$border-unit;
+        left: calc(50% - #{$border-unit});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[x-placement^="right"] {
+      margin-left: $border-unit-x2;
+
+      [x-arrow] {
+        border-width: $border-unit $border-unit $border-unit 0;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        left: -$border-unit;
+        top: calc(50% - #{$border-unit});
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &[x-placement^="bottom"] {
+      margin-top: $border-unit-x2;
+
+      [x-arrow] {
+        border-width: 0 $border-unit $border-unit $border-unit;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        top: -$border-unit;
+        left: calc(50% - #{$border-unit});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[x-placement^="left"] {
+      margin-right: $border-unit-x2;
+
+      [x-arrow] {
+        border-width: $border-unit 0 $border-unit $border-unit;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        right: -$border-unit;
+        top: calc(50% - #{$border-unit});
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+  }
+
+  .eds-tooltip-content {
+    font-family: $eds-font-family-base;
+    @include font-smoothing();
+    padding: 10px 20px;
+    font-size: 14px;
+    color:#fff;
+    border-radius: 4px;
+    background-color: $tip-color;
+    box-sizing: border-box;
+    opacity: 0;
+    @include raised-container-high();
+    border: none;
+    transform: scale(0);
+
+    [x-arrow] {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: $tip-color;
+      position: absolute;
+      margin: $border-unit;
+    }
+
+    &.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    a, a:hover {
+      color: $eds-white;
+    }
+
+  }
+
+}

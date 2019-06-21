@@ -1,0 +1,183 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .button-set .name, .button-set button {
+    margin: 8px;
+  }
+
+  .button-set .button {
+    display: inline-block;
+  }
+
+  .alt-background.button-set {
+    background: #f6f6f6;
+  }
+
+  .inverse {
+    background-color: #72217b;
+  }
+
+  .inverse .name {
+    color: white;
+  }
+</style>
+
+<div>
+
+  <h3>Motifs</h3>
+
+  <div class="button-sets">
+
+    <div class="normal button-set">
+      <div class="name">normal</div>
+      <button eds-button>default</button>
+      <button eds-button motif="basic">basic</button>
+      <button eds-button motif="primary">primary</button>
+      <button eds-button motif="tertiary" class="icon-left" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon> tertiary
+      </button>
+      <button eds-button motif="tertiary" class="icon-only" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+
+    <div class="alt-background button-set">
+      <div class="name">alt background</div>
+      <button eds-button>default</button>
+      <button eds-button motif="basic">basic</button>
+      <button eds-button motif="primary">primary</button>
+      <button eds-button motif="tertiary" class="icon-left" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon> tertiary
+      </button>
+      <button eds-button motif="tertiary" class="icon-only" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+
+    <div class="disabled button-set">
+      <div class="name">disabled</div>
+      <button eds-button disabled>default</button>
+      <button eds-button disabled motif="basic">basic</button>
+      <button eds-button disabled motif="primary">primary</button>
+      <button eds-button disabled motif="tertiary" class="icon-left" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon> tertiary
+      </button>
+      <button eds-button disabled motif="tertiary" class="icon-only" aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+
+    <div class="inverse button-set">
+      <div class="name">inverse</div>
+      <button eds-button inverse>default</button>
+      <button eds-button motif="basic" inverse>basic</button>
+      <button eds-button motif="primary" inverse>primary</button>
+      <button eds-button motif="tertiary" class="icon-left" inverse aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon> tertiary
+      </button>
+      <button eds-button motif="tertiary" class="icon-only" inverse aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+
+    <div class="inverse button-set">
+      <div class="name">inverse - disabled</div>
+      <button eds-button disabled inverse>default</button>
+      <button eds-button disabled motif="basic" inverse>basic</button>
+      <button eds-button disabled motif="primary" inverse>primary</button>
+      <button eds-button disabled motif="tertiary" class="icon-left" inverse aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon> tertiary
+      </button>
+      <button eds-button disabled motif="tertiary" class="icon-only" inverse aria-label="chat to a representative">
+        <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+      </button>
+    </div>
+
+    <p>Adjacent with icons</p>
+    <button eds-button class="icon-left" aria-label="chat to a representative">
+      <eds-icon icon="chat" aria-hidden="true"></eds-icon> import
+    </button>
+    <button eds-button motif="primary" class="icon-left" aria-label="chat to a representative">
+      <eds-icon icon="chat" aria-hidden="true"></eds-icon> import
+    </button>
+    <button eds-button motif="tertiary" class="icon-left" aria-label="chat to a representative">
+      <eds-icon icon="chat" aria-hidden="true"></eds-icon> export
+    </button>
+    <button eds-button motif="tertiary">
+      duplicate
+    </button>
+    <button eds-button class="icon-right" aria-label="chat to a representative">
+      import <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+    </button>
+    <button eds-button motif="tertiary" class="icon-right" aria-label="chat to a representative">
+      import <eds-icon icon="chat" aria-hidden="true"></eds-icon>
+    </button>
+
+  </div>
+
+</div>
+
+<div class="properties">
+  <h3>Programmatic use of properties</h3>
+
+  <div class="disabled">
+
+    <p><code>disabled</code></p>
+
+    <button eds-button></button>
+    <label><input type="checkbox" /> Disabled</label>
+
+    <script>
+    ((prop) => {
+      ((button, checkbox) => {
+        display();
+        checkbox.addEventListener('change', (e) => {
+          setDisabled(e.target.checked);
+        });
+
+        function setDisabled(value) {
+          button.disabled = value;
+          display();
+        }
+
+        function display() {
+          button.innerHTML = `Button is ${button.disabled ? 'disabled' : 'enabled'}`;
+        }
+      })(prop.querySelector('button'), prop.querySelector('[type="checkbox"]'));
+    })(document.querySelector('.properties .disabled'));
+    </script>
+
+  </div>
+
+  <div class="motif">
+
+    <p><code>motif</code></p>
+
+    <button eds-button motif="basic"></button>
+
+    <script>
+    ((button) => {
+      display();
+      button.addEventListener('click', next);
+
+      function next() {
+        button.setAttribute('motif', (button.getAttribute('motif') === 'primary' ? 'basic' : 'primary'));
+        display();
+      }
+
+      function display() {
+        button.innerHTML = button.getAttribute('motif') + ' (click to change)';
+      }
+    })(document.querySelector('.properties .motif button'));
+    </script>
+
+  </div>
+
+</div>

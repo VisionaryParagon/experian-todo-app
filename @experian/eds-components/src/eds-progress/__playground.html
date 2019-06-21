@@ -1,0 +1,61 @@
+<h3>Basic</h3>
+
+<eds-progress></eds-progress>
+
+<br />
+<eds-progress style='width: 300px;' value='0.5'></eds-progress>
+<br />
+<eds-progress style='width: 200px;' value='0.5'></eds-progress>
+<br />
+<eds-progress style='width: 100px;' value='0.5' baselineValue='0.8'></eds-progress>
+
+<h3>Motif</h3>
+
+<div background='gray'>
+  <eds-progress style='width: 300px;' value='0.5' max='2' motif='purple'></eds-progress>
+  <br />
+  <eds-progress style='width: 200px;' value='0.5' max='2' motif='purple'></eds-progress>
+  <br />
+  <eds-progress style='width: 100px;' value='0.5' baselineValue='0.8' max='2' motif='purple'></eds-progress>
+</div>
+
+<h3>Indeterminate</h3>
+
+<eds-progress></eds-progress>
+
+<br />
+<eds-progress style='width: 300px;'></eds-progress>
+<br />
+<eds-progress style='width: 200px;'></eds-progress>
+<br />
+<eds-progress style='width: 100px;'></eds-progress>
+
+<h3>Programmatic Updates + Animation</h3>
+
+<eds-progress id='animation-example' style='width: 300px;' value='2' max='10'></eds-progress>
+
+<script>
+(function() {
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  var el = document.getElementById('animation-example');
+  setInterval(function() {
+    if (el.value >= 10) {
+      el.removeAttribute('value');
+    }
+    else if (isNaN(el.value)) {
+      el.value = 0;
+      el.baselineValue = 2;
+    }
+    else {
+      el.value = parseInt(el.value + getRandomInt(1, 7));
+      el.baselineValue = el.value + parseInt(el.value + getRandomInt(1, 3));
+    }
+  }, 500);
+})();
+</script>

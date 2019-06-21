@@ -1,0 +1,51 @@
+@import "../styles/eds-variables";
+
+[eds-segmented-control] {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-flow: row nowrap;
+
+  li, a {
+    display: block;
+  }
+
+  li {
+    a {
+      background: $eds-white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid $eds-border-color;
+      border-width: 1px;
+      border-radius: 5px;
+      padding: 10px 20px;
+    }
+
+    &[aria-selected="true"] a {
+      border-color: $eds-magenta;
+      background: $eds-magenta;
+      color: $eds-white;
+    }
+
+    &:not(:first-child) a {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &:not(:last-child) a {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  li:not(:first-child) {
+    a {
+      border-left-color: transparent;
+    }
+  }
+
+  li[aria-selected="true"] + li a {
+    border-left-color: $eds-border-color;
+  }
+}

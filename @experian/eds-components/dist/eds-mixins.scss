@@ -1,0 +1,111 @@
+@import "./eds-variables";
+
+@mixin base-font() {
+  font-family: $eds-font-family-base;
+  font-size: $eds-font-size-base;
+  font-weight: $eds-font-weight-base;
+  color: $eds-font-color;
+}
+
+@mixin font-smoothing() {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin placeholder-style() {
+  $placeholder-font-weight: 400;
+  &:-moz-placeholder {
+    opacity: 1;
+    color: $eds-form-field-placeholder-font-color;
+    font-weight: $placeholder-font-weight;
+    font-family: $eds-font-family-base;
+  }
+  &:-ms-input-placeholder {
+    color: $eds-form-field-placeholder-font-color;
+    font-weight: $placeholder-font-weight;
+    font-family: $eds-font-family-base;
+  }
+  &::-webkit-input-placeholder {
+    color: $eds-form-field-placeholder-font-color;
+    font-weight: $placeholder-font-weight;
+    font-family: $eds-font-family-base;
+  }
+}
+
+@mixin raised-container() {
+  border: 1px solid $eds-border-color;
+  background-clip: border-box;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+@mixin raised-container-high() {
+  border: 1px solid $eds-border-color;
+  background-clip: border-box;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.12);
+}
+
+@mixin hide-focusable {
+  position: absolute;
+  left: -10000px;
+}
+
+@mixin focus-element($offset: -1px, $radius: $eds-border-radius-small) {
+  $transition-period: 0.15s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: $offset;
+    left: $offset;
+    right: $offset;
+    bottom: $offset;
+    border-radius: $radius;
+    border: 2px solid $eds-border-focus-color;
+    opacity: 0;
+    transition: opacity $transition-period ease;
+  }
+
+  &.focus, &:focus {
+    &::after {
+      opacity: 1;
+      transition: opacity $transition-period ease;
+      border-color: $eds-border-focus-color;
+      z-index: 900;
+    }
+  }
+}
+
+@mixin flex($fg: 1, $fs: null, $fb: null) {
+  $fg-boxFlex: $fg;
+  @if type-of($fg) == 'list' {
+    $fg-boxFlex: nth($fg, 1);
+  }
+
+  flex: $fg $fs $fb;
+}
+
+/* reset button styling
+ * source: https://gist.github.com/MoOx/9137295
+ */
+@mixin reset-button() {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+@function url-encode-color($string) {
+	@if type-of($string) == "color" {
+    $hex: str-slice(ie-hex-str($string), 4);
+    $string: unquote("#{$hex}");
+  }
+  $string: "%23" + $string;
+  @return $string;
+}

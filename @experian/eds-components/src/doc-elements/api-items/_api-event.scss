@@ -1,0 +1,28 @@
+$type-color:    #a064af;
+$detail-color:  #9b6a16;
+
+.api-item-container {
+
+  .api-item {
+
+    .event-name {
+      margin-right: 3px;
+    }
+
+    .event-type {
+      margin-left: 3px;
+      color: $type-color;
+    }
+
+    .event-detail {
+      margin-left: 3px;
+      color: $detail-color;
+
+      &:before {
+        color: $eds-black;
+        content: 'e.detail = ';
+      }
+    }
+  }
+
+}

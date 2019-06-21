@@ -1,0 +1,19 @@
+@import "../../styles/eds-variables";
+@import "../../styles/eds-mixins";
+
+doc-header {
+  display: block;
+  margin: 2rem 0 1rem;
+  @include base-font();
+  @include font-smoothing();
+  font-size: 18px;
+  color: #333333;
+  font-weight: bold;
+
+  &[caps] {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: $eds-purple;
+    font-weight: 400;
+  }
+}

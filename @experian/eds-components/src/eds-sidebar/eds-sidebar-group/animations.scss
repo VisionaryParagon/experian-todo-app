@@ -1,0 +1,28 @@
+$transition-ms: 200ms;
+
+eds-sidebar-group {
+  transition: height $transition-ms ease 0ms;
+
+  & > eds-icon {
+    transition: transform $transition-ms ease 0ms, opacity $transition-ms ease 0ms;
+  }
+
+  .eds-sidebar-group-content {
+    transform-origin: 0 0;
+    transition: transform $transition-ms ease 0ms, opacity $transition-ms ease 0ms;
+  }
+
+  &[collapsed] {
+    transition: height $transition-ms ease 0ms;
+
+    & > eds-icon {
+      transition: transform $transition-ms ease 0ms, opacity $transition-ms ease 0ms;
+    }
+
+    .eds-sidebar-group-content {
+      transform-origin: 0 0;
+      transition: transform $transition-ms ease 0ms, opacity $transition-ms ease 0ms;
+    }
+  }
+
+}

@@ -1,0 +1,268 @@
+<h1>EDSElement</h1>
+
+<p>
+  All elements in EDS extend <code>EDSElement</code>, which in turn extends <mdn-doc-link url='API/HTMLElement'>HTMLElement</mdn-doc-link>. <code>EDSElement</code> provides a set of default behaviors and convenience methods that make component authoring easier. We cover the most common ideas here but we encourage you to checkout <code>src/eds-core/element.js</code> to see everything that's available.
+</p>
+
+<h2>Element Life Cycle</h2>
+
+<h3>Initialization and <code>init()</code></h3>
+
+<eds-alert motif='warning' background='gray'>
+  All elements that extend <code>EDSElement</code> must implement an <code>init()</code> method.
+</eds-alert>
+
+<p>
+  Generally, you don't need to deal with element constructors directly. If you do, remember to call <code>super()</code> to get a proper DOM instance. We've taken care of this if you are extending <code>EDSElement</code>, however. Instead of writing your own constructor, <code>EDSElement</code> provides a hook from it's constructor that you should use for constructor-time operations.
+</p>
+
+<p>
+  The constructor hook provided is <code>init()</code> which <em>you must override</em>. <code>init()</code> is called prior to the element being attached to the DOM and allows you to setup default property values among other things.
+</p>
+
+<h4><code>initShadowDOM()</code></h4>
+
+<p>
+  During initialization we setup the specific shadow DOM strategy for EDS elements. In effect, we use a <code>template</code> node to inject DOM into the <code>shadowRoot</code> of the element, while also injecting a <code>style</code> tag into the document head with the provided css. There are specific technical reasons we handle styling in this way, primarily related to browser compatibility and ease of overrides. All this behavior is abstracted behind a method making setting up the DOM structure and styling very simple:
+</p>
+
+<doc-code language='javascript'>
+  const tag = 'eds-my-element';
+  const html = '<slot></slot>';
+  const css = require('./eds-my-element.scss');
+
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+    }
+  });
+</doc-code>
+
+<h4><code>defineDefaultProperties()</code> & <code>defineFlagProperties()</code></h4>
+
+<p>
+  HTML Custom elements can have either attributes or properties, just like native elements. Each of these can hold different values and each will follow the same rules that native elements use. This paradigm is different from typical javascript frameworks which use only properties. In the case of the latter, managing state is simpler. For HTML custom elements we must manage the state of both attributes and properties. Often, we want these to be in sync. To facilitate this we've provided two methods that create properties which mirror element attributes so if you access the property via javascript, you will get the value of the attribute rather than <code>undefined</code>.
+</p>
+
+<p>
+  So, for example, if you wanted to support a <code>disabled</code> state for your element that is accessible both as an attribute and a property you could do so like this:
+</p>
+
+<doc-code language='javascript'>
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+      this.defineDefaultProperties(['disabled']);
+    }
+  });
+</doc-code>
+
+<p>
+  Now, when you access the <code>disabled</code> property it will return the value of the <code>disabled</code> attribute. There is no need for you to implement a getter and setter, this is done automatically for you.
+</p>
+
+<p>
+  While the <code>defineDefaultProperties()</code> method is useful, we actually have a problem here with booleans. If, for example, our element was not disabled we'd still get <code>undefined</code> rather than <code>true</code> or <code>false</code> when checking programatically.
+</p>
+
+<doc-code>
+  <eds-my-element id='example1' disabled></eds-my-element>
+  <eds-my-element id='example2'></eds-my-element>
+
+  <script>
+    console.log(document.getElementById('example1').disabled); // undefined
+    console.log(document.getElementById('example2').disabled); // undefined
+  </script>
+</doc-code>
+
+<p>
+  This is because we aren't actually assigning a value to the <code>disabled</code> attribute. Boolean HTML attributes don't require values, they are considered <code>true</code> if present and <code>false</code> otherwise. To support this paradigm you can use a similar abstraction, but one designed specifically for booleans: <code>defineFlagProperties()</code>.
+</p>
+
+<doc-code language='javascript'>
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+      this.defineFlagProperties(['disabled']);
+    }
+  });
+</doc-code>
+
+<p>
+  Now our javascript is giving us the correct results:
+</p>
+
+<doc-code>
+  <eds-my-element id='example1' disabled></eds-my-element>
+  <eds-my-element id='example2'></eds-my-element>
+
+  <script>
+    console.log(document.getElementById('example1').disabled); // true
+    console.log(document.getElementById('example2').disabled); // false
+  </script>
+</doc-code>
+
+<eds-alert motif='warning' background='gray'>
+  Using these two methods will automatically create getters and setters that reflect the attribute values, or existence of attributes in the case of booleans. When defining properties in this way, make sure you don't mix up these methods or your find yourself debugging unexpected behavior.
+</eds-alert>
+
+<h4><code>_refs</code>, <code>$()</code>, <code>$$()</code> and querying the shadow DOM</h4>
+
+<p>
+  Another thing you will need to do is query your shadow DOM and store references to specific elements. The convention for storing references to nodes in the <code>shadowRoot</code> is to use the <code>_refs</code> hash. This hash provides a convenient collection of shortcuts to specific elements for later use. In addition to this shortcut, we've also implemented the convention used by Chrome Developer Tools for element querying: <code>$()</code> & <code>$$()</code>.
+</p>
+
+<eds-alert motif='info' background='gray'>
+  The <code>$()</code> and <code>$$()</code> methods query the <code>shadowRoot</code> only. If you need to query other content such as slotted content these shortcuts will not work. Use <code>this.querySelector()</code> and <code>this.querySelectorAll()</code> instead.
+</eds-alert>
+
+<p>
+  Here is an example that shows these principles in action:
+</p>
+
+<doc-code language='javascript'>
+  const html = '<slot></slot><div id="trigger"></div>'
+  customElements.define(tag, class _ extends EDSElement {
+    init() {
+      this.initShadowDOM(tag, html, css);
+      this._refs = {
+        id: this.$('#trigger')
+      }
+    }
+
+    connectedCallback() {
+      const spans = this.querySelectorAll('span'); // Gets all spans that were slotted
+      const fail = this.$$$('span'); // There are no spans in the shadowRoot
+      this._refs.trigger.addEventListener(...) // trigger is accessible via _refs
+    }
+  });
+</doc-code>
+
+<h3>Connection to and from the DOM</h3>
+
+<h4><code>connectedCallback()</code> & <code>disconnectedCallback()</code></h4>
+
+<p>
+  After initialization the new element is connected to the DOM and its <code>connectedCallback()</code> method is invoked if present. This is generally a good place to add events, manipulate DOM or do things that otherwise require the element to be constructed and present in the document.
+</p>
+
+<eds-alert motif='info' background='gray'>
+  If setting up event listeners at the document level be sure to keep a reference to them so you can remove them when the element is disconnected.
+</eds-alert>
+
+<p>
+  You don't need to implement <code>disconnectedCallback()</code> unless there is specific teardown needed for your element. Events attached to the element itself and its <code>shadowRoot</code> will be automatically cleaned up.
+</p>
+
+<h3>Rendering in Hidden Containers</h3>
+
+<p>
+  One lifecycle consideration is the initial render of an element. Often times, correct rendering requires element or container dimensions&mdash;which are not available in cases where the element is rendered in a hidden container such as a tab. To mitigate this problem, EDSElement looks for a <code>onFirstVisible()</code> method to execute when the element becomes visible for the first time. If present, <code>onFirstVisible()</code> will be called only once when the element is first made visible in the DOM.
+</p>
+
+<eds-alert motif='warning' background='gray'>
+  <h4>Browser Support for IntersectionObserver</h4>
+  <p>
+    <code>onFirstVisible()</code> relies on <mdn-doc-link url='API/IntersectionObserver'>IntersectionObserver</mdn-doc-link> to be called automatically and will therefore only work (automatically) in browsers that support it. The latest browser support can be found here:
+  </p>
+
+  <p>
+    <a href='https://caniuse.com/#feat=intersectionobserver'>https://caniuse.com/#feat=intersectionobserver</a>
+  </p>
+
+  <p>
+    Because this feature is not mandatory we've not included any polyfills. It is possible to polyfill <a href='https://github.com/w3c/IntersectionObserver/tree/master/polyfill'>IntersectionObserver</a> with some limitations, however, you may wish to orchestrate your own refresh paradigm in the application layer to provide the highest degree of support for all browsers. For example, you might add callbacks to all known hidden layers in your application. EDS defers the decision to you in cases where <code>IntersectionObserver</code> is not natively supported.
+  </p>
+</eds-alert>
+
+<h2>Observed Attributes</h2>
+
+<h3>Observing changes with <code>static get observedAttributes()</code></h3>
+
+<p>
+  We've already looked at how to update properties by mirroring attribute values with <code>defineDefaultProperties()</code> and <code>defineFlagProperties()</code>, but in many cases you need to do more than just mirror the attribute value. These situations are solved easily by telling the element to observe some attributes and execute a callback when they change.
+</p>
+
+<p>
+  To do this simply add attributes to the static <code>observedAttributes</code> getter. The webcomponents polyfill or native browser will take care of the rest and automatically call <code>attributeChangedCallback()</code> each time an observed attribute changes. However, even though you want to execute some custom code when an attribute changes, in almost every case a call to <code>attributeChangedCallback()</code> runs the same code, namely assigning the new attribute value to the corresponding property. Because of this we've defaulted <code>attributeChangedCallback()</code> to do just that, and we recommend you don't override this method unless absolutely necessary.
+</p>
+
+<p>
+  Because <code>attributeChangedCallback()</code> assigns new values into corresponding properties, you can now use property setters to execute custom code when specific attributes change.
+</p>
+
+<eds-alert motif='warning' background='gray'>
+  If you are implementing your own getter and setter for a property, you should not put that property in the call to <code>defineDefaultProperties()</code> or <code>defineFlagProperties()</code>. Those method create getters and setters for you.
+</eds-alert>
+
+<p>
+  Here is an example of how you can run custom code when specific attributes change:
+</p>
+
+<doc-code language='javascript'>
+  const html = '<slot></slot><eds-icon></eds-icon>'
+  customElements.define(tag, class _ extends EDSElement {
+    static get observedAttributes() {
+      return ['disabled', 'icon']);
+    }
+
+    init() {
+      this.initShadowDOM(tag, html, css);
+      this.defineFlagProperties(['disabled']);
+      this._refs = {
+        icon: this.$('eds-icon')
+      };
+    }
+
+    get icon() {
+      return this._refs.icon.getAttribute('icon');
+      // Could also be
+      // return this.getAttribute('icon');
+    }
+
+    set icon(value) {
+      // Reflect the property change back to the attribute
+      this.setAttribute('icon', value);
+      // Manipulate some shadowRoot
+      this._refs.icon.setAttribute('icon', value);
+    }
+
+    // We don't implement getters or setters for 'disabled'
+    // Those are provided by defineFlagProperties()
+
+  });
+</doc-code>
+
+<h3>Normalizing Observed Attributes</h3>
+
+<p>
+  After testing custom elements in different javascript frameworks we've observed that treatment of attribute case matters when making assignments to properties. Because of this, we've included a convenience method that allows you to use either lowercase or camelcase in your attribute markup and javascript properties. The <code>normalizeObservedAttributes()</code> method will accept an array of strings and objects (mixed) where the objects are key value mappings from lowercase to camelcase. As a best practice, you should always use <code>normalizeObservedAttributes()</code>.
+</p>
+
+<doc-code language='javascript'>
+  const html = '<slot></slot><eds-icon></eds-icon>'
+  customElements.define(tag, class _ extends EDSElement {
+    static get observedAttributes() {
+      return this.normalizeObservedAttributes(['disabled', { iconlibrary: 'iconLibrary' }]));
+    }
+
+    init() {
+      this.initShadowDOM(tag, html, css);
+      this._refs = {
+        icon: this.$('eds-icon')
+      };
+    }
+
+    // camelcase property
+    get iconLibrary() {
+      return this._refs.icon.getAttribute('library');
+    }
+
+    // camelcase property
+    set iconLibrary(value) {
+      this.setAttribute('iconLibrary', value);
+      this._refs.icon.setAttribute('library', value);
+    }
+
+  });
+</doc-code>

@@ -1,0 +1,109 @@
+@import "../../styles/eds-variables.scss";
+@import "../../styles/eds-mixins.scss";
+
+eds-stage {
+  @include flex(1 0 0);
+  display: inline-flex;
+  justify-content: flex-start;
+  color: $eds-blue;
+  font: {
+    size: 14px;
+    weight: 500;
+  }
+  padding-bottom: 38px;
+  position: relative;
+  text-align: left;
+
+  .stage-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $eds-blue;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style=''%3E%3Crect id='backgroundrect' width='100%25' height='100%25' x='0' y='0' fill='none' stroke='none'/%3E%3Cg class='currentLayer' style=''%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cpath d='M0,0 h24 v24 H0 z' fill='none' id='svg_1' class=''/%3E%3Cpath d='M9,16.17 L4.83,12 l-1.42,1.4100000000000001 L9,19 L21,7 l-1.4100000000000001,-1.4100000000000001 z' id='svg_2' class='' fill='%23ffffff' fill-opacity='1'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 18px 18px;
+    border-radius: 50%;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 18px;
+    z-index: 20;
+  }
+
+  &::after {
+    background-color: $eds-blue;
+    bottom: 8px;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+  }
+
+  &:first-child .stage-icon {
+      transform: translateX(0);
+  }
+
+  &:last-child {
+    justify-content: flex-end;
+    @include flex(0 1 0px);
+    transform: translateX(0);
+    width: 0;
+    z-index: 30;
+
+    .stage-icon {
+      transform: translateX(-100%);
+    }
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+
+  &[active] {
+    color: $eds-black;
+
+    .stage-icon {
+      background-color: $eds-white;
+      border: 3px solid $eds-magenta;
+      i {
+        display: none;
+      }
+    }
+
+    &::after {
+      background-color: $eds-border-color-dark;
+    }
+  }
+
+  &[active] ~ & /* incomplete step */ {
+    color: $eds-black;
+    font-weight: normal;
+    .stage-icon {
+      background-color: $eds-white;
+      border: 3px solid $eds-border-color-dark;
+      i {
+        display: none;
+      }
+    }
+
+    &::after {
+      background-color: $eds-border-color-dark;
+    }
+  }
+
+  span.stage-text {
+    white-space: nowrap;
+  }
+
+  & + &:not(:last-child) span.stage-text {
+    transform: translateX(-50%);
+  }
+
+  & + &:last-child span.stage-text {
+    transform: translateX(0);
+  }
+}

@@ -1,23 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export class TodoList {
-  _id: string;
-  name: string;
+export class User {
+  details: UserDetails;
+  lists: TodoList[];
+  items?: TodoItem[];
 
   constructor() {
-    this._id = Math.random().toString(36).substr(2, 10);
+    this.details = new UserDetails();
+    this.lists = new Array<TodoList>();
   }
 }
 
-export class TodoTask {
-  _id: string;
+export class UserDetails {
+  firstName: string;
+  lastName: string;
+  image?: string;
+}
+
+export class TodoList {
+  id: string;
+  name: string;
+  slug: string;
+
+  constructor() {
+    this.id = Math.random().toString(36).substr(2, 10);
+    this.name = '';
+    this.slug = '';
+  }
+}
+
+export class TodoItem {
+  id: string;
   description: string;
   list: string;
   archived: boolean;
 
   constructor() {
-    this._id = Math.random().toString(36).substr(2, 10);
+    this.id = Math.random().toString(36).substr(2, 10);
     this.archived = false;
   }
 }
@@ -26,48 +46,115 @@ export class TodoTask {
   providedIn: 'root'
 })
 export class TodoService {
-  lists: TodoList[] = [
-    {
-      _id: 'j657r8p9te',
-      name: 'Grocery Shopping'
-    }
-  ];
-  tasks: TodoTask[] = [
-    {
-      _id: '91nzf4gelf',
-      description: 'Ground Beef',
-      list: 'Grocery Shopping',
-      archived: false
+  user: User = {
+    details: {
+      firstName: 'Stephen',
+      lastName: 'Dickens',
+      image: '../../assets/images/stephen-dickens.jpg'
     },
-    {
-      _id: 'hp66sqq3y7',
-      description: 'Taco Seasoning',
-      list: 'Grocery Shopping',
-      archived: false
-    },
-    {
-      _id: 'h6xf8c7h4q',
-      description: 'Tortillas',
-      list: 'Grocery Shopping',
-      archived: false
-    }
-  ];
+    lists: [
+      {
+        id: 'j657r8p9te',
+        name: 'Groceries',
+        slug: 'groceries'
+      },
+      {
+        id: 'j657r8p9tf',
+        name: 'Chores',
+        slug: 'chores'
+      },
+      {
+        id: 'j657r8p9tg',
+        name: 'Christmas Shopping',
+        slug: 'christmas-shopping'
+      }
+    ],
+    items: [
+      {
+        id: '91nzf4gelf',
+        description: 'Apples',
+        list: 'Groceries',
+        archived: false
+      },
+      {
+        id: '91nzf4gelg',
+        description: 'Bananas',
+        list: 'Groceries',
+        archived: false
+      },
+      {
+        id: '91nzf4gelh',
+        description: 'Crepes',
+        list: 'Groceries',
+        archived: false
+      },
+      {
+        id: '91nzf4geli',
+        description: 'Doritos',
+        list: 'Groceries',
+        archived: false
+      },
+      {
+        id: 'hp66sqq3y7',
+        description: 'Vacuum',
+        list: 'Chores',
+        archived: false
+      },
+      {
+        id: 'h6xf8c7h4q',
+        description: 'Slippers for mom',
+        list: 'Christmas Shopping',
+        archived: false
+      },
+      {
+        id: 'h6xf8c7h4r',
+        description: 'Sweater for dad',
+        list: 'Christmas Shopping',
+        archived: false
+      }
+    ]
+  }
 
   constructor() { }
 
+  // User
+  getUser() {
+    return new Observable<User>(observer => {
+      observer.next(this.user);
+      observer.complete();
+      observer.error('Could not get user');
+    });
+  }
+
   // Lists
+  validateList(name) {
+    return new Observable<TodoList>(observer => {
+      observer.next(this.user.lists.filter(list => list.name.toLowerCase() === name.toLowerCase())[0]);
+      observer.complete();
+      observer.error('Could not validate list');
+    });
+  }
+
   getLists() {
     return new Observable<TodoList[]>(observer => {
-      observer.next(this.lists);
+      observer.next(this.user.lists);
       observer.complete();
       observer.error('Could not get lists');
     });
   }
 
+  getList(slug) {
+    return new Observable<TodoList>(observer => {
+      observer.next(this.user.lists.filter(list => list.slug === slug)[0]);
+      observer.complete();
+      observer.error('Could not get list');
+    });
+  }
+
   addList(data) {
     return new Observable<TodoList>(observer => {
-      this.lists.push(data);
-      observer.next(this.lists.find(list => list._id === data._id));
+      this.user.lists.push(data);
+      observer.next(this.user.lists.find(list => list.id === data.id));
       observer.complete();
       observer.error('Could not add list');
     });
@@ -75,9 +162,9 @@ export class TodoService {
 
   deleteList(data) {
     return new Observable<TodoList>(observer => {
-      const idx = this.lists.findIndex(list => list._id === data._id);
+      const idx = this.user.lists.findIndex(list => list.id === data.id);
       if (idx > -1) {
-        this.lists.splice(idx, 1);
+        this.user.lists.splice(idx, 1);
       }
       observer.next(data);
       observer.complete();
@@ -85,69 +172,80 @@ export class TodoService {
     });
   }
 
-  // Tasks
-  getTasks() {
-    return new Observable<TodoTask[]>(observer => {
-      observer.next(this.tasks);
+  // Items
+  validateItem(data) {
+    return new Observable<TodoItem>(observer => {
+      const val = this.user.items
+        .filter(item => item.list === data.list)
+        .filter(item => item.description.toLowerCase() === data.description.toLowerCase());
+      observer.next(val[0]);
       observer.complete();
-      observer.error('Could not get tasks');
+      observer.error('Could not validate item');
     });
   }
 
-  addTask(data) {
-    return new Observable<TodoTask>(observer => {
-      this.tasks.push(data);
-      observer.next(this.tasks.find(task => task._id === data._id));
+  getItems() {
+    return new Observable<TodoItem[]>(observer => {
+      observer.next(this.user.items);
       observer.complete();
-      observer.error('Could not add task');
+      observer.error('Could not get items');
+    });
+  }
+
+  addItem(data) {
+    return new Observable<TodoItem>(observer => {
+      this.user.items.push(data);
+      observer.next(this.user.items.find(item => item.id === data.id));
+      observer.complete();
+      observer.error('Could not add item');
     });
   }
   
-  updateTask(data) {
-    return new Observable<TodoTask>(observer => {
-      const task = this.tasks.find(task => task._id === data._id);
-      if (task) {
-        task.description = data.description;
+  updateItem(data) {
+    return new Observable<TodoItem>(observer => {
+      const item = this.user.items.find(item => item.id === data.id);
+      if (item) {
+        item.description = data.description;
       }
-      observer.next(task);
+      observer.next(item);
       observer.complete();
-      observer.error('Could not update task');
+      observer.error('Could not update item');
     });
   }
   
-  archiveTask(data) {
-    return new Observable<TodoTask>(observer => {
-      const task = this.tasks.find(task => task._id === data._id);
-      if (task) {
-        task.archived = true;
-      }
-      observer.next(task);
+  archiveItems(data) {
+    return new Observable<TodoItem[]>(observer => {
+      data.forEach(item => {
+        this.user.items.find(i => i.id === item.id).archived = true;
+      });
+      observer.next(this.user.items);
       observer.complete();
-      observer.error('Could not archive task');
+      observer.error('Could not archive items');
     });
   }
   
-  unarchiveTask(data) {
-    return new Observable<TodoTask>(observer => {
-      const task = this.tasks.find(task => task._id === data._id);
-      if (task) {
-        task.archived = false;
-      }
-      observer.next(task);
+  unarchiveItems(data) {
+    return new Observable<TodoItem[]>(observer => {
+      data.forEach(item => {
+        this.user.items.find(i => i.id === item.id).archived = false;
+      });
+      observer.next(this.user.items);
       observer.complete();
-      observer.error('Could not archive task');
+      observer.error('Could not archive item');
     });
   }
   
-  deleteTask(data) {
-    return new Observable<TodoTask>(observer => {
-      const idx = this.tasks.findIndex(task => task._id === data._id);
-      if (idx > -1) {
-        this.tasks.splice(idx, 1);
-      }
-      observer.next(data);
+  deleteItems(data) {
+    return new Observable<TodoItem[]>(observer => {
+      data.forEach(item => {
+        const idx = this.user.items.findIndex(i => i.id === item.id);
+        if (idx > -1) {
+          this.user.items.splice(idx, 1);
+        }
+      });
+      observer.next(this.user.items);
       observer.complete();
-      observer.error('Could not archive task');
+      observer.error('Could not archive item');
     });
   }
 }

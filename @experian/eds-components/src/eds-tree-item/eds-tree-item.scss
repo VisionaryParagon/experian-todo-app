@@ -1,0 +1,111 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "animations";
+@import "gray";
+@import "compact";
+
+eds-tree-item {
+  display: block;
+  position: relative;
+  background-color: $eds-white;
+  font-weight: 400;
+  color: $eds-link-color;
+  cursor: pointer;
+
+  .eds-tree-item-main {
+    padding: 0.6em 0;
+    z-index: 90;
+    position: relative;
+
+    .eds-tree-item-toggle {
+      display: none;
+
+      &.show {
+        display:inline-block;
+        margin-right: 4px;
+        width: 16px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: translateY(3px);
+      }
+    }
+  }
+
+  &.has-children {
+    font-weight: 500;
+    color: $eds-link-color;
+
+    .eds-tree-item-toggle {
+      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDkuMyAoNTExNjcpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPg0KICAgIDx0aXRsZT5leHBhbmQxNjwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGRlZnM+PC9kZWZzPg0KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPg0KICAgICAgICA8ZyBpZD0iZXhwYW5kMTYiIHN0cm9rZT0iIzQyNkRBOSI+DQogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLUNvcHkiIHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHJ4PSIzIj48L3JlY3Q+DQogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTItQ29weS0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LjAwMDAwMCwgOC4wMDAwMDApIHJvdGF0ZSg5MC4wMDAwMDApIHRyYW5zbGF0ZSgtOC4wMDAwMDAsIC04LjAwMDAwMCkgIiB4PSI3LjUiIHk9IjQuNSIgd2lkdGg9IjEiIGhlaWdodD0iNyIgcng9IjAuNSI+PC9yZWN0Pg0KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yLUNvcHktMyIgeD0iNy41IiB5PSI0LjUiIHdpZHRoPSIxIiBoZWlnaHQ9IjciIHJ4PSIwLjUiPjwvcmVjdD4NCiAgICAgICAgPC9nPg0KICAgIDwvZz4NCjwvc3ZnPg==");
+    }
+
+    &[expanded] {
+      & > .eds-tree-item-main > .eds-tree-item-toggle {
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDkuMyAoNTExNjcpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPg0KICAgIDx0aXRsZT5jb2xsYXBzZTE2PC90aXRsZT4NCiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4NCiAgICA8ZGVmcz48L2RlZnM+DQogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+DQogICAgICAgIDxnIGlkPSJjb2xsYXBzZTE2IiBzdHJva2U9IiM0MjZEQTkiPg0KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjMiPjwvcmVjdD4NCiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtMi1Db3B5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LjAwMDAwMCwgOC4wMDAwMDApIHJvdGF0ZSg5MC4wMDAwMDApIHRyYW5zbGF0ZSgtOC4wMDAwMDAsIC04LjAwMDAwMCkgIiB4PSI3LjUiIHk9IjQuNSIgd2lkdGg9IjEiIGhlaWdodD0iNyIgcng9IjAuNSI+PC9yZWN0Pg0KICAgICAgICA8L2c+DQogICAgPC9nPg0KPC9zdmc+");
+      }
+    }
+
+    &[expanded] > .eds-tree-item-children {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    & > .eds-tree-item-children {
+      opacity: 0;
+      transform: scaleY(0);
+      overflow: hidden;
+      height: 0;
+    }
+
+    eds-icon {
+      display: none;
+      margin-left: 10px;
+    }
+  }
+
+  &:hover {
+    color: $eds-link-hover-color;
+  }
+
+  &:first-child {
+    margin-top: 4px;
+  }
+
+  &:last-child {
+    margin-bottom: 4px;
+  }
+
+  &[selected] {
+    color: $eds-font-color;
+
+    & > .eds-tree-item-main {
+
+      background-color: $eds-gray;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: $eds-magenta;
+        z-index: 120;
+        pointer-events: none;
+      }
+    }
+
+  }
+
+  eds-icon {
+    display: none;
+    margin-right: 10px;
+  }
+
+  &[icon] eds-icon {
+    display: inline-block;
+  }
+
+}

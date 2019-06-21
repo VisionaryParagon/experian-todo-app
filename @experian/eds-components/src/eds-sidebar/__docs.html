@@ -1,0 +1,422 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+<script>
+  window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+  };
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.eds-docs eds-sidebar {
+  width: 250px;
+  height: 300px;
+  display: inline-block !important;
+  margin-right: 20px;
+}
+.eds-docs eds-sidebar .api-sidebar {
+  font-size: 14px;
+}
+</style>
+
+<div class='eds-docs'>
+
+  <doc-header>Examples</doc-header>
+
+  <eds-sidebar>
+    <eds-sidebar-group icon='reorder'>
+      <h4 caps>Package Configuration</h4>
+
+      <eds-menu-item>
+        Acquire Customers Faster
+        <div slot='children'>
+          <eds-menu-item>Tactical Parameters</eds-menu-item>
+          <eds-menu-item>Dynamic Parameters</eds-menu-item>
+          <eds-menu-item>Promotion Management</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </eds-sidebar-group>
+
+    <hr aria-hidden="true" />
+    <h4 caps>Section 2</h4>
+
+    <eds-menu-item icon='favorite'>
+      Group 1
+      <div slot='children'>
+        <eds-menu-item icon='person'>Profile</eds-menu-item>
+        <eds-menu-item icon='favorite'>
+          Group 1.1
+          <div slot='children'>
+            <eds-menu-item icon='person'>Profile</eds-menu-item>
+            <eds-menu-item icon='person'>Profile</eds-menu-item>
+          </div>
+        </eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar>
+
+  <eds-sidebar collapsable compact>
+    <eds-sidebar-group icon='reorder'>
+      <h4 caps>Package Configuration</h4>
+
+      <eds-menu-item>
+        Acquire Customers Faster
+        <div slot='children'>
+          <eds-menu-item>Tactical Parameters</eds-menu-item>
+          <eds-menu-item>Dynamic Parameters</eds-menu-item>
+          <eds-menu-item>Promotion Management</eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </eds-sidebar-group>
+
+    <hr aria-hidden="true" />
+    <h4 caps>Section 2</h4>
+
+    <eds-menu-item icon='favorite'>
+      Group 1
+      <div slot='children'>
+        <eds-menu-item icon='person'>Profile</eds-menu-item>
+        <eds-menu-item icon='favorite'>
+          Group 1.1
+          <div slot='children'>
+            <eds-menu-item icon='person'>Profile</eds-menu-item>
+            <eds-menu-item icon='person'>Profile</eds-menu-item>
+          </div>
+        </eds-menu-item>
+      </div>
+    </eds-menu-item>
+  </eds-sidebar>
+
+  <doc-header>Configuration Options</doc-header>
+
+  <api-option name='collapsable' type='boolean' default='false'>
+    Gets or sets whether the sidebar is collapsable. If <code>true</code>, a footer with an expand/collapse handle is displayed.
+
+    <doc-code live>
+      <eds-sidebar>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+
+      <eds-sidebar collapsable>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+    </doc-code>
+
+  </api-option>
+
+  <api-option name='collapsed' type='boolean' default='false'>
+    Gets or sets whether the sidebar is collapsed. This is primarily for use with <code>collapsable</code> but can be used independently (programmatically, for example).
+
+    <doc-code live>
+      <eds-sidebar collapsable>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+
+      <eds-sidebar collapsable collapsed>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+    </doc-code>
+
+  </api-option>
+
+  <api-option name='compact' type='boolean' default='false'>
+    Applies compact styling convenient for displaying more items.
+
+    <doc-code live>
+      <eds-sidebar compact style='height: 115px;'>
+        <eds-menu-item selected>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </eds-sidebar>
+  </doc-code>
+  </api-option>
+
+  <doc-header>Methods</doc-header>
+
+  <on-first-visible></on-first-visible>
+  
+  <api-method name='resetWidth [async]'>
+    Resets the sidebar width to fit its content. This is a convenience method normally only used in cases where 1) you allow content to drive the sidebar width and 2) you change the content after the sidebar has been rendered (for example, localizing content to a new language).
+
+    <doc-code live>
+      <eds-sidebar id='reset-width-method-example' style='height: 250px; width: auto;' collapsable>
+        <eds-sidebar-group icon='reorder'>
+          <h5 caps>Phrases</h5>
+          <hr aria-hidden="true" />
+          <eds-menu-item id='language1-example'>Excuse Me</eds-menu-item>
+          <eds-menu-item id='language2-example'>May I pass?</eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+
+      <div>
+        <eds-button id='english-button'>English</eds-button>
+        <eds-button id='german-button'>German</eds-button>
+      </div>
+
+      <script>
+      window.addEventListener('WebComponentsReady', function() {
+        var sidebar = document.getElementById('reset-width-method-example');
+        var item1 = document.getElementById('language1-example');
+        var item2 = document.getElementById('language2-example');
+
+        document.getElementById('english-button').addEventListener('click', function() {
+          item1.innerHTML = 'Excuse Me';
+          item2.innerHTML = 'May I pass?';
+          sidebar.resetWidth();
+        });
+
+        document.getElementById('german-button').addEventListener('click', function() {
+          item1.innerHTML = 'Entschuldigen Sie mich';
+          item2.innerHTML = 'Darf ich weitergeben?';
+          sidebar.resetWidth();
+        });
+      });
+      </script>
+    </doc-code>
+  </api-method>
+
+  <api-method name='selectItem' args="el: HTMLElement">
+    Selects the provided element, and deselects all other elements. The element provided should already be in the DOM of the <code>eds-sidebar</code> and it should support a <code>selected</code> property.
+
+    <doc-code live>
+      <eds-sidebar id='select-item-method-example' style='height: 150px;'>
+        <eds-menu-item>Tactical Parameters</eds-menu-item>
+        <eds-menu-item>Dynamic Parameters</eds-menu-item>
+        <eds-menu-item>Promotion Management</eds-menu-item>
+      </eds-sidebar>
+
+      <script>
+      window.addEventListener('WebComponentsReady', function() {
+        var sidebar = document.getElementById('select-item-method-example');
+        var index = 0;
+
+        setInterval(function() {
+          sidebar.selectItem(sidebar.children[index]);
+          index = (index === 2) ? 0 : index + 1;
+        }, 2000);
+      });
+      </script>
+    </doc-code>
+  </api-method>
+
+  <doc-header><code>eds-sidebar-group</code> Configuration Options</doc-header>
+
+  <api-option name='icon' type='string'>
+    Displays an icon when the sidebar group is collapsed. This value is passed through directly to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+    <doc-note motif='warning'>
+      <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+    </doc-note>
+
+    <doc-code live>
+      <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+      <!-- <script src='eds-icon.js'></script> -->
+      <!-- <script>
+        window.EDS.icons.defaultLibrary = 'material-icon-font';
+      </script> -->
+      <eds-sidebar collapsable collapsed>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+    </doc-code>
+
+  </api-option>
+
+  <api-option name='iconLibrary' type='string'>
+    The icon library to use when <code>icon</code> is also specified. This value is passed through as <code>library</code> to an <code>eds-icon</code> element and requires <code>eds-icon</code> to be included and configured.
+
+    <doc-note motif='warning'>
+      <b>Dependency Warning:</b> This option will only work properly if <code>eds-icon</code> is included and configured on the page.
+    </doc-note>
+
+    <doc-code live>
+      <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+      <!-- <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: false
+        };
+      </script> -->
+      <!-- <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script> -->
+      <!-- <script src='eds-icon.js'></script> -->
+      <!-- <script>
+        window.EDS.icons.defaultLibrary = 'material-icon-font';
+      </script> -->
+      <eds-sidebar collapsable collapsed>
+        <eds-sidebar-group icon='reorder'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+
+      <eds-sidebar collapsable collapsed>
+        <eds-sidebar-group icon='bars' iconLibrary='fas-svg'>
+          <h4 caps>Package Configuration</h4>
+          <eds-menu-item>
+            Acquire Customers Faster
+            <div slot='children'>
+              <eds-menu-item>Tactical Parameters</eds-menu-item>
+              <eds-menu-item>Dynamic Parameters</eds-menu-item>
+              <eds-menu-item>Promotion Management</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </eds-sidebar-group>
+      </eds-sidebar>
+    </doc-code>
+
+  </api-option>
+
+  <doc-header>Events</doc-header>
+
+  <api-event name='collapsed' type='CustomEvent'>
+    Fires when a sidebar is toggled to either a collapsed or expanded state. <code>event.detail</code> contains a boolean indicating whether the sidebar is collapsed.
+  </api-event>
+
+  <doc-header>CSS API</doc-header>
+
+  <api-option name='.api-sidebar'>
+    Provides access to the main sidebar body. This should be used to set font-size and other content styles.
+
+    <doc-code live>
+      <style>
+        eds-sidebar#eds-sidebar-16px-example .api-sidebar {
+          font-size: 16px;
+        }
+        eds-sidebar#eds-sidebar-14px-example .api-sidebar {
+          font-size: 14px;
+        }
+      </style>
+
+      <eds-sidebar id='eds-sidebar-16px-example'>
+        <h4 caps>Package Configuration</h4>
+        <eds-menu-item>
+          Acquire Customers Faster
+          <div slot='children'>
+            <eds-menu-item>Tactical Parameters</eds-menu-item>
+            <eds-menu-item>Dynamic Parameters</eds-menu-item>
+            <eds-menu-item>Promotion Management</eds-menu-item>
+          </div>
+        </eds-menu-item>
+      </eds-sidebar>
+
+      <eds-sidebar id='eds-sidebar-14px-example' compact>
+        <h4 caps>Package Configuration</h4>
+        <eds-menu-item>
+          Acquire Customers Faster
+          <div slot='children'>
+            <eds-menu-item>Tactical Parameters</eds-menu-item>
+            <eds-menu-item>Dynamic Parameters</eds-menu-item>
+            <eds-menu-item>Promotion Management</eds-menu-item>
+          </div>
+        </eds-menu-item>
+      </eds-sidebar>
+    </doc-code>
+  </api-option>
+
+  <doc-header>Content</doc-header>
+
+  <p>
+    <code>eds-sidebar</code> is optimized for the following content elements:
+  </p>
+
+  <ul>
+    <li><code>eds-menu-item</code>s</li>
+    <li><code>eds-sidebar-group</code>s</li>
+    <li><code>h3, h4, h5</code> tags</li>
+    <li><code>hr</code>s</li>
+  </ul>
+
+  <p>
+    When dealing with <code>collapsable</code> sidebars, you can provide an icon for non <code>eds-menu-item</code> elements by nesting content inside an <code>eds-sidebar-group</code> and setting an icon for the group. This will cause the entire group to collapse down to a single icon.
+  </p>
+
+  <doc-code live>
+    <eds-sidebar collapsable>
+      <eds-sidebar-group icon='reorder'>
+        <h4 caps>Package Configuration</h4>
+
+        <eds-menu-item>
+          Acquire Customers Faster
+          <div slot='children'>
+            <eds-menu-item>Tactical Parameters</eds-menu-item>
+            <eds-menu-item>Dynamic Parameters</eds-menu-item>
+            <eds-menu-item>Promotion Management</eds-menu-item>
+          </div>
+        </eds-menu-item>
+      </eds-sidebar-group>
+
+      <hr aria-hidden="true" />
+      <h4 caps>Section 2</h4>
+
+      <eds-menu-item icon='favorite'>
+        Group 1
+        <div slot='children'>
+          <eds-menu-item icon='person'>Profile</eds-menu-item>
+          <eds-menu-item icon='favorite'>
+            Group 1.1
+            <div slot='children'>
+              <eds-menu-item icon='person'>Profile</eds-menu-item>
+              <eds-menu-item icon='person'>Profile</eds-menu-item>
+            </div>
+          </eds-menu-item>
+        </div>
+      </eds-menu-item>
+    </eds-sidebar>
+  </doc-code>
+
+</div>

@@ -1,5 +1,4 @@
 @import "~bootstrap/scss/bootstrap.scss";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
@@ -8,171 +7,231 @@ $experian-blue-hover: #276bc4;
 $experian-pink: #af1685;
 $experian-pink-hover: #e31fad;
 $experian-link: #426da9;
+$experian-link-hover: #0056b3;
 $success: #28a745;
 
 html,
 body {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#body-content {
+  display: flex;
+  height: calc(100% - 66px);
+  overflow: hidden;
+}
+
+#route-content {
+  flex-grow: 1;
+  padding: 3rem 5rem 5rem;
 }
 
 
 /*~~ Typography ~~*/
 
-h1 {
-  margin: 1rem 0;
+.eds {
+  h1 {
+    &[caps] {
+      flex-grow: 1;
+      margin: 0;
+    }
+  }
+
+  h4 {
+    &[caps] {
+      margin: 0;
+      padding: 20px 20px 15px;
+    }
+  }
 }
 
-label {
-  margin: 0;
+a:not([href]):not([tabindex]) {
+  color: $experian-link;
+  cursor: pointer;
+
+  &:hover {
+    color: $experian-link-hover;
+    text-decoration: underline;
+  }
+}
+
+
+/*~~ Inputs ~~*/
+
+.edsTextbox {
+  border: 1px solid #939393;
+  border-radius: 4px;
+  display: inline-flex;
+  pointer-events: none;
+  position: relative;
+  width: 100%;
+
+  input {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #333333;
+    display: block;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.4px;
+    outline: none;
+    padding: 5px 10px;
+    pointer-events: auto;
+    -moz-transition: border-color 0.15s ease;
+    -o-transition: border-color 0.15s ease;
+    -webkit-transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease;
+    width: 100%;
+  }
+
+  &::after {
+    border: 2px solid $experian-link;
+    border-radius: 4px;
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    opacity: 0;
+    -moz-transition: opacity 0.15s ease;
+    -o-transition: opacity 0.15s ease;
+    -webkit-transition: opacity 0.15s ease;
+    transition: opacity 0.15s ease;
+  }
+
+  &.focus,
+  &:focus {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &.error {
+    input {
+      background-color: #fff5f7;
+    }
+
+    &::after {
+      border-color: #e4002b;
+      opacity: 1;
+    }
+  }
+}
+
+.edsInputMsg {
+  font-size: 13px;
+  display: none;
+  padding: 5px 0 0;
+  -moz-transition: height 0.15s ease;
+  -o-transition: height 0.15s ease;
+  -webkit-transition: height 0.15s ease;
+  transition: height 0.15s ease;
+
+  .error-text {
+    color: #cd0026;
+  }
+
+  &.show {
+    display: block;
+  }
 }
 
 
 /*~~ Layout ~~*/
 
 // Header
-header {
-  background: #fff;
-  box-shadow: 0 3px 10px rgba(0,0,0,.2);
-  height: 60px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 5;
+eds-primary-header {
+  eds-textbox {
+    &.searchbar {
+      margin: 0 10px 0 0;
 
-  .logo {
-    background: url(./assets/images/logo-experian.svg) no-repeat;
-    background-position: center;
-    background-size: contain;
-    display: block;
-    height: 100%;
-    width: 117px;
-  }
+      .eds-textbox-prepend {
+        background: none;
+        border: none;
 
-  .menu {
-    color: $experian-blue;
-    cursor: pointer;
-    font-size: 2rem;
-
-    &:hover {
-      color: $experian-blue-hover;
+        eds-icon {
+          color: $experian-blue;
+          font-size: 18px;
+          margin: 7px 0 0 10px;
+        }
+      }
     }
   }
 
-  nav {
-    background: #fff;
-    box-shadow: 0 10px 10px rgba(0,0,0,.2);
-    overflow: hidden;
+  .user {
+    border-left: 1px solid;
 
-    a {
-      border-top: 1px solid #eee;
-      display: block;
-      font-size: 1.25rem;
-      padding: 1rem 0;
+    .avatar {
+      background-color: $experian-blue; 
+      background-image: url(./assets/images/baseline-account_circle-24px.svg);
+      background-size: 30px 30px;
+      border: 1px solid #aaa;
+      border-radius: 50%;
+      display: inline-block;
+      height: 32px;
+      width: 32px;
+    }
+
+    .name {
+      color: #333;
+      margin: 0 10px;
+    }
+
+    eds-icon {
+      color: $experian-blue;
     }
   }
-}
 
-// Templates
-section {
-  padding: 60px 0;
-}
-
-// Lists
-.lists {
-  white-space: nowrap;
-
-  .list {
-    background: #ddd;
-    border-radius: 5px;
-    display: inline-block;
-    margin: 0 15px 0 0;
-    vertical-align: top;
-    white-space: normal;
-    width: 320px;
-
-    .mat-card {
-      margin: 0 0 .5rem;
+  &[motif='dark'] {
+    eds-textbox {
+      &.searchbar {
+        .eds-textbox-prepend {
+          eds-icon {
+            color: inherit;
+          }
+        }
+      }
+    }
+    .user {
+      .name,
+      eds-icon {
+        color: inherit;
+      }
     }
   }
 }
 
-input {
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0 .5rem;
-  width: 100%;
+// Sidebar
+#sidenav {
+  height: 100%;
+  width: 250px;
 
-  &.nameInput {
-    font-size: 20px;
-    line-height: 2.5rem;
-    margin: 1rem 0;
-  }
-
-  &.description {
-    font-size: 16px;
-    line-height: 2.5rem;
-    margin: 0 0 1rem;
-  }
-
-  &:focus {
-    background: #fff;
-    border-color: $experian-blue;
+  button[eds-button] {
+    margin: 15px 20px;
   }
 }
 
-button {
-  background: none;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  line-height: 1.5rem;
-  margin: 1rem 0;
-  padding: .5rem 1rem;
-
-  &.addBtn {
-    align-items: center;
-    display: flex;
-    line-height: 24px;
-    margin: 0;
-    padding: 1rem;
-    width: 100%;
-  }
-
-  &.more {
-    align-items: center;
-    display: flex;
-    margin: 0;
-    padding: .5rem;
-  }
-
-  &:hover {
-    background: #eee;
-  }
-}
-
-*:focus {
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-
-/*~~ Bootstrap Components ~~*/
-
-.dropdown {
-  margin: 1rem 0;
-
-  .dropdown-menu {
-    display: block;
-    padding: 1rem;
-
-    a {
-      cursor: pointer;
-    }
-  }
+// Content
+.mainHeading {
+  align-items: center;
+  display: flex;
+  margin: 0 0 2rem;
 }
 
 
@@ -182,4 +241,12 @@ snack-bar-container {
   &.success {
     background: $success;
   }
+}
+
+
+/*~~ Fallbacks ~~*/
+
+*:focus {
+  box-shadow: none !important;
+  outline: none !important;
 }

@@ -1,0 +1,250 @@
+[
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-1",
+    "element": "eds-textbox",
+    "change": "Added 'mode' api to support password masking",
+    "docs": "#code/api-option/mode"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-3",
+    "element": "eds-button",
+    "change": "Tertiary buttons without icons no longer display in red",
+    "docs": "#code/api-option/motif"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-4",
+    "element": "eds-accordion",
+    "change": "Added eds-accordion-panel to support any type of accordion content",
+    "docs": "#code/doc-header/-eds-accordion-panel--Configuration-Options"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-5",
+    "element": "eds-dropdown",
+    "change": "Dropdown width now based on content by default",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-9",
+    "element": "eds-tooltip",
+    "change": "Added targetElements api to bind directly to target elements",
+    "docs": "#code/api-option/targetElements"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-10",
+    "element": "eds-tooltip",
+    "change": "Added beforeShow hook to allow conditional display",
+    "docs": "#code/api-method/beforeShow"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-11",
+    "element": "eds-textarea",
+    "change": "Added textarea element",
+    "docs": "#code/doc-header/Examples",
+    "new": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-18",
+    "element": "eds-menu-item",
+    "change": "Hide collapsed menu items from screen readers",
+    "docs": "#code/api-option/expanded"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-19",
+    "element": "eds-primary-header",
+    "change": "Added 'banner' role for accessibility",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-21",
+    "element": "eds-data-grid",
+    "change": "Hide selection header from screen readers when not displayed",
+    "docs": "#code/doc-header/Headers-and-Toolbars"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-22",
+    "element": "eds-menu-item",
+    "change": "Various accessibility improvements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-23",
+    "element": "eds-card",
+    "change": "Converted from custom element to css-only",
+    "docs": "#code/doc-header/Examples",
+    "deprecation": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-24",
+    "element": "eds-alert",
+    "change": "Added ariaLabelClose option to make close label accessible",
+    "docs": "#code/api-option/ariaLabelClose"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-25",
+    "element": "eds-dropdown",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-28",
+    "element": "eds-tooltip",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-30",
+    "element": "eds-modal",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-31",
+    "element": "eds-token",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-32",
+    "element": "eds-alert",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-33",
+    "element": "eds-accordion",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-33",
+    "element": "eds-textbox",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-33",
+    "element": "eds-sidebar",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-37",
+    "element": "eds-button",
+    "change": "Converted from custom element to css-only",
+    "docs": "#code/doc-header/Examples",
+    "deprecation": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-47",
+    "element": "ALL",
+    "change": "Named based classes can now be extended",
+    "docs": false
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-48",
+    "element": "eds-radio",
+    "change": "Various accessibility enhancements",
+    "docs": "#code/doc-header/Examples"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-50",
+    "element": "eds-progress-indicator",
+    "change": "Deprecated eds-progress-indicator, use eds-step-sequence instead",
+    "docs": "#code/doc-header/Examples",
+    "deprecation": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-50",
+    "element": "eds-step-sequence",
+    "change": "Added eds-step-sequence, replaces eds-progress-indicator, now accessible",
+    "docs": "#code/doc-header/Examples",
+    "new": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-56",
+    "element": "eds-badge",
+    "change": "Added eds-badge element",
+    "docs": "#code/doc-header/Examples",
+    "new": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-58",
+    "element": "eds-data-grid",
+    "change": "Upgraded to ag-grid v20, breaking change (new api and styles)",
+    "docs": "#code/doc-header/Examples",
+    "breaking": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-60",
+    "element": "eds-avatar",
+    "change": "Added eds-avatar element",
+    "docs": "#code/doc-header/Examples",
+    "new": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-62",
+    "element": "eds-tabs",
+    "change": "Made tabs closable",
+    "docs": "#code/api-option/closable"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-63",
+    "element": "eds-segmented-control",
+    "change": "Added eds-segmented-control element",
+    "docs": "#code/doc-header/Examples",
+    "new": true
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-66",
+    "element": "eds-tabs",
+    "change": "Added eds-icon-tabs",
+    "docs": "NEEDS DOCS"
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-66",
+    "element": "ALL",
+    "change": "Various style changes to address accessibility",
+    "docs": false
+  },
+  {
+    "version": "2.0.0",
+    "preRelease": "1.0.1-68",
+    "element": "eds-switch",
+    "change": "Removed state labels (labels inside the switch)",
+    "docs": "#code/doc-header/Examples",
+    "breaking": true
+  }
+]

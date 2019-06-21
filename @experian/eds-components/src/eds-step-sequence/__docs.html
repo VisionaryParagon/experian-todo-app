@@ -1,0 +1,82 @@
+<doc-header>Examples</doc-header>
+<div class='examples'>
+  <eds-step-sequence>
+    <eds-step>First</eds-step>
+    <eds-step active>Second</eds-step>
+    <eds-step>Third</eds-step>
+  </eds-step-sequence>
+</div>
+
+<doc-header>Configuration Options</doc-header>
+
+<p>
+  The number of steps is defined by the number of <code>eds-step</code> elements within the root <code>eds-step-sequence</code> element.
+</p>
+
+<api-option name='currentStepARIALabel' type='string' default='window.EDS.stepSequence.defaults.currentStepARIALabel || current'>
+  Sets the <code>aria-label</code> value for steps in the <code>active</code> state.
+
+  <doc-code live>
+    <eds-step-sequence currentStepARIALabel="in progress">
+      <eds-step>First</eds-step>
+      <eds-step active>Second</eds-step>
+      <eds-step>Third</eds-step>
+    </eds-step-sequence>
+  </doc-code>
+
+</api-option>
+
+<api-option name='nextStepARIALabel' type='string' default='window.EDS.stepSequence.defaults.nextStepARIALabel || next'>
+  Sets the <code>aria-label</code> value for steps following the <code>active</code> state.
+
+  <doc-code live>
+    <eds-step-sequence nextStepARIALabel="pending">
+      <eds-step>First</eds-step>
+      <eds-step active>Second</eds-step>
+      <eds-step>Third</eds-step>
+    </eds-step-sequence>
+  </doc-code>
+
+</api-option>
+
+<api-option name='previousStepARIALabel' type='string' default='window.EDS.stepSequence.defaults.previousStepARIALabel || previous'>
+  Sets the <code>aria-label</code> value for steps before the <code>active</code> state.
+
+  <doc-code live>
+    <eds-step-sequence previousStepARIALabel="already reviewed">
+      <eds-step>First</eds-step>
+      <eds-step active>Second</eds-step>
+      <eds-step>Third</eds-step>
+    </eds-step-sequence>
+  </doc-code>
+
+</api-option>
+
+<doc-header><code>eds-step</code> Configuration Options</doc-header>
+
+<api-option name='active' type='boolean' default='false'>
+  Sets whether the step is currently active. Steps preceding the active stage will be marked as previous.
+
+  <doc-code live>
+    <eds-step-sequence>
+      <eds-step>First</eds-step>
+      <eds-step active>Second</eds-step>
+      <eds-step>Third</eds-step>
+    </eds-step-sequence>
+  </doc-code>
+
+</api-option>
+
+
+<doc-header>Step Title</doc-header>
+
+<p>
+  Step title is defined by the <code>eds-step</code> element contents.
+</p>
+
+<doc-code live>
+  <eds-step-sequence>
+    <eds-step>Step Title 1</eds-step>
+    <eds-step active>Step Title 2</eds-step>
+  </eds-step-sequence>
+</doc-code>

@@ -1,0 +1,14 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+// CAUTION: .eds base class gets added to *every* eds element
+// Do not over style the base class itself
+.eds {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  @include font-smoothing();
+  font-family: $eds-font-family-base;
+  line-height: 1.4em;
+}

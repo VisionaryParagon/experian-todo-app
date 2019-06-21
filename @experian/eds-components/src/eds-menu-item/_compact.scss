@@ -1,0 +1,32 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+.eds-item-compact eds-menu-item {
+
+  & > .eds-menu-item-main {
+    padding: 0.40em 0;
+  }
+
+  &.has-children {
+    & > .eds-menu-item-main {
+      padding: 0.6em 0;
+    }
+  }
+
+  &[selected] {
+
+    .eds-menu-item-main {
+      &::before {
+        right: 0;
+        top: 0px;
+        bottom: 0px;
+      }
+    }
+
+    &::after {
+      top: 0px;
+      bottom: 0px;
+    }
+  }
+
+}

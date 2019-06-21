@@ -1,0 +1,39 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+@import "./animations.scss";
+
+eds-icon {
+  display: inline-block;
+  line-height: 0 !important;
+  margin: 0 6px 0 0;
+  vertical-align: text-bottom;
+
+  .material-icons {
+    font-size: inherit;
+  }
+
+  & > * {
+    font-size: inherit;
+  }
+
+  // Size variants
+  @mixin icon-size($px) {
+    & > * {
+      font-size: $px;
+      vertical-align: bottom;
+    }
+  }
+
+  &.s18 { @include icon-size(18px); }
+  &.s24 { @include icon-size(24px); }
+  &.s36 { @include icon-size(36px); }
+  &.s48 { @include icon-size(48px); }
+  &.s60 { @include icon-size(60px); }
+
+  &[border] {
+    padding: 12px;
+    border: 4px solid $eds-border-color;
+    border-radius: 3px;
+  }
+
+}

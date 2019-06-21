@@ -1,0 +1,333 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+  .example {
+    border-left: 1px dotted #ccc;
+    padding:20px;
+  }
+
+  .example:first-child {
+    border-left: none;
+  }
+
+  .flex {
+    display: flex;
+    border: 1px dotted #ccc;
+  }
+</style>
+
+<doc-header>Examples</doc-header>
+
+<div class="flex">
+  <div class="example">
+    <eds-icon icon="info" class="example-icon" aria-describedby="example-icon-tooltip"></eds-icon>
+    <eds-tooltip targetclass="example-icon" id="example-icon-tooltip">
+      Lorem ipsum dolor sit amet, consectetur
+    </eds-tooltip>
+  </div>
+
+  <div class="example">
+    <p>
+      Tooltips can be used with <a href="#" class="example-link" aria-describedby="example-link-tooltip">links</a> as well.
+    </p>
+    <eds-tooltip position="bottom" targetclass="example-link" id="example-link-tooltip">
+      Learn more about links here:
+      <br />
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a</a>
+    </eds-tooltip>
+  </div>
+
+  <div class="example">
+    <eds-button class="example-button" aria-describedby="example-button-tooltip">Aligned with button edge</eds-button>
+    <eds-tooltip position="top-end" targetclass="example-button" id="example-button-tooltip">
+      And also using some <b>HTML</b> formatting.
+    </eds-tooltip>
+  </div>
+
+</div>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='delay' type='number' default='window.EDS.tooltips.defaults.delay || 0'>
+    The milliseconds to wait before showing the tooltip.
+
+    <doc-note motif='warning'>
+      <b>NOTE:</b> The delay for displaying tooltips only applies at first render for any single tooltip. For example, if three adjacent elements each have their own tooltip there will be a delay as you move between them. However, if the same elements share a tooltip, there will only be a delay on the first element with mouseover, and moving between the other elements in the group will cause the tooltip to instantly switch targets (i.e. no delay).
+    </doc-note>
+
+    <doc-code live>
+      <eds-button class='example-delay-default'>Delay 0 (default)</eds-button>
+      <eds-button class='example-delay-300'>Delay 300</eds-button>
+      <eds-button class='example-delay-700'>Delay 700</eds-button>
+      <eds-button class='example-delay-1000'>Delay 1000</eds-button>
+
+      <br />
+      <br />
+      <eds-button class='example-delay-group-700'>Delay 700 (shared)</eds-button>
+      <eds-button class='example-delay-group-700'>Delay 700 (shared)</eds-button>
+      <eds-button class='example-delay-group-700'>Delay 700 (shared)</eds-button>
+
+      <eds-tooltip targetClass='example-delay-default'>
+        Delay: <b>0 (default)</b>
+      </eds-tooltip>
+      <eds-tooltip delay='300' targetClass='example-delay-300'>
+        Delay: <b>300</b>
+      </eds-tooltip>
+      <eds-tooltip delay='700' targetClass='example-delay-700'>
+        Delay: <b>700</b>
+      </eds-tooltip>
+      <eds-tooltip delay='1000' targetClass='example-delay-1000'>
+        Delay: <b>1000</b>
+      </eds-tooltip>
+      <eds-tooltip delay='700' targetClass='example-delay-group-700'>
+        Delay: <b>700</b> (shared tooltip)
+      </eds-tooltip>
+    </doc-code>
+</api-option>
+
+<api-option name='position' type='string' default='window.EDS.tooltips.defaults.position || top'>
+    The position of the tooltip in relation to the trigger element. The valid values are:
+
+    <ul>
+      <li><b>top (-start/-end)</b></li>
+      <li><b>bottom (-start/-end)</b></li>
+      <li><b>left (-start/-end)</b></li>
+      <li><b>right (-start/-end)</b></li>
+    </ul>
+
+    <p>
+      You can optionally align the tooltip with the target element by adding a <code>-start</code> or <code>-end</code> modifier to any of the positions above.
+    </p>
+
+    <doc-code live>
+      <eds-button class='example-position-top'>Top</eds-button>
+      <eds-button class='example-position-bottom'>Bottom</eds-button>
+      <eds-button class='example-position-left'>Left</eds-button>
+      <eds-button class='example-position-right'>Right</eds-button>
+
+      <eds-tooltip targetClass='example-position-top'>
+        Position: <b>top</b>
+      </eds-tooltip>
+      <eds-tooltip  position="bottom" targetClass='example-position-bottom'>
+        Position: <b>bottom</b>
+      </eds-tooltip>
+      <eds-tooltip  position="left" targetClass='example-position-left'>
+        Position: <b>left</b>
+      </eds-tooltip>
+      <eds-tooltip  position="right" targetClass='example-position-right'>
+        Position: <b>right</b>
+      </eds-tooltip>
+
+      <br />
+      <br />
+
+      <eds-button class='example-position-top-start'>Top Start</eds-button>
+      <eds-button class='example-position-top-end'>Top End</eds-button>
+      <eds-button class='example-position-right-start'>Right Start</eds-button>
+      <eds-button class='example-position-right-end'>Right End</eds-button>
+
+      <eds-tooltip  position="top-start" targetClass='example-position-top-start'>
+        Position: <b>top-start</b>
+      </eds-tooltip>
+      <eds-tooltip  position="top-end" targetClass='example-position-top-end'>
+        Position: <b>top-end</b>
+      </eds-tooltip>
+      <eds-tooltip  position="right-start" targetClass='example-position-right-start'>
+        Position: <br /><b>right-start</b>
+      </eds-tooltip>
+      <eds-tooltip  position="right-end" targetClass='example-position-right-end'>
+        Position: <br /><b>right-end</b>
+      </eds-tooltip>
+    </doc-code>
+</api-option>
+
+<api-option name='targetClass' type='string'>
+    A css class on elements the tooltip should attach itself to. <code>eds-tooltip</code>s use document level event listeners to determine when the mouse hovers over elements in the document. These listeners check elements for the class specified in <code>targetClass</code>, and if present the tooltip will be shown.
+
+    <p>
+      Using event delegation in this way allows you to change which elements a tooltip should attach to at any time, and also allows you to add and remove elements to the document after tooltips have initialized.
+    </p>
+
+    <doc-code live>
+      <eds-button class='example-target-class'>Same Tooltip (1)</eds-button>
+      <eds-button class='example-target-class'>Same Tooltip (2)</eds-button>
+      <eds-button class='example-target-class'>Same Tooltip (3)</eds-button>
+      <eds-button class='example-target-class2'>Different Tooltip</eds-button>
+
+
+      <eds-tooltip targetClass='example-target-class'>
+        One tooltip to rule them all.
+      </eds-tooltip>
+      <eds-tooltip targetClass='example-target-class2'>
+        A tooltip for just one element... unless you add more with the same class.
+      </eds-tooltip>
+    </doc-code>
+</api-option>
+
+<api-option name='targetElements' type='HTMLElement[]' propertyOnly>
+    An iterable of <code>HTMLElement</code>s the tooltip should attach itself to. If you need to attach tooltips to elements inside of shadow DOM boundaries you need to use this API.
+
+    <doc-note motif='warning'>
+      Tooltips that use <code>targetElements</code> do not use event delegation. Instead <code>mouseenter</code> and <code>mouseleave</code> events are bound directly to the targets provided. Because of this, you will need to reassign these references manually in cases where the DOM is dynamic and targets are added or removed after your tooltips are initialized.
+    </doc-note>
+
+    <doc-code live>
+      <eds-button class='example-target-element'>Same Tooltip (1)</eds-button>
+      <eds-button class='example-target-element'>Same Tooltip (2)</eds-button>
+      <eds-button class='example-target-element'>Same Tooltip (3)</eds-button>
+      <eds-button class='example-target-element2'>Different Tooltip</eds-button>
+
+
+      <eds-tooltip id='example-target-element-tooltip1'>
+        One tooltip to rule them all.
+      </eds-tooltip>
+      <eds-tooltip id='example-target-element-tooltip2'>
+        A tooltip for just one element...
+      </eds-tooltip>
+
+      <script>
+        window.addEventListener('WebComponentsReady', function() {
+          var els1 = document.querySelectorAll('.example-target-element');
+          var tooltip1 = document.getElementById('example-target-element-tooltip1');
+          tooltip1.targetElements = els1;
+
+          var el2 = document.querySelector('.example-target-element2');
+          var tooltip2 = document.getElementById('example-target-element-tooltip2');
+          tooltip2.targetElements = [el2];
+        });
+      </script>
+    </doc-code>
+</api-option>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='beforeShow' args='target: HTMLElement' returnType='any'>
+  If defined, this method is automatically called before each call to <code>show()</code> and can be used to process dynamic content or conditionally display the tooltip. The current tooltip target is passed as an argument. This method should not be called manually.
+
+  <doc-note motif='warning'>
+    Returning <code>false</code> will cancel showing the tooltip.
+  </doc-note>
+
+  <doc-code live>
+    <h4 caps>Dynamic Content</h4>
+    <eds-textbox id='before-show-tooltip-source' placeholder='Type to change tooltip content...' style='display: inline-flex;'></eds-textbox>
+    <eds-button class='before-show-tooltip-method-example1' style='display: inline-flex;'>Hover for tooltip</eds-button>
+
+    <eds-tooltip id='before-show-tooltip-method-example1' targetClass='before-show-tooltip-method-example1'></eds-tooltip>
+
+    <h4 caps>Conditional display</h4>
+    <eds-button class='before-show-tooltip-method-example2'>Hover for tooltip</eds-button>
+    <eds-button class='before-show-tooltip-method-example2' style='margin-left: 30px;'>Hover for tool...</eds-button>
+    <eds-tooltip id='before-show-tooltip-method-example2' targetClass='before-show-tooltip-method-example2'>Conditional!</eds-tooltip>
+
+    <script>
+      var beforeshowTooltip1 = document.getElementById('before-show-tooltip-method-example1');
+      var beforeshowTooltipSource = document.getElementById('before-show-tooltip-source');
+      beforeshowTooltip1.beforeShow = function(target) {
+        // Take tooltip content from form input
+        beforeshowTooltip1.innerHTML = beforeshowTooltipSource.value || 'Write something in the textbox...';
+      };
+
+      var beforeshowTooltip2 = document.getElementById('before-show-tooltip-method-example2');
+      beforeshowTooltip2.beforeShow = function(target) {
+        // Suppress tooltips if complete text is visible
+        if (target.innerText.indexOf('...') === -1) return false;
+      };
+    </script>
+  </doc-code>
+</api-method>
+
+<api-method name='hide'>
+  Hides the tooltip.
+
+  <p>
+    This method is intended for building custom programmatic interfaces.
+  </p>
+
+  <doc-note>
+    See <code>show()</code> for a working example.
+  </doc-note>
+</api-method>
+
+<api-method name='show' args='target: HTMLElement'>
+  Calling <code>show</code> will cause the tooltip to display on the specified target, even if <code>targetClass</code> and <code>targetElements</code> are omitted. All other options are honored (delay, position, etc.).
+
+  <p>
+    This method is intended for building custom programmatic interfaces.
+  </p>
+
+  <doc-code live>
+    <span id='method-show-example-span'>A random bit of text</span>
+    <eds-button id='method-show-example-button-show'>Show tooltip</eds-button>
+    <eds-button id='method-show-example-button-hide'>Hide tooltip</eds-button>
+    <eds-tooltip id='method-show-example-tooltip'>
+      A detatched tooltip
+    </eds-tooltip>
+
+
+    <script>
+      window.addEventListener('WebComponentsReady', function() {
+        var span = document.getElementById('method-show-example-span');
+        var buttonShow = document.getElementById('method-show-example-button-show');
+        var buttonHide = document.getElementById('method-show-example-button-hide');
+        var tooltip = document.getElementById('method-show-example-tooltip');
+
+        buttonShow.addEventListener('click', function() {
+          tooltip.show(span);
+        });
+        buttonHide.addEventListener('click', function() {
+          tooltip.hide(span);
+        });
+      });
+    </script>
+  </doc-code>
+</api-method>
+
+<doc-header>Events</doc-header>
+
+<api-event name='hide' type='CustomEvent' detail='HTMLElement'>
+  Fires when the tooltip is hidden. This event fires after all animations are complete. <code>e.detail</code> contains the element this tooltip attached to.
+
+  <doc-code live>
+    <eds-button icon='visibility_off' motif='tertiary' class='hide-tooltip-event-example'>Hover to see tooltip</eds-button>
+    <eds-tooltip id='hide-tooltip-event-example' targetClass='hide-tooltip-event-example'>New Icon!</eds-tooltip>
+
+    <script>
+      var hideEventTooltip = document.getElementById('hide-tooltip-event-example');
+      hideEventTooltip.addEventListener('show', function(e) {
+        e.detail.icon = 'visibility';
+      });
+      hideEventTooltip.addEventListener('hide', function(e) {
+        e.detail.icon = 'visibility_off';
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<api-event name='show' type='CustomEvent' detail='HTMLElement'>
+  Fires when the tooltip is shown. This event fires before animations are complete. <code>e.detail</code> contains the element this tooltip attached to.
+
+  <doc-code live>
+    <eds-button icon='visibility_off' motif='tertiary' class='show-tooltip-event-example'>Hover to see tooltip</eds-button>
+    <eds-tooltip id='show-tooltip-event-example' targetClass='show-tooltip-event-example'>New Icon!</eds-tooltip>
+
+    <script>
+      var showEventTooltip = document.getElementById('show-tooltip-event-example');
+      showEventTooltip.addEventListener('show', function(e) {
+        e.detail.icon = 'visibility';
+      });
+      showEventTooltip.addEventListener('hide', function(e) {
+        e.detail.icon = 'visibility_off';
+      });
+    </script>
+  </doc-code>
+</api-event>
+
+<doc-header>Content</doc-header>
+
+<p>
+  Tooltip content should be limited to simple statements that are easy to read. Use of imagery and other complex markup is discouraged, but html content is technically supported.
+</p>

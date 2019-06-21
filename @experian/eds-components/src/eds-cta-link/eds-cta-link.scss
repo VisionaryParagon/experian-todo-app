@@ -1,0 +1,39 @@
+@import "../styles/eds-variables";
+@import "../styles/eds-mixins";
+
+$animation-time: 0.15s;
+$cta-link-border-radius: $eds-border-radius-large;
+$cta-link-font-family: $eds-font-family-base;
+$cta-link-font-size: 16px;
+$cta-link-font-weight: 500;
+$cta-link-arrow: "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjI0IiB3aWR0aD0iMjQiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMzIwIDUxMiI+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTI4NS40NzYgMjcyLjk3MUw5MS4xMzIgNDY3LjMxNGMtOS4zNzMgOS4zNzMtMjQuNTY5IDkuMzczLTMzLjk0MSAwbC0yMi42NjctMjIuNjY3Yy05LjM1Ny05LjM1Ny05LjM3NS0yNC41MjItLjA0LTMzLjkwMUwxODguNTA1IDI1NiAzNC40ODQgMTAxLjI1NWMtOS4zMzUtOS4zNzktOS4zMTctMjQuNTQ0LjA0LTMzLjkwMWwyMi42NjctMjIuNjY3YzkuMzczLTkuMzczIDI0LjU2OS05LjM3MyAzMy45NDEgMEwyODUuNDc1IDIzOS4wM2M5LjM3MyA5LjM3MiA5LjM3MyAyNC41NjguMDAxIDMzLjk0MXoiPjwvcGF0aD48L3N2Zz4=";
+
+// CTA Link template styles
+// These styles intentionally omit the font and background colors and, as such, should be extended by the user
+[class*="eds-cta-link"] {
+  box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
+  font-family: $cta-link-font-family;
+  font-size: $cta-link-font-size;
+  font-weight: $cta-link-font-weight;
+  @include font-smoothing();
+  border-radius: $cta-link-border-radius;
+  padding: 10px 20px;
+
+  transition: background-color $animation-time ease;
+
+  // Apply the arrow
+  &::after {
+    box-sizing: border-box;
+    content: '';
+    display: inline-block;
+    position: relative;
+    background-image: url($cta-link-arrow);
+    background-size: contain;
+    vertical-align: text-top;
+    width: 18px;
+    height: 18px;
+    right: -10px;
+  }
+}

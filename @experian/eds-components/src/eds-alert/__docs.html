@@ -1,0 +1,282 @@
+<style>
+table tr td {
+  vertical-align: bottom;
+}
+</style>
+
+<doc-header>Examples</doc-header>
+<eds-alert motif="success" background="gray">
+  <h4>Success</h4>
+  <p>Thank you for subscribing.</p>
+</eds-alert>
+
+<doc-header>Configuration Options</doc-header>
+
+<api-option name='background' type='enum' default='white'>
+  Sets the background color to either gray or white. <doc-note>Non-regional alerts only</doc-note>
+
+  <p>
+    Available values:
+  </p>
+  <ul>
+    <li>gray</li>
+    <li>white</li>
+  </ul>
+
+  <doc-code live>
+    <div style="padding: 16px">
+      <eds-alert motif="info" background="gray">
+        <h4>Alert</h4>
+        <p>This alert has a <b>gray</b> background.</p>
+      </eds-alert>
+    </div>
+
+    <div style="padding: 16px" background="gray">
+      <eds-alert motif="info" background="white">
+        <h4>Alert</h4>
+        <p>This alert has a <b>white</b> background.</p>
+      </eds-alert>
+    </div>
+  </doc-code>
+</api-option>
+
+<api-option name='border' type='boolean' default='false' attributeOnly>
+  Adds a border on white alerts only. Intended for the lightest possible treatment (white on white).
+
+  <doc-code live>
+    <eds-alert motif="info" background="gray">
+      <h4>Alert</h4>
+      <p>This alert has a <b>gray</b> background.</p>
+    </eds-alert>
+
+    <eds-alert motif="info" background="white" border>
+      <h4>Alert</h4>
+      <p>This alert has a <b>white</b> background.</p>
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name='closable' type='boolean' default='false'>
+  Determines whether an "&times;" icon (that closes the alert when clicked) is displayed in the top right corner of the alert.
+
+  <doc-code live>
+    <eds-alert motif="warning" background="gray" closable>
+      <h4>Warning</h4>
+      <p>A warning that can be ignored.</p>
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name="ariaLabelClose" type="string" default="close">
+  Defines the value of the <code>aria-label</code> attribute of the button in the top right corner of the alert that allows the alert to be closed.
+
+  <doc-note>
+    Only applicable when the <code>closable</code> attribute is also provided.
+  </doc-note>
+
+  <doc-code live>
+    <eds-alert motif="warning" background="gray" closable ariaLabelClose="ferme">
+      <h4>Attention</h4>
+      <p>Il y a un problème.</p>
+      <p>Ne vous inquiétez pas.</p>
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name='compact' type='boolean' default='false' attributeOnly>
+  Applies compact styling convenient for small inline alerts.
+
+  <doc-note motif='warning'>
+    <b>NOTE:</b> <code>b</code> tags automatically inherit the motif color style (like <code>h4</code> tags) when using the compact attribute.
+  </doc-note>
+
+  <doc-code live>
+    <eds-alert motif="warning" background="gray" compact>
+      <b>Warning</b> - A warning that can be ignored.
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name='hidden' type='boolean' default='false'>
+  Determines whether the alert starts off in the "hidden" state. When this happens the alert can be programmatically shown using the <code>.show()</code> method.
+
+  <doc-note>
+    Only applicable for "inline" alerts. An alert with a "region" will also start off hidden.
+  </doc-note>
+
+  <doc-code live>
+    <eds-alert motif="warning" background="gray" hidden closable id="show-alert-test">
+      <h4>Error</h4>
+      <p>An action just occurred that caused an error.</p>
+    </eds-alert>
+
+    <eds-button onclick="document.getElementById('show-alert-test').show()">
+      Show alert
+    </eds-button>
+  </doc-code>
+</api-option>
+
+<api-option name='motif' type='enum'>
+  Sets the color of the alert background and icon.
+
+  <p>
+    Available values:
+  </p>
+  <ul>
+    <li>success</li>
+    <li>error</li>
+    <li>warning</li>
+    <li>info</li>
+  </ul>
+
+  <doc-code live>
+    <eds-alert motif="success" background="gray">
+      <h4>Good job</h4>
+      <p>Something great just happened.</p>
+    </eds-alert>
+    <eds-alert motif="error" background="gray">
+      <h4>Error</h4>
+      <p>An action just occurred that caused an error.</p>
+    </eds-alert>
+    <eds-alert motif="warning" background="gray">
+      <h4>Warning</h4>
+      <p>Beware. You might want to check this.</p>
+    </eds-alert>
+    <eds-alert motif="info" background="gray">
+      <h4>Info</h4>
+      <p>FYI you can ignore this.</p>
+    </eds-alert>
+  </doc-code>
+</api-option>
+
+<api-option name='region' type='enum'>
+  Sets the region of the screen an alert will appear in. Omitting this option will render an inline alert.
+
+  <p>
+    Available values:
+  </p>
+  <ul>
+    <li>top-left</li>
+    <li>top-center</li>
+    <li>top-right</li>
+    <li>bottom-left</li>
+    <li>bottom-center</li>
+    <li>bottom-right</li>
+  </ul>
+
+  <doc-code live>
+    <eds-button onclick="regionalAlertGenerator('top-left')">
+      Top left
+    </eds-button>
+    <eds-button onclick="regionalAlertGenerator('top-center')">
+      Top Center
+    </eds-button>
+    <eds-button onclick="regionalAlertGenerator('top-right')">
+      Top right
+    </eds-button>
+
+    <br />
+
+    <eds-button onclick="regionalAlertGenerator('bottom-left')">
+      Bottom left
+    </eds-button>
+    <eds-button onclick="regionalAlertGenerator('bottom-center')">
+      Bottom Center
+    </eds-button>
+    <eds-button onclick="regionalAlertGenerator('bottom-right')">
+      Bottom right
+    </eds-button>
+
+    <script>
+      function regionalAlertGenerator(region) {
+        window.EDS.alerts.create(`Sample alert at ${region.split('-').join(' ')}`, {
+          motif: 'success',
+          region: region,
+          timeout: 3000
+        });
+      }
+    </script>
+  </doc-code>
+</api-option>
+
+<api-option name='timeout' type='int' default='window.EDS.alerts.defaults.timeout || 8000'>
+  Sets the amount of time, in milliseconds, the alert will be visible for. <doc-note>Regional alerts only</doc-note>
+
+  <doc-code live>
+    <eds-button onclick="timeoutAlertGenerator('top-right')">
+      Show alert with default timeout
+    </eds-button>
+
+    <eds-button onclick="timeoutAlertGenerator('top-right', 5000)">
+      Show alert for 5 seconds
+    </eds-button>
+
+    <script>
+      function timeoutAlertGenerator(region, timeout) {
+        var timeStr = 'when the default timeout is over.';
+        var config = {
+          motif: 'warning',
+          region: region
+        }
+        if (timeout) {
+          config.timeout = timeout;
+          timeStr = 'in ' + parseInt(timeout) / 1000 + ' seconds';
+        }
+
+        window.EDS.alerts.create("This alert will disappear " + timeStr, config);
+      }
+    </script>
+  </doc-code>
+</api-option>
+
+<doc-header>Methods</doc-header>
+
+<api-method name='show'>
+  Makes the alert visible using a "slide down" animation.
+</api-method>
+
+<api-method name='hide'>
+  Hides the alert using a "slide up" animation.
+</api-method>
+
+<doc-header>Events</doc-header>
+
+<api-event name='show'>
+  Fires a <code>show</code> event when the alert has been shown.
+</api-event>
+
+<api-event name='hide'>
+  Fires a <code>hide</code> event when the alert has been hidden.
+</api-event>
+
+<doc-header>Creating alerts programmatically</doc-header>
+
+<p>
+  Because alerts are often created ad hoc there is a shorthand method for programmatic creation. Alerts created using this method are automatically destroyed when hidden.
+</p>
+
+<api-method name='window.EDS.alerts.create' args="html: string, options: any" returnType="HTMLElement">
+  Creates an alert with the provided html and options. Alerts created with this method are automatically destroyed when hidden. This is primarily useful to regional alerts but can be used anywhere.
+
+  <doc-code live>
+    <eds-button id='eds-alerts-create-example'>
+      Create an alert programmatically
+    </eds-button>
+
+    <script>
+      (function() {
+        var button = document.getElementById('eds-alerts-create-example');
+        var counter = 0;
+
+        button.addEventListener('click', function() {
+          window.EDS.alerts.create("Programmatic alert " + counter, {
+            motif: 'success',
+            region: 'top-right',
+            timeout: 3000
+          });
+          counter += 1;
+        });
+      })();
+    </script>
+  </doc-code>
+</api-method>

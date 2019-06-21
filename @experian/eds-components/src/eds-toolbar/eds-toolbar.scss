@@ -1,0 +1,30 @@
+@import "../styles/eds-variables.scss";
+@import "../styles/eds-mixins.scss";
+
+eds-toolbar {
+
+  display: flex;
+  padding: 0;
+  border-bottom: 1px solid $eds-border-color;
+
+  section {
+    height: 46px;
+    padding: 6px 6px 0 6px;
+    border-top: none;
+    border-bottom: none;
+    border-right: 1px solid $eds-border-color;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    h4, h5 {
+      margin: 0;
+    }
+
+    &.text-only {
+      padding: 12px 20px;
+    }
+  }
+
+}

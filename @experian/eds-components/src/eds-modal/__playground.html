@@ -1,0 +1,60 @@
+<eds-button onclick="document.getElementById('modal-closable').show()" id="closable-referrer">
+  Closable Modal
+</eds-button>
+
+<eds-button onclick="document.getElementById('modal-non-closable').show()" id="non-closable-referrer">
+  Non-closable Modal
+</eds-button>
+
+<eds-button onclick="document.getElementById('modal-with-tooltip').show()" id="tooltip-referrer">
+  Modal with Tooltip
+</eds-button>
+
+<eds-modal id="modal-closable" class="my-modal" aria-labelledby="closable-referrer">
+  <header>
+    My Modal Header
+  </header>
+  <div>
+    The content of the closable modal.
+  </div>
+  <footer>
+    <eds-button motif="primary" onclick="document.getElementById('modal-closable').hide()">Close</eds-button>
+  </footer>
+</eds-modal>
+
+<eds-modal id="modal-non-closable" closable="false" aria-labelledby="non-closable-referrer">
+  <header>
+    My Modal Header
+  </header>
+  <div>
+    The content of the non-closable modal.
+  </div>
+  <footer>
+    <eds-button motif="primary" onclick="document.getElementById('modal-non-closable').hide()">Close</eds-button>
+  </footer>
+</eds-modal>
+
+<eds-modal id="modal-with-tooltip" aria-labelledby="tooltip-referrer">
+  <header>
+    My Modal Header
+  </header>
+  <div>
+    The content of the modal with tooltip. <eds-button class="tooltip">Hover for tooltip</eds-button>
+    <eds-tooltip targetClass="tooltip" position="left">
+      This tooltip displays outside the modal boundaries.
+    </eds-tooltip>
+  </div>
+  <footer>
+    <eds-button motif="primary" onclick="document.getElementById('modal-with-tooltip').hide()">Close</eds-button>
+  </footer>
+</eds-modal>
+
+<script>
+  document.getElementById('modal-closable').addEventListener('show', function() {
+    console.log('show event!');
+  });
+
+  document.getElementById('modal-closable').addEventListener('hide', function() {
+    console.log('hide event!');
+  });
+</script>

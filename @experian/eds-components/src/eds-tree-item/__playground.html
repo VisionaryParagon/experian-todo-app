@@ -1,0 +1,193 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+  window.EDS.icons.defaultLibrary = 'material-icon-font';
+</script>
+
+<style>
+.container {
+  width: 200px;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
+
+.container.small {
+  font-size: 14px;
+}
+
+[background='gray'] {
+  background-color: #f6f6f6;
+}
+</style>
+
+<div class='container'>
+  <eds-tree-item icon='favorite' expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item icon='person'>Profile</eds-tree-item>
+      <eds-tree-item icon='favorite' selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person' selected>Profile</eds-tree-item>
+          <eds-tree-item icon='favorite'>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<div class='container small'>
+  <eds-tree-item icon='favorite' expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item icon='person'>Profile</eds-tree-item>
+      <eds-tree-item icon='favorite' selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person' selected>Profile</eds-tree-item>
+          <eds-tree-item icon='favorite'>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<div class='container small' background='gray'>
+  <eds-tree-item expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item>Profile</eds-tree-item>
+      <eds-tree-item selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item selected>Profile</eds-tree-item>
+          <eds-tree-item>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<h4>Compact</h4>
+
+<div class='container small eds-item-compact'>
+  <eds-tree-item icon='favorite' expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item icon='person'>Profile</eds-tree-item>
+      <eds-tree-item icon='favorite' selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person'>Profile</eds-tree-item>
+          <eds-tree-item icon='person' selected>Profile</eds-tree-item>
+          <eds-tree-item icon='favorite'>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+                <eds-tree-item icon='person'>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<div class='container small eds-item-compact' background='gray'>
+  <eds-tree-item expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item>Profile</eds-tree-item>
+      <eds-tree-item selected>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item>Profile</eds-tree-item>
+          <eds-tree-item selected>Profile</eds-tree-item>
+          <eds-tree-item>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+                <eds-tree-item>Profile</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+
+<h4>Events</h4>
+
+<div class='container small' id='events-example'>
+  <eds-tree-item data-id='group1' expanded>
+    Group 1
+    <div slot='children'>
+      <eds-tree-item data-id='profile1'>Profile 1</eds-tree-item>
+      <eds-tree-item selected data-id='group1.1'>
+        Group 1.1
+        <div slot='children'>
+          <eds-tree-item data-id='profile2'>Profile 2</eds-tree-item>
+          <eds-tree-item data-id='profile3'>Profile 3</eds-tree-item>
+          <eds-tree-item selected data-id='profile4'>Profile 4</eds-tree-item>
+          <eds-tree-item data-id='group1.1.1'>
+              Group 1.1.1
+              <div slot='children'>
+                <eds-tree-item data-id='profile5'>Profile 5</eds-tree-item>
+                <eds-tree-item data-id='profile6'>Profile 6</eds-tree-item>
+                <eds-tree-item data-id='profile7'>Profile 7</eds-tree-item>
+              </div>
+          </eds-tree-item>
+        </div>
+      </eds-tree-item>
+    </div>
+  </eds-tree-item>
+</div>
+<p id='events-example-output'></p>
+
+<script>
+  (function(items, output) {
+    items.forEach(function(el) {
+      el.addEventListener('itemclick', function(e) {
+        console.log(e);
+        output.innerHTML = `You clicked: ${e.detail.getAttribute('data-content')}`;
+      });
+      el.addEventListener('heightchange', e => {
+        console.log(e);
+      });
+    });
+  })(
+    Array.from(document.querySelectorAll('#events-example eds-tree-item')),
+    document.getElementById('events-example-output')
+  );
+</script>
+
