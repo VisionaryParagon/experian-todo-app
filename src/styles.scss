@@ -218,8 +218,9 @@ eds-primary-header {
 }
 
 // Sidebar
-#sidenav {
+#sidebar {
   height: 100%;
+  max-width: 250px;
   width: 250px;
 
   button[eds-button] {

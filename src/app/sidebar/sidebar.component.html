@@ -1,4 +1,4 @@
-<eds-sidebar id="sidenav" background="gray">
+<eds-sidebar id="sidebar" background="gray">
   <h4 caps>My ToDo Lists</h4>
 
   <eds-menu-item *ngFor="let list of user.lists" [routerLink]="['/list/', list.slug]" [selected]="slug === list.slug">{{ list.name }}</eds-menu-item>

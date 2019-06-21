@@ -18,10 +18,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // get user data on init
+    // Init app
     this.getUser();
 
-    // subscribe to route changes and update slug
+    // Subscribe to route changes and update slug
     this.router.events.subscribe((ev: any) => {
       if (ev instanceof NavigationEnd) {
         this.slug = ev.url.split('/').pop();
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // get user from todo service
+  // Get user from todo service
   getUser() {
     this.todoService.getUser()
       .subscribe(
