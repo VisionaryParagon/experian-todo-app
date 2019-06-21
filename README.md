@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
-## Setup Instructions
+[DEMO](https://d31uyg0txbbggp.cloudfront.net/)
+
+## Local Development Setup Instructions
 
 1. Clone repo to local directory and navigate to app directory with `cd experian-todo-app`
 2. Run `npm install` to install app dependencies
